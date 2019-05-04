@@ -1,0 +1,52 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <mat-card
+    class="tossWinnerCard"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <div
+      fxLayout="column"
+      fxLayoutAlign="center start"
+      fxFlexAlign="center"
+      fxFlex="30"
+    >
+      <mat-form-field class="tossWinner">
+        <mat-label>Who won the toss</mat-label>
+        <mat-select [formControl]="toss">
+          <mat-option *ngFor="let team of teams" [value]="team">
+            {{ team }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p *ngIf="tossWinner">Toss Winner: {{ tossWinner }}</p>
+    </div>
+  </mat-card>
+
+  <mat-card
+    *ngIf="showSelection"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <div
+      fxLayout="column"
+      fxLayoutAlign="center start"
+      fxFlexAlign="center"
+      fxFlex="30"
+    >
+      <mat-form-field class="tossSelection">
+        <mat-label>What {{ tossWinner }} choose</mat-label>
+        <mat-select [formControl]="tossSelection">
+          <mat-option *ngFor="let part of parts" [value]="part">
+            {{ part }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p *ngIf="partSelection">
+        {{ tossWinner }} selected to {{ partSelection }} first
+      </p>
+    </div>
+  </mat-card>
+  <button class="scoring" mat-raised-button color="primary" routerLink="/toss">
+    Start Scoring
+  </button>
+</div>

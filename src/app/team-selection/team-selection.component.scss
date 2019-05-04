@@ -4,4 +4,29 @@
 
 .cross {
   cursor: pointer;
+  color: red;
+}
+
+.playerCard {
+  width: 200px;
+  height: 30px;
+}
+
+.teamSelection {
+  width: 250px;
+}
+
+.redCard {
+  margin-bottom: 30px;
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.greenCard {
+  margin-bottom: 30px;
+  background-color: rgba(0, 128, 0, 0.2);
+}
+
+.toss {
+  position: fixed;
+  bottom: 30px;
 }

@@ -1,32 +1,73 @@
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <ol class="players" fxFlex="30">
-    <li *ngFor="let redPlayer of teamRedSelectedPlayer" fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-card> {{redPlayer}} </mat-card><span (click)="remove(redPlayer)">
-        <mat-icon>clear</mat-icon>
-      </span>
-    </li>
-  </ol>
-  <div fxLayout="column" fxLayoutAlign="center center" fxFlexAlign="center" fxFlex="30">
-    <mat-form-field class="teamSelection" fxflex="50">
-      <mat-label>Select Player For Team Red</mat-label>
-      <mat-select [formControl]="teamRed" multiple>
-        <mat-option *ngFor="let player of playerLeft" [value]="player">{{player}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+<div fxLayout="column" fxLayoutAlign="space-between center">
+  <div
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="space-between center"
+  >
+    <mat-card class="redCard" fxLayout="column" fxLayoutAlign="start center">
+      <div
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxFlexAlign="center"
+        fxFlex="30"
+      >
+        <mat-form-field class="teamSelection">
+          <mat-label>Select Player For Team Red</mat-label>
+          <mat-select [formControl]="teamRed" multiple>
+            <mat-option *ngFor="let player of playerLeft" [value]="player">
+              {{ player }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ol fxFlex="30">
+          <li *ngFor="let redPlayer of teamRedSelectedPlayer" class="players">
+            <mat-card
+              class="playerCard"
+              fxLayout="row"
+              fxLayoutAlign="space-between center"
+            >
+              {{ redPlayer }}
+              <span class="cross" (click)="remove(redPlayer)">
+                <mat-icon>clear</mat-icon>
+              </span>
+            </mat-card>
+          </li>
+        </ol>
+      </div>
+    </mat-card>
+    <mat-card class="greenCard" fxLayout="column" fxLayoutAlign="start center">
+      <div
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxFlexAlign="center"
+        fxFlex="30"
+      >
+        <mat-form-field class="teamSelection">
+          <mat-label>Select Player For Team Green</mat-label>
+          <mat-select [formControl]="teamGreen" multiple>
+            <mat-option *ngFor="let player of playerLeft" [value]="player">
+              {{ player }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-    <mat-form-field fxflex="50">
-      <mat-label>Select Player For Team Green</mat-label>
-      <mat-select [formControl]="teamGreen" multiple>
-        <mat-option *ngFor="let player of playerLeft" [value]="player">{{player}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <ol fxFlex="30">
+          <li
+            class="players"
+            *ngFor="let greenPlayer of teamGreenSelectedPlayer"
+          >
+            <mat-card class="playerCard" fxLayoutAlign="space-between center">
+              {{ greenPlayer }}
+              <span class="cross" (click)="remove(greenPlayer)">
+                <mat-icon>clear</mat-icon>
+              </span>
+            </mat-card>
+          </li>
+        </ol>
+      </div>
+    </mat-card>
   </div>
-  <ol fxFlex="30" class="players">
-    <li *ngFor="let greenPlayer of teamGreenSelectedPlayer" fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-card> {{greenPlayer}} </mat-card>
-      <span class="cross" (click)="remove(greenPlayer)">
-        <mat-icon>clear</mat-icon>
-      </span>
-    </li>
-  </ol>
+  <button class="toss" mat-raised-button color="primary" routerLink="/toss">
+    Go To Toss
+  </button>
 </div>
