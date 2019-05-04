@@ -9,12 +9,26 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TossComponent } from './toss/toss.component';
+import { ScoreComponent } from './score/score.component';
+import { BatsmanComponent } from './score/batsman/batsman.component';
+import { ExtraComponent } from './score/extra/extra.component';
+import { BowlerComponent } from './score/bowler/bowler.component';
+import { RunsComponent } from './score/runs/runs.component';
+import { ExRunsComponent } from './score/ex-runs/ex-runs.component';
+import { WicketsComponent } from './score/wickets/wickets.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TeamSelectionComponent,
-    TossComponent
+    TossComponent,
+    ScoreComponent,
+    BatsmanComponent,
+    ExtraComponent,
+    BowlerComponent,
+    RunsComponent,
+    ExRunsComponent,
+    WicketsComponent
   ],
   imports: [
     BrowserModule,
