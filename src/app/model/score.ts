@@ -1,5 +1,5 @@
 export class BatsmanScore {
-  name: string;
+  name?: string;
   run: number;
   out?: string;
   bowler?: string;
@@ -8,11 +8,11 @@ export class BatsmanScore {
   sixes: number;
   dots: number;
   strikeRate: number;
-  active: boolean;
+  active?: boolean;
 }
 
 export class BowlerScore {
-  name: string;
+  name?: string;
   over: number;
   run: number;
   wicket: number;
@@ -20,7 +20,7 @@ export class BowlerScore {
   sixes: number;
   dots: number;
   economyRate: number;
-  active: boolean;
+  active?: boolean;
 }
 
 export class Total {

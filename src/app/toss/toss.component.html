@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="center center">
+<div fxLayout="column" fxLayoutAlign="space-between center">
   <mat-card
     class="tossWinnerCard"
     fxLayout="column"
@@ -10,7 +10,7 @@
       fxFlexAlign="center"
       fxFlex="30"
     >
-      <mat-form-field class="tossWinner">
+      <mat-form-field class="tossWinner" *ngIf="!tossWinner">
         <mat-label>Who won the toss</mat-label>
         <mat-select [formControl]="toss">
           <mat-option *ngFor="let team of teams" [value]="team">
@@ -18,7 +18,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <p *ngIf="tossWinner">Toss Winner: {{ tossWinner }}</p>
+      <p *ngIf="tossWinner">{{ tossWinner }} won the toss</p>
     </div>
   </mat-card>
 
@@ -26,6 +26,7 @@
     *ngIf="showSelection"
     fxLayout="column"
     fxLayoutAlign="center center"
+    class="tossWinnerCard"
   >
     <div
       fxLayout="column"
@@ -33,7 +34,7 @@
       fxFlexAlign="center"
       fxFlex="30"
     >
-      <mat-form-field class="tossSelection">
+      <mat-form-field class="tossSelection" *ngIf="!partSelection">
         <mat-label>What {{ tossWinner }} choose</mat-label>
         <mat-select [formControl]="tossSelection">
           <mat-option *ngFor="let part of parts" [value]="part">
@@ -43,6 +44,77 @@
       </mat-form-field>
       <p *ngIf="partSelection">
         {{ tossWinner }} selected to {{ partSelection }} first
+      </p>
+    </div>
+  </mat-card>
+
+  <mat-card
+    *ngIf="partSelection"
+    fxLayout="column"
+    class="tossWinnerCard"
+    fxLayoutAlign="center center"
+  >
+    <div
+      fxLayout="column"
+      fxLayoutAlign="center start"
+      fxFlexAlign="center"
+      fxFlex="30"
+    >
+      <mat-form-field class="tossSelection" *ngIf="!strikeBatsman.value">
+        <mat-label>Select Strike Batsman</mat-label>
+        <mat-select [formControl]="strikeBatsman">
+          <mat-option
+            *ngFor="let strikeBatsman of battingSidePlayers"
+            [value]="strikeBatsman"
+          >
+            {{ strikeBatsman }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="tossSelection" *ngIf="!nonStrikeBatsman.value">
+        <mat-label>Select Non-Strike Batsman</mat-label>
+        <mat-select [formControl]="nonStrikeBatsman">
+          <mat-option
+            *ngFor="let nonStrikeBatsman of battingSidePlayers"
+            [value]="nonStrikeBatsman"
+          >
+            {{ nonStrikeBatsman }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p *ngIf="strikeBatsman.value">
+        Strike Batsman: {{ strikeBatsman.value }}
+      </p>
+      <p *ngIf="nonStrikeBatsman.value">
+        Non-Strike Batsman: {{ nonStrikeBatsman.value }}
+      </p>
+    </div>
+  </mat-card>
+
+  <mat-card
+    *ngIf="nonStrikeBatsman.value"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <div
+      fxLayout="column"
+      fxLayoutAlign="center start"
+      fxFlexAlign="center"
+      fxFlex="30"
+    >
+      <mat-form-field class="tossSelection" *ngIf="!strikeBowler.value">
+        <mat-label>Select Strike Bowler</mat-label>
+        <mat-select [formControl]="strikeBowler">
+          <mat-option
+            *ngFor="let strikeBowler of bowlingSidePlayers"
+            [value]="strikeBowler"
+          >
+            {{ strikeBowler }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p *ngIf="strikeBowler.value">
+        Non-Strike Batsman: {{ strikeBowler.value }}
       </p>
     </div>
   </mat-card>
