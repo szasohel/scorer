@@ -1,7 +1,7 @@
 export class BatsmanScore {
   name: string;
   run: number;
-  out?: boolean;
+  out?: string;
   bowler?: string;
   ball: number;
   fours: number;
@@ -14,7 +14,6 @@ export class BatsmanScore {
 export class BowlerScore {
   name: string;
   over: number;
-  match: number;
   run: number;
   wicket: number;
   fours: number;
@@ -28,4 +27,11 @@ export class Total {
   Run: number;
   wicket: number;
   runRate: number;
+}
+
+export class Score {
+  type: string;
+  outType?: string;
+  bowler?: string;
+  run: number;
 }

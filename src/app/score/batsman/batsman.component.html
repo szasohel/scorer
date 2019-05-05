@@ -2,33 +2,34 @@
   class="batsmanCard"
   fxLayout="row"
   fxLayoutAlign="space-between center"
+  [ngClass]="{ active: batsman.active }"
 >
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">Name</span>
-    Arafat
+    {{ batsman.name }}
   </div>
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">R</span>
-    Arafat
+    {{ batsman.run }}
   </div>
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">B</span>
-    Arafat
+    {{ batsman.ball }}
   </div>
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">0</span>
-    Arafat
+    {{ batsman.dots }}
   </div>
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">4s</span>
-    Arafat
+    {{ batsman.fours }}
   </div>
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">6s</span>
-    Arafat
+    {{ batsman.sixes }}
   </div>
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">SR</span>
-    Arafat
+    {{ batsman.strikeRate }}
   </div>
 </mat-card>

@@ -4,13 +4,13 @@
     <p>Current Run Rate: 5.6</p>
   </mat-card>
   <p class="title">Batsmen</p>
-  <app-batsman></app-batsman>
-  <app-batsman></app-batsman>
+  <app-batsman [batsman]="batsman1"></app-batsman>
+  <app-batsman [batsman]="batsman2"></app-batsman>
   <p class="title">Extra</p>
   <app-extra></app-extra>
   <p class="title">Bowler</p>
-  <app-bowler></app-bowler>
-  <app-runs></app-runs>
+  <app-bowler [bowler]="bowler"></app-bowler>
+  <app-runs (runEmitter)="onRunEmitter($event)"></app-runs>
   <app-ex-runs></app-ex-runs>
   <app-wickets></app-wickets>
 </div>

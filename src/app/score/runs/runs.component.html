@@ -1,8 +1,10 @@
 <div fxLayout="row" fxLayoutAlign="center center">
-  <button mat-fab class="run-button">0</button>
-  <button mat-fab class="run-button">1</button>
-  <button mat-fab class="run-button">2</button>
-  <button mat-fab class="run-button">3</button>
-  <button mat-fab class="run-button">4</button>
-  <button mat-fab class="run-button">6</button>
+  <button
+    mat-fab
+    class="run-button"
+    *ngFor="let run of runs"
+    (click)="addRun(run)"
+  >
+    {{ run }}
+  </button>
 </div>
