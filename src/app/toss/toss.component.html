@@ -1,15 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="space-between center">
-  <mat-card
-    class="tossWinnerCard"
-    fxLayout="column"
-    fxLayoutAlign="center center"
-  >
-    <div
-      fxLayout="column"
-      fxLayoutAlign="center start"
-      fxFlexAlign="center"
-      fxFlex="30"
-    >
+  <mat-card class="tossWinnerCard" fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
       <mat-form-field class="tossWinner" *ngIf="!tossWinner">
         <mat-label>Who won the toss</mat-label>
         <mat-select [formControl]="toss">
@@ -22,18 +13,8 @@
     </div>
   </mat-card>
 
-  <mat-card
-    *ngIf="showSelection"
-    fxLayout="column"
-    fxLayoutAlign="center center"
-    class="tossWinnerCard"
-  >
-    <div
-      fxLayout="column"
-      fxLayoutAlign="center start"
-      fxFlexAlign="center"
-      fxFlex="30"
-    >
+  <mat-card *ngIf="showSelection" fxLayout="column" fxLayoutAlign="center center" class="tossWinnerCard">
+    <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
       <mat-form-field class="tossSelection" *ngIf="!partSelection">
         <mat-label>What {{ tossWinner }} choose</mat-label>
         <mat-select [formControl]="tossSelection">
@@ -48,25 +29,12 @@
     </div>
   </mat-card>
 
-  <mat-card
-    *ngIf="partSelection"
-    fxLayout="column"
-    class="tossWinnerCard"
-    fxLayoutAlign="center center"
-  >
-    <div
-      fxLayout="column"
-      fxLayoutAlign="center start"
-      fxFlexAlign="center"
-      fxFlex="30"
-    >
+  <mat-card *ngIf="partSelection" fxLayout="column" class="tossWinnerCard" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
       <mat-form-field class="tossSelection" *ngIf="!strikeBatsman.value">
         <mat-label>Select Strike Batsman</mat-label>
         <mat-select [formControl]="strikeBatsman">
-          <mat-option
-            *ngFor="let strikeBatsman of battingSidePlayers"
-            [value]="strikeBatsman"
-          >
+          <mat-option *ngFor="let strikeBatsman of battingSidePlayers" [value]="strikeBatsman">
             {{ strikeBatsman }}
           </mat-option>
         </mat-select>
@@ -74,10 +42,7 @@
       <mat-form-field class="tossSelection" *ngIf="!nonStrikeBatsman.value">
         <mat-label>Select Non-Strike Batsman</mat-label>
         <mat-select [formControl]="nonStrikeBatsman">
-          <mat-option
-            *ngFor="let nonStrikeBatsman of battingSidePlayers"
-            [value]="nonStrikeBatsman"
-          >
+          <mat-option *ngFor="let nonStrikeBatsman of battingSidePlayers" [value]="nonStrikeBatsman">
             {{ nonStrikeBatsman }}
           </mat-option>
         </mat-select>
@@ -91,34 +56,22 @@
     </div>
   </mat-card>
 
-  <mat-card
-    *ngIf="nonStrikeBatsman.value"
-    fxLayout="column"
-    fxLayoutAlign="center center"
-  >
-    <div
-      fxLayout="column"
-      fxLayoutAlign="center start"
-      fxFlexAlign="center"
-      fxFlex="30"
-    >
+  <mat-card *ngIf="nonStrikeBatsman.value" fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
       <mat-form-field class="tossSelection" *ngIf="!strikeBowler.value">
         <mat-label>Select Strike Bowler</mat-label>
         <mat-select [formControl]="strikeBowler">
-          <mat-option
-            *ngFor="let strikeBowler of bowlingSidePlayers"
-            [value]="strikeBowler"
-          >
+          <mat-option *ngFor="let strikeBowler of bowlingSidePlayers" [value]="strikeBowler">
             {{ strikeBowler }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <p *ngIf="strikeBowler.value">
-        Non-Strike Batsman: {{ strikeBowler.value }}
+        Strike Bowler: {{ strikeBowler.value }}
       </p>
     </div>
   </mat-card>
-  <button class="scoring" mat-raised-button color="primary" routerLink="/score">
+  <button *ngIf="strikeBowler.value" class="scoring" mat-raised-button color="primary" (click)="onStartScoring()">
     Start Scoring
   </button>
 </div>

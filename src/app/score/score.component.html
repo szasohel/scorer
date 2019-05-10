@@ -1,16 +1,16 @@
 <div fxLayout="column" fxLayoutAlign="center center">
   <mat-card>
-    <p>Total: 101/5 Overs: 20</p>
-    <p>Current Run Rate: 5.6</p>
+    <p>Total: {{total.run}}/5 Overs: {{total.over}}.{{total.ball}}</p>
+    <p>Current Run Rate: {{total.runRate}}</p>
   </mat-card>
   <p class="title">Batsmen</p>
   <app-batsman [batsman]="batsman1"></app-batsman>
   <app-batsman [batsman]="batsman2"></app-batsman>
   <p class="title">Extra</p>
-  <app-extra></app-extra>
+  <app-extra [extra]='extra'></app-extra>
   <p class="title">Bowler</p>
   <app-bowler [bowler]="bowler"></app-bowler>
   <app-runs (runEmitter)="onRunEmitter($event)"></app-runs>
-  <app-ex-runs></app-ex-runs>
+  <app-ex-runs (extraEmitter)="onExtraEmitter($event)"></app-ex-runs>
   <app-wickets></app-wickets>
 </div>

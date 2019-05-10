@@ -10,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class BatsmanComponent implements OnInit {
   @Input() batsman: BatsmanScore;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

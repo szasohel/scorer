@@ -1,15 +1,11 @@
-<mat-card
-  class="batsmanCard"
-  fxLayout="row"
-  fxLayoutAlign="space-between center"
->
+<mat-card class="batsmanCard" fxLayout="row" fxLayoutAlign="space-between center">
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">Name</span>
     {{ bowler.name }}
   </div>
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">O</span>
-    {{ bowler.over }}
+    {{ bowler.over }}.{{bowler.ball}}
   </div>
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">R</span>
@@ -26,6 +22,10 @@
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">6s</span>
     {{ bowler.sixes }}
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <span class="title">0</span>
+    {{ bowler.dots }}
   </div>
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">ECON</span>

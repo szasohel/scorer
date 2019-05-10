@@ -1,9 +1,5 @@
-<mat-card
-  class="batsmanCard"
-  fxLayout="row"
-  fxLayoutAlign="space-between center"
-  [ngClass]="{ active: batsman.active }"
->
+<mat-card class="batsmanCard" fxLayout="row" fxLayoutAlign="space-between center"
+  [ngClass]="{ active: batsman.strike }">
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">Name</span>
     {{ batsman.name }}

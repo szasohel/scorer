@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TeamList } from '../model/player';
 import { tap, switchMap } from 'rxjs/operators';
+import { InningsService } from '../services/innings.service';
+import { ScoreService } from '../services/score.service';
+import { BatsmanScore, BowlerScore } from '../model/score';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toss',
@@ -24,7 +28,10 @@ export class TossComponent implements OnInit {
   list: any;
   strikeBowler: FormControl;
 
-  constructor(private playerService: PlayerService) {}
+  constructor(
+    private playerService: PlayerService,
+    private scoreService: ScoreService,
+    private router: Router) { }
 
   ngOnInit() {
     this.list = JSON.parse(localStorage.getItem('teams'));
@@ -59,5 +66,12 @@ export class TossComponent implements OnInit {
         }
       }
     });
+  }
+
+  onStartScoring() {
+    this.scoreService.setBatsman1(new BatsmanScore(this.strikeBatsman.value, true));
+    this.scoreService.setBatsman2(new BatsmanScore(this.nonStrikeBatsman.value, false));
+    this.scoreService.setBowler(new BowlerScore(this.strikeBowler.value));
+    this.router.navigate(['/score']);
   }
 }

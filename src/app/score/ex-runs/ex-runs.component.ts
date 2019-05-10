@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Score } from 'src/app/model/score';
 
 @Component({
   selector: 'app-ex-runs',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ex-runs.component.scss']
 })
 export class ExRunsComponent implements OnInit {
-
+  extras = ['WD', 'NB', 'Bye', 'Bye2', 'Bye3', 'Bye4'];
+  score: Score = {
+    run: 0,
+    type: 'extra'
+  };
+  @Output() extraEmitter = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addRun(extra) {
+    this.score.run = extra;
+    console.log(this.score);
+    this.extraEmitter.emit(this.score);
   }
 
 }
