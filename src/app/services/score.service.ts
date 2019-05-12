@@ -1,21 +1,18 @@
 import { BatsmanScore, Score, Total, BowlerScore } from './../model/score';
 import { Injectable, OnInit } from '@angular/core';
 import { InningsService } from './innings.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ScoreService implements OnInit {
+export class ScoreService {
   batsmen1: BatsmanScore;
   batsmen2: BatsmanScore;
   bowler: BowlerScore;
-  totalScore: Total = {
-    run: 0,
-    wicket: 0,
-    runRate: 0,
-    over: 0,
-    ball: 0
-  };
+  bowlingSidePlayers;
+  battingSidePlayers;
+  totalScore = new Total();
   extra = {
     total: 0,
     WD: 0,
@@ -26,16 +23,35 @@ export class ScoreService implements OnInit {
     Bye3: 0,
     Bye4: 0
   };
+  activeBatsmanSubject = new Subject();
+  activeBowlerSubject = new Subject();
+  activePlayers: Array<any>;
+  bowlerChangeSubject = new Subject();
+  batsmanChangeSubject = new Subject();
 
-  activeBatsman: void;
+  constructor(private inningsService: InningsService) {
+    this.inningsService.activeBatsmenSubject.subscribe(
+      (activeBatsmen: Array<BatsmanScore>) => {
+        this.batsmen1 = activeBatsmen.find((batsmen: BatsmanScore) => {
+          return batsmen.strike === true;
+        });
+        this.batsmen2 = activeBatsmen.find((batsmen: BatsmanScore) => {
+          return batsmen.strike === false;
+        });
+        this.activeBatsmanSubject.next({
+          batsman1: this.batsmen1,
+          batsman2: this.batsmen2
+        });
+      }
+    );
 
-  constructor(private inningsService: InningsService) { }
-
-  ngOnInit() {
-    this.activeBatsman = this.inningsService.getActiveBatsmen();
+    this.inningsService.activeBowlerSubject.subscribe((bowler: BowlerScore) => {
+      this.bowler = bowler;
+      this.activeBowlerSubject.next(bowler);
+    });
   }
 
-  updateBatsmanScore(batsman: BatsmanScore, run: number) { }
+  updateBatsmanScore(batsman: BatsmanScore, run: number) {}
   setBatsman1(batsman: BatsmanScore) {
     this.batsmen1 = batsman;
   }
@@ -137,7 +153,9 @@ export class ScoreService implements OnInit {
   updateBatsman1(score: Score) {
     if (score.type === 'out') {
       this.batsmen1.out = score.outType;
-      this.batsmen1.bowler = score.bowler;
+      this.batsmen1.bowler = this.bowler.name;
+      this.batsmen1.active = false;
+      this.batsmen1.strike = false;
     } else if (score.type === 'run') {
       this.batsmen1.run += score.run;
       if (score.run === 1 || score.run === 3) {
@@ -156,7 +174,9 @@ export class ScoreService implements OnInit {
   updateBatsman2(score: Score) {
     if (score.type === 'out') {
       this.batsmen2.out = score.outType;
-      this.batsmen2.bowler = score.bowler;
+      this.batsmen2.bowler = this.bowler.name;
+      this.batsmen2.active = false;
+      this.batsmen2.strike = false;
     } else if (score.type === 'run') {
       this.batsmen2.run += score.run;
       if (score.run === 1 || score.run === 3) {
@@ -204,6 +224,7 @@ export class ScoreService implements OnInit {
   ballAndOverCount() {
     this.totalScore.ball++;
     if (this.totalScore.ball === 6) {
+      this.changeStrike();
       this.totalScore.over++;
       this.totalScore.ball = 0;
     }
@@ -212,6 +233,8 @@ export class ScoreService implements OnInit {
     if (this.bowler.ball === 6) {
       this.bowler.over++;
       this.bowler.ball = 0;
+      this.bowler.active = false;
+      this.bowlerChangeSubject.next(true);
     }
   }
 
@@ -220,11 +243,16 @@ export class ScoreService implements OnInit {
   }
 
   runRateCount() {
-    console.log(this.totalScore.ball);
-    this.totalScore.runRate = +(this.totalScore.run / (((this.totalScore.over * 6) + this.totalScore.ball) / 6)).toFixed(1);
+    this.totalScore.runRate = +(
+      this.totalScore.run /
+      ((this.totalScore.over * 6 + this.totalScore.ball) / 6)
+    ).toFixed(1);
   }
 
   calculateEcon() {
-    this.bowler.economyRate = +(this.totalScore.run / (((this.totalScore.over * 6) + this.totalScore.ball) / 6)).toFixed(2);
+    this.bowler.economyRate = +(
+      this.totalScore.run /
+      ((this.totalScore.over * 6 + this.totalScore.ball) / 6)
+    ).toFixed(2);
   }
 }

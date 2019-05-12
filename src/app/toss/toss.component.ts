@@ -1,12 +1,10 @@
 import { PlayerService } from './../services/player.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { TeamList } from '../model/player';
-import { tap, switchMap } from 'rxjs/operators';
-import { InningsService } from '../services/innings.service';
 import { ScoreService } from '../services/score.service';
-import { BatsmanScore, BowlerScore } from '../model/score';
+import { BatsmanScore, BowlerScore, InningsCard } from '../model/score';
 import { Router } from '@angular/router';
+import { InningsService } from '../services/innings.service';
 
 @Component({
   selector: 'app-toss',
@@ -29,9 +27,10 @@ export class TossComponent implements OnInit {
   strikeBowler: FormControl;
 
   constructor(
-    private playerService: PlayerService,
     private scoreService: ScoreService,
-    private router: Router) { }
+    private router: Router,
+    private inningsService: InningsService
+  ) {}
 
   ngOnInit() {
     this.list = JSON.parse(localStorage.getItem('teams'));
@@ -65,13 +64,30 @@ export class TossComponent implements OnInit {
           this.battingSidePlayers = this.list.teamRed;
         }
       }
+      this.scoreService.bowlingSidePlayers = this.bowlingSidePlayers;
+      this.scoreService.battingSidePlayers = this.battingSidePlayers;
     });
   }
 
   onStartScoring() {
-    this.scoreService.setBatsman1(new BatsmanScore(this.strikeBatsman.value, true));
-    this.scoreService.setBatsman2(new BatsmanScore(this.nonStrikeBatsman.value, false));
-    this.scoreService.setBowler(new BowlerScore(this.strikeBowler.value));
+    // this.scoreService.setBatsman1(
+    //   new BatsmanScore(this.strikeBatsman.value, true)
+    // );
+    // this.scoreService.setBatsman2(
+    //   new BatsmanScore(this.nonStrikeBatsman.value, false)
+    // );
+    // this.scoreService.setBowler(new BowlerScore(this.strikeBowler.value));
+    this.inningsService.setInnigsCard(new InningsCard(1));
+    this.inningsService.setNewBatsman(
+      new BatsmanScore(this.strikeBatsman.value, true)
+    );
+
+    this.inningsService.setNewBatsman(
+      new BatsmanScore(this.nonStrikeBatsman.value, false)
+    );
+
+    this.inningsService.setNewBowler(new BowlerScore(this.strikeBowler.value));
+
     this.router.navigate(['/score']);
   }
 }

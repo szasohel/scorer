@@ -16,6 +16,9 @@ import { BowlerComponent } from './score/bowler/bowler.component';
 import { RunsComponent } from './score/runs/runs.component';
 import { ExRunsComponent } from './score/ex-runs/ex-runs.component';
 import { WicketsComponent } from './score/wickets/wickets.component';
+import { AddBowlerComponent } from './score/add-bowler/add-bowler.component';
+import { LiveScoreComponent } from './score/live-score/live-score.component';
+import { ScorecardComponent } from './score/scorecard/scorecard.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { WicketsComponent } from './score/wickets/wickets.component';
     BowlerComponent,
     RunsComponent,
     ExRunsComponent,
-    WicketsComponent
+    WicketsComponent,
+    AddBowlerComponent,
+    LiveScoreComponent,
+    ScorecardComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +42,9 @@ import { WicketsComponent } from './score/wickets/wickets.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,16 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-  <mat-card>
-    <p>Total: {{total.run}}/5 Overs: {{total.over}}.{{total.ball}}</p>
-    <p>Current Run Rate: {{total.runRate}}</p>
-  </mat-card>
-  <p class="title">Batsmen</p>
-  <app-batsman [batsman]="batsman1"></app-batsman>
-  <app-batsman [batsman]="batsman2"></app-batsman>
-  <p class="title">Extra</p>
-  <app-extra [extra]='extra'></app-extra>
-  <p class="title">Bowler</p>
-  <app-bowler [bowler]="bowler"></app-bowler>
-  <app-runs (runEmitter)="onRunEmitter($event)"></app-runs>
-  <app-ex-runs (extraEmitter)="onExtraEmitter($event)"></app-ex-runs>
-  <app-wickets></app-wickets>
-</div>
+<mat-tab-group fxLayout="column" fxLayoutAlign="center center">
+  <mat-tab label="Live Score"><app-live-score></app-live-score></mat-tab>
+  <mat-tab label="Scorecard"><app-scorecard></app-scorecard></mat-tab>
+</mat-tab-group>

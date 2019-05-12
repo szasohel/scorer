@@ -1,17 +1,16 @@
 import { Subject } from 'rxjs';
-import { BowlerScore, Score, Total } from './../model/score';
 import { Component, OnInit } from '@angular/core';
-import { BatsmanScore } from '../model/score';
-import { ScoreService } from '../services/score.service';
 import { FormControl } from '@angular/forms';
-import { InningsService } from '../services/innings.service';
+import { BatsmanScore, BowlerScore, Total, Score } from 'src/app/model/score';
+import { ScoreService } from 'src/app/services/score.service';
+import { InningsService } from 'src/app/services/innings.service';
 
 @Component({
-  selector: 'app-score',
-  templateUrl: './score.component.html',
-  styleUrls: ['./score.component.scss']
+  selector: 'app-live-score',
+  templateUrl: './live-score.component.html',
+  styleUrls: ['./live-score.component.scss']
 })
-export class ScoreComponent implements OnInit {
+export class LiveScoreComponent implements OnInit {
   batsman1: BatsmanScore;
   batsman2: BatsmanScore;
   bowler: BowlerScore;

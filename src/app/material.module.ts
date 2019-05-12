@@ -24,7 +24,8 @@ import {
   MatSnackBarModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatTableModule
 } from '@angular/material';
 
 const MODULES = [
@@ -51,7 +52,8 @@ const MODULES = [
   MatProgressSpinnerModule,
   MatBadgeModule,
   MatTooltipModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatTableModule
 ];
 
 @NgModule({
