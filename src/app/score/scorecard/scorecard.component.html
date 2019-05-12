@@ -1,7 +1,7 @@
 <h6 *ngIf="innings.inningsNumber === 1">1<sup>st</sup> Innings</h6>
 <h6>
   Total: {{ innings.total.run }}/{{ innings.total.wicket }} Over:
-  {{ innings.total.over }}{{ innings.total.ball }}
+  {{ innings.total.over }}.{{ innings.total.ball }}
 </h6>
 <h6>Batting</h6>
 <table mat-table [dataSource]="dataSourceBatsman" class="mat-elevation-z8">
