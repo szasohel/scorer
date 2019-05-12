@@ -50,7 +50,7 @@ export class Score {
 
 export class InningsCard {
   inningsNumber: number;
-  total: Total;
+  total = new Total();
   batting: Array<BatsmanScore> = [];
   bowling: Array<BowlerScore> = [];
   constructor(inningsNumer) {

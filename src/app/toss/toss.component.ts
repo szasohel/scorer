@@ -70,13 +70,6 @@ export class TossComponent implements OnInit {
   }
 
   onStartScoring() {
-    // this.scoreService.setBatsman1(
-    //   new BatsmanScore(this.strikeBatsman.value, true)
-    // );
-    // this.scoreService.setBatsman2(
-    //   new BatsmanScore(this.nonStrikeBatsman.value, false)
-    // );
-    // this.scoreService.setBowler(new BowlerScore(this.strikeBowler.value));
     this.inningsService.setInnigsCard(new InningsCard(1));
     this.inningsService.setNewBatsman(
       new BatsmanScore(this.strikeBatsman.value, true)

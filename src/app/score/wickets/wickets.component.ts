@@ -9,7 +9,7 @@ import { ScoreService } from 'src/app/services/score.service';
   styleUrls: ['./wickets.component.scss']
 })
 export class WicketsComponent implements OnInit {
-  outs = ['Bold', 'Catch', 'Stump', 'Run', 'LBW'];
+  outs = ['Bold', 'Caught', 'Stump', 'Run', 'LBW'];
   score = new Score();
   @Output() outEmitter = new EventEmitter();
   constructor(
