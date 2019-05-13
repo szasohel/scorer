@@ -11,7 +11,7 @@ export class InningsService {
   activeBowlerSubject = new Subject();
   alradyBattedSubject = new Subject();
   inningsCardSubject = new Subject();
-  constructor() {}
+  constructor() { }
 
   getInnigsCard() {
     return this.innings;
@@ -46,7 +46,12 @@ export class InningsService {
   }
 
   setNewBowler(actBowler: BowlerScore) {
-    this.innings.bowling.push(actBowler);
+    const isBowler = this.innings.bowling.find((bowler: BowlerScore) => {
+      return bowler.name === actBowler.name;
+    });
+    if (!isBowler) {
+      this.innings.bowling.push(actBowler);
+    }
     this.activeBowlerSubject.next(this.getActiveBowler());
     this.inningsCardSubject.next(this.innings);
   }

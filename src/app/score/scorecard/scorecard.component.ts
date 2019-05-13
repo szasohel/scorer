@@ -26,7 +26,7 @@ export class ScorecardComponent implements OnInit, OnDestroy {
   constructor(
     private inningsService: InningsService,
     private changeDetectorRefs: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.inningsService.inningsCardSubject.subscribe((res: InningsCard) => {
@@ -34,6 +34,7 @@ export class ScorecardComponent implements OnInit, OnDestroy {
       this.innings = res;
       this.dataSourceBatsman = res.batting;
       this.dataSourceBowler = res.bowling;
+      console.log(res.bowling);
       this.batsmanTable.renderRows();
       this.bowlerTable.renderRows();
     });

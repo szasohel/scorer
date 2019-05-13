@@ -25,19 +25,19 @@ export class TossComponent implements OnInit {
   bowlingSidePlayers: string[];
   list: any;
   strikeBowler: FormControl;
+  nonStrikeSelection: any;
 
   constructor(
     private scoreService: ScoreService,
     private router: Router,
     private inningsService: InningsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.list = JSON.parse(localStorage.getItem('teams'));
     this.toss = new FormControl();
     this.tossSelection = new FormControl();
     this.strikeBatsman = new FormControl();
-    this.nonStrikeBatsman = new FormControl();
     this.strikeBowler = new FormControl();
     this.toss.valueChanges.subscribe(res => {
       this.tossWinner = res;
@@ -67,6 +67,13 @@ export class TossComponent implements OnInit {
       this.scoreService.bowlingSidePlayers = this.bowlingSidePlayers;
       this.scoreService.battingSidePlayers = this.battingSidePlayers;
     });
+
+    this.strikeBatsman.valueChanges.subscribe((res) => {
+      this.nonStrikeSelection = this.battingSidePlayers.filter((el) => {
+        return el !== res;
+      });
+    });
+    this.nonStrikeBatsman = new FormControl();
   }
 
   onStartScoring() {

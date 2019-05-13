@@ -31,7 +31,7 @@
 
   <mat-card *ngIf="partSelection" fxLayout="column" class="tossWinnerCard" fxLayoutAlign="center center">
     <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
-      <mat-form-field class="tossSelection" *ngIf="!strikeBatsman.value">
+      <mat-form-field class="tossSelection">
         <mat-label>Select Strike Batsman</mat-label>
         <mat-select [formControl]="strikeBatsman">
           <mat-option *ngFor="let strikeBatsman of battingSidePlayers" [value]="strikeBatsman">
@@ -39,10 +39,10 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="tossSelection" *ngIf="!nonStrikeBatsman.value">
+      <mat-form-field class="tossSelection">
         <mat-label>Select Non-Strike Batsman</mat-label>
         <mat-select [formControl]="nonStrikeBatsman">
-          <mat-option *ngFor="let nonStrikeBatsman of battingSidePlayers" [value]="nonStrikeBatsman">
+          <mat-option *ngFor="let nonStrikeBatsman of nonStrikeSelection" [value]="nonStrikeBatsman">
             {{ nonStrikeBatsman }}
           </mat-option>
         </mat-select>
