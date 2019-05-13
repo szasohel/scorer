@@ -16,10 +16,12 @@ export class AddBowlerComponent implements OnInit {
   constructor(
     private scoreService: ScoreService,
     private inningsServie: InningsService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.bowlingSidePlayers = this.scoreService.bowlingSidePlayers;
+    this.bowlingSidePlayers = this.scoreService.bowlingSidePlayers.filter((el) => {
+      return el !== this.scoreService.bowler.name;
+    });
     this.strikeBowler = new FormControl();
   }
   onStartScoring() {
