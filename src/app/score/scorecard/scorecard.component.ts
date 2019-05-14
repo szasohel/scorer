@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { InningsService } from 'src/app/services/innings.service';
 import { MatTable } from '@angular/material';
+import { ScoreCardService } from 'src/app/services/score-card.service';
+import { ScoreService } from 'src/app/services/score.service';
 
 @Component({
   selector: 'app-scorecard',
@@ -22,37 +24,40 @@ export class ScorecardComponent implements OnInit, OnDestroy {
   displayedColumnsBowler: string[] = ['name', 'over', 'run', 'fours', 'sixes'];
   dataSourceBatsman = this.inningsService.innings.batting;
   dataSourceBowler = this.inningsService.innings.bowling;
+
+  @ViewChild('firstbatsman') firstbatsmanTable: MatTable<any>;
+  @ViewChild('firstbowler') firstbowlerTable: MatTable<any>;
+
+  firstdisplayedColumns: string[] = ['name', 'out', 'run', 'ball', 'fours', 'sixes'];
+  firstdisplayedColumnsBowler: string[] = ['name', 'over', 'run', 'fours', 'sixes'];
+  firstdataSourceBatsman;
+  firstdataSourceBowler;
+
   innings: InningsCard = this.inningsService.innings;
+  firstinnings: InningsCard;
+  isSecInnings: boolean;
   constructor(
     private inningsService: InningsService,
+    private scorecardService: ScoreCardService,
     private changeDetectorRefs: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     this.inningsService.inningsCardSubject.subscribe((res: InningsCard) => {
+      if (this.inningsService.innings.inningsNumber === 2) {
+        this.firstinnings = this.scorecardService.scorecard.firstInnings;
+        this.firstdataSourceBatsman = this.scorecardService.scorecard.firstInnings.batting;
+        this.firstdataSourceBowler = this.scorecardService.scorecard.firstInnings.bowling;
+        this.batsmanTable.renderRows();
+        this.bowlerTable.renderRows();
+      }
       this.changeDetectorRefs.detectChanges();
       this.innings = res;
       this.dataSourceBatsman = res.batting;
       this.dataSourceBowler = res.bowling;
-      console.log(res.bowling);
       this.batsmanTable.renderRows();
       this.bowlerTable.renderRows();
     });
-    // this.inningsService.inningsCardSubject.subscribe((res: InningsCard) => {
-    //   this.dataSourceBowler = res.bowling;
-    //   this.changeDetectorRefs.detectChanges();
-    // });
-    // this.dataSourceBatsman = this.inningsService.innings.batting;
-    // this.dataSourceBowler = [
-    //   {
-    //     name: 'arafat',
-    //     run: 25,
-    //     over: 15,
-    //     fours: 2,
-    //     sixes: 1,
-    //     dots: 0
-    //   }
-    // ];
   }
 
   ngOnDestroy() {

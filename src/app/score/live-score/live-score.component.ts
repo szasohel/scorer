@@ -15,7 +15,7 @@ export class LiveScoreComponent implements OnInit {
   batsman2: BatsmanScore;
   bowler: BowlerScore;
   extra: any;
-  total: Total;
+  total = new Total();
   strikeBowler: any;
   bowlingSidePlayers;
   battingSidePlayers = [];

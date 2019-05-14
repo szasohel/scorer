@@ -1,102 +1,206 @@
-<h6 *ngIf="innings.inningsNumber === 1">1<sup>st</sup> Innings</h6>
-<h6>
-  Total: {{ innings.total.run }}/{{ innings.total.wicket }} Over:
-  {{ innings.total.over }}.{{ innings.total.ball }}
-</h6>
-<h6>Batting</h6>
-<table mat-table [dataSource]="dataSourceBatsman" class="mat-elevation-z8">
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Batsman</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+<!-- first innings -->
+<div *ngIf="innings.inningsNumber === 2">
+  <h6>1<sup>st</sup> Innings</h6>
+  <h6>
+    Total: {{ firstinnings.total.run }}/{{ firstinnings.total.wicket }} Over:
+    {{ firstinnings.total.over }}.{{ firstinnings.total.ball }}
+  </h6>
+  <h6>Batting</h6>
+  <table mat-table [dataSource]="scorecardService.scorecard.firstInnings.batting" class="mat-elevation-z8"
+    #firstbatsman>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Batsman</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="out">
-    <th mat-header-cell *matHeaderCellDef class="out"></th>
-    <td mat-cell *matCellDef="let element" class="out">
-      {{ element.out }}<span *ngIf="element.out"> Out - B. </span
-      >{{ element.bowler }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="out">
+      <th mat-header-cell *matHeaderCellDef class="out"></th>
+      <td mat-cell *matCellDef="let element" class="out">
+        {{ element.out }}<span *ngIf="element.out"> Out - B. </span>{{ element.bowler }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="run">
-    <th mat-header-cell *matHeaderCellDef class="center-text">Run</th>
-    <td mat-cell *matCellDef="let element" class="center-text">
-      {{ element.run }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="run">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Run</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.run }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="ball">
-    <th mat-header-cell *matHeaderCellDef class="center-text">Ball</th>
-    <td mat-cell *matCellDef="let element" class="center-text">
-      {{ element.ball }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="ball">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Ball</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.ball }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="fours">
-    <th mat-header-cell *matHeaderCellDef class="center-text">4s</th>
-    <td mat-cell *matCellDef="let element" class="center-text">
-      {{ element.fours }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="fours">
+      <th mat-header-cell *matHeaderCellDef class="center-text">4s</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.fours }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="sixes">
-    <th mat-header-cell *matHeaderCellDef class="center-text">6s</th>
-    <td mat-cell *matCellDef="let element" class="center-text">
-      {{ element.sixes }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="sixes">
+      <th mat-header-cell *matHeaderCellDef class="center-text">6s</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.sixes }}
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="firstdisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: firstdisplayedColumns"></tr>
+  </table>
 
-<h6>Bowling</h6>
-<table
-  mat-table
-  [dataSource]="dataSourceBowler"
-  class="mat-elevation-z8"
-  #bowler
->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Bowler</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+  <h6>Bowling</h6>
+  <table mat-table [dataSource]="scorecardService.scorecard.firstInnings.bowling" class="mat-elevation-z8" #firstbowler>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Bowler</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="over">
-    <th mat-header-cell *matHeaderCellDef class="center-text">Over</th>
-    <td mat-cell *matCellDef="let element" class="center-text">
-      {{ element.over }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="over">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Over</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.over }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="run">
-    <th mat-header-cell *matHeaderCellDef class="center-text">Run</th>
-    <td mat-cell *matCellDef="let element" class="center-text">
-      {{ element.run }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="run">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Run</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.run }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="wicket">
-    <th mat-header-cell *matHeaderCellDef class="center-text">W</th>
-    <td mat-cell *matCellDef="let element" class="center-text">
-      {{ element.wicket }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="wicket">
+      <th mat-header-cell *matHeaderCellDef class="center-text">W</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.wicket }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="fours">
-    <th mat-header-cell *matHeaderCellDef class="center-text">4s</th>
-    <td mat-cell *matCellDef="let element" class="center-text">
-      {{ element.fours }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="fours">
+      <th mat-header-cell *matHeaderCellDef class="center-text">4s</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.fours }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="sixes">
-    <th mat-header-cell *matHeaderCellDef class="center-text">6s</th>
-    <td mat-cell *matCellDef="let element" class="center-text">
-      {{ element.sixes }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="sixes">
+      <th mat-header-cell *matHeaderCellDef class="center-text">6s</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.sixes }}
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumnsBowler"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumnsBowler"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="firstdisplayedColumnsBowler"></tr>
+    <tr mat-row *matRowDef="let row; columns: firstdisplayedColumnsBowler"></tr>
+  </table>
+</div>
+
+<div>
+  <!-- current innings -->
+  <h6 *ngIf="innings.inningsNumber === 1; else elseTemplate">
+    1<sup>st</sup> Innings
+  </h6>
+  <ng-template #elseTemplate>
+    <h6>2<sup>nd</sup> Innings</h6>
+  </ng-template>
+  <h6>
+    Total: {{ innings.total.run }}/{{ innings.total.wicket }} Over:
+    {{ innings.total.over }}.{{ innings.total.ball }}
+  </h6>
+  <h6>Batting</h6>
+  <table mat-table [dataSource]="dataSourceBatsman" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Batsman</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="out">
+      <th mat-header-cell *matHeaderCellDef class="out"></th>
+      <td mat-cell *matCellDef="let element" class="out">
+        {{ element.out }}<span *ngIf="element.out"> Out - B. </span>{{ element.bowler }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="run">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Run</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.run }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ball">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Ball</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.ball }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fours">
+      <th mat-header-cell *matHeaderCellDef class="center-text">4s</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.fours }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sixes">
+      <th mat-header-cell *matHeaderCellDef class="center-text">6s</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.sixes }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <h6>Bowling</h6>
+  <table mat-table [dataSource]="dataSourceBowler" class="mat-elevation-z8" #bowler>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Bowler</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="over">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Over</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.over }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="run">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Run</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.run }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="wicket">
+      <th mat-header-cell *matHeaderCellDef class="center-text">W</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.wicket }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fours">
+      <th mat-header-cell *matHeaderCellDef class="center-text">4s</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.fours }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sixes">
+      <th mat-header-cell *matHeaderCellDef class="center-text">6s</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.sixes }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsBowler"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsBowler"></tr>
+  </table>
+
+</div>
