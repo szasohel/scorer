@@ -1,7 +1,8 @@
-import { BatsmanScore, Score, Total, BowlerScore } from './../model/score';
+import { BatsmanScore, Score, Total, BowlerScore, InningsCard } from './../model/score';
 import { Injectable, OnInit } from '@angular/core';
 import { InningsService } from './innings.service';
 import { Subject } from 'rxjs';
+import { ScoreCardService } from './score-card.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,10 @@ export class ScoreService {
   activePlayers: Array<any>;
   bowlerChangeSubject = new Subject();
   batsmanChangeSubject = new Subject();
+  inningsChangeSubject = new Subject();
 
-  constructor(private inningsService: InningsService) {
+  constructor(private inningsService: InningsService,
+    private scorecardService: ScoreCardService) {
     this.inningsService.activeBatsmenSubject.subscribe(
       (activeBatsmen: Array<BatsmanScore>) => {
         this.batsmen1 = activeBatsmen.find((batsmen: BatsmanScore) => {
@@ -51,7 +54,7 @@ export class ScoreService {
     });
   }
 
-  updateBatsmanScore(batsman: BatsmanScore, run: number) {}
+  updateBatsmanScore(batsman: BatsmanScore, run: number) { }
   setBatsman1(batsman: BatsmanScore) {
     this.batsmen1 = batsman;
   }
@@ -235,7 +238,13 @@ export class ScoreService {
       this.bowler.over++;
       this.bowler.ball = 0;
       this.bowler.active = false;
-      this.bowlerChangeSubject.next(true);
+      if (this.totalScore.over === this.scorecardService.scorecard.totalOver) {
+        this.bowlerChangeSubject.next(false);
+        this.inningsChangeSubject.next(true);
+        this.changeInnings();
+      } else {
+        this.bowlerChangeSubject.next(true);
+      }
     }
   }
 
@@ -248,6 +257,10 @@ export class ScoreService {
       this.totalScore.run /
       ((this.totalScore.over * 6 + this.totalScore.ball) / 6)
     ).toFixed(1);
+
+    if (Number.isNaN(this.totalScore.runRate)) {
+      this.totalScore.runRate = 0;
+    }
   }
 
   calculateEcon() {
@@ -255,5 +268,12 @@ export class ScoreService {
       this.totalScore.run /
       ((this.totalScore.over * 6 + this.totalScore.ball) / 6)
     ).toFixed(2);
+  }
+
+  changeInnings() {
+    this.totalScore = new Total();
+    const swapPlayers = this.battingSidePlayers;
+    this.battingSidePlayers = this.bowlingSidePlayers;
+    this.bowlingSidePlayers = swapPlayers;
   }
 }

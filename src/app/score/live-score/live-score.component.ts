@@ -23,11 +23,15 @@ export class LiveScoreComponent implements OnInit {
   changeBowler = false;
   changeBatsman = false;
   strikeBatsman: FormControl;
+  inningsChange = false;
 
   constructor(
     private scoreService: ScoreService,
     private inningsServie: InningsService
   ) {
+    this.scoreService.inningsChangeSubject.subscribe((res: boolean) => {
+      this.inningsChange = res;
+    });
     this.scoreService.bowlerChangeSubject.subscribe((res: boolean) => {
       this.changeBowler = res;
     });
@@ -48,7 +52,6 @@ export class LiveScoreComponent implements OnInit {
     this.batsman2 = this.scoreService.getBatsman2();
     this.bowler = this.scoreService.getBowler();
     this.extra = this.scoreService.getExtra();
-    this.total = this.scoreService.totalScore;
     this.inningsServie.alradyBattedSubject.subscribe((list: any) => {
       this.total.wicket = list[1].length - 1;
       this.battingSidePlayers = this.scoreService.battingSidePlayers.filter(

@@ -2,9 +2,10 @@ import { PlayerService } from './../services/player.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ScoreService } from '../services/score.service';
-import { BatsmanScore, BowlerScore, InningsCard } from '../model/score';
+import { BatsmanScore, BowlerScore, InningsCard, ScoreCard } from '../model/score';
 import { Router } from '@angular/router';
 import { InningsService } from '../services/innings.service';
+import { ScoreCardService } from '../services/score-card.service';
 
 @Component({
   selector: 'app-toss',
@@ -20,6 +21,7 @@ export class TossComponent implements OnInit {
   showSelection: boolean;
   tossSelection: FormControl;
   strikeBatsman: FormControl;
+  overs: FormControl;
   nonStrikeBatsman: FormControl;
   battingSidePlayers: string[];
   bowlingSidePlayers: string[];
@@ -29,6 +31,7 @@ export class TossComponent implements OnInit {
 
   constructor(
     private scoreService: ScoreService,
+    private scorecardService: ScoreCardService,
     private router: Router,
     private inningsService: InningsService
   ) { }
@@ -39,6 +42,7 @@ export class TossComponent implements OnInit {
     this.tossSelection = new FormControl();
     this.strikeBatsman = new FormControl();
     this.strikeBowler = new FormControl();
+    this.overs = new FormControl();
     this.toss.valueChanges.subscribe(res => {
       this.tossWinner = res;
       this.showSelection = true;
@@ -77,6 +81,7 @@ export class TossComponent implements OnInit {
   }
 
   onStartScoring() {
+    this.scorecardService.scorecard = new ScoreCard(+this.overs.value, this.tossWinner, this.partSelection);
     this.inningsService.setInnigsCard(new InningsCard(1));
     this.inningsService.setNewBatsman(
       new BatsmanScore(this.strikeBatsman.value, true)

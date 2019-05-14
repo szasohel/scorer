@@ -8,7 +8,7 @@ export class BatsmanScore {
   sixes = 0;
   dots = 0;
   strikeRate = 0;
-  active ? = true;
+  active ?= true;
   strike?: boolean;
 
   constructor(name, strike) {
@@ -20,14 +20,14 @@ export class BatsmanScore {
 export class BowlerScore {
   name?: string;
   over = 0;
-  ball ? = 0;
+  ball ?= 0;
   run = 0;
   wicket = 0;
   fours = 0;
   sixes = 0;
   dots = 0;
   economyRate = 0;
-  active ? = true;
+  active ?= true;
 
   constructor(name) {
     this.name = name;
@@ -62,6 +62,11 @@ export class ScoreCard {
   toss: string;
   selection: string;
   result: string;
+  totalOver: number;
   firstInnings: InningsCard;
   secondInnings: InningsCard;
+  constructor(totalOver, tossWinner, selection) {
+    this.totalOver = totalOver;
+    this.toss = `${tossWinner} won the toss and selected to ${selection} first`;
+  }
 }

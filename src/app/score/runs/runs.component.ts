@@ -13,13 +13,12 @@ export class RunsComponent implements OnInit {
     type: 'run'
   };
   @Output() runEmitter = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   addRun(run) {
     this.score.run = run;
-    console.log(this.score);
     this.runEmitter.emit(this.score);
   }
 }

@@ -38,10 +38,8 @@ export class InningsService {
   }
 
   setNewBatsman(actBatsman: BatsmanScore) {
-    const listName: Array<string> = [];
     this.innings.batting.push(actBatsman);
     this.inningsCardSubject.next(this.innings);
-    console.log('i am call');
     this.activeBatsmenSubject.next(this.getActiveBatsmen());
   }
 

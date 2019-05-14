@@ -19,6 +19,7 @@ import { WicketsComponent } from './score/wickets/wickets.component';
 import { AddBowlerComponent } from './score/add-bowler/add-bowler.component';
 import { LiveScoreComponent } from './score/live-score/live-score.component';
 import { ScorecardComponent } from './score/scorecard/scorecard.component';
+import { SecPlayerSelectionComponent } from './score/sec-player-selection/sec-player-selection.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ScorecardComponent } from './score/scorecard/scorecard.component';
     WicketsComponent,
     AddBowlerComponent,
     LiveScoreComponent,
-    ScorecardComponent
+    ScorecardComponent,
+    SecPlayerSelectionComponent
   ],
   imports: [
     BrowserModule,
