@@ -1,4 +1,7 @@
-<div fxLayout="column" fxLayoutAlign="center center" *ngIf="!changeBowler && !changeBatsman && !inningsChange">
+<div class="live-score" fxLayout="column" fxLayoutAlign="center center"
+  *ngIf="!changeBowler && !changeBatsman && !inningsChange && !isShowWinner">
+  <h4 *ngIf="innings.inningsNumber === 2">Need {{scoreService.targetRun}} run off
+    {{scoreService.targetball}} ball</h4>
   <mat-card>
     <p>
       Total: {{ scoreService.totalScore.run }}/{{ scoreService.totalScore.wicket }} Overs: {{ scoreService.totalScore.over }}.{{
@@ -19,8 +22,8 @@
   <app-wickets (outEmitter)="onOutEmitter($event)"></app-wickets>
 </div>
 <app-sec-player-selection *ngIf="inningsChange"></app-sec-player-selection>
-<app-add-bowler *ngIf="changeBowler"></app-add-bowler>
-<div fxLayout="column" fxLayoutAlign="space-between center" *ngIf="changeBatsman">
+<app-add-bowler *ngIf="changeBowler && !isShowWinner"></app-add-bowler>
+<div class="add-batsman" fxLayout="column" fxLayoutAlign="space-between center" *ngIf="changeBatsman">
   <mat-card fxLayout="column" fxLayoutAlign="center center">
     <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
       <mat-form-field class="tossSelection">
@@ -36,4 +39,12 @@
   <button *ngIf="strikeBatsman.value" class="scoring" mat-raised-button color="primary" (click)="onaddingbatsman()">
     Start Scoring
   </button>
+</div>
+<div *ngIf="isShowWinner">
+  <p *ngIf="winningMargin; else elseTemplate"> {{winner}} won the match by {{winningMargin}} wickets </p>
+
+  <ng-template #elseTemplate>
+    <p> {{winner}} won the match by {{winningMarginRun}} runs </p>
+  </ng-template>
+
 </div>

@@ -28,7 +28,7 @@
 
   <mat-card *ngIf="nonStrikeBatsman.value" fxLayout="column" fxLayoutAlign="center center">
     <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
-      <mat-form-field class="tossSelection" *ngIf="!strikeBowler.value">
+      <mat-form-field class="tossSelection">
         <mat-label>Select Strike Bowler</mat-label>
         <mat-select [formControl]="strikeBowler">
           <mat-option *ngFor="let strikeBowler of bowlingSidePlayers" [value]="strikeBowler">

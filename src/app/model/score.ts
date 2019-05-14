@@ -59,6 +59,7 @@ export class InningsCard {
 }
 
 export class ScoreCard {
+  tossWinner: string;
   toss: string;
   selection: string;
   result: string;
@@ -67,6 +68,8 @@ export class ScoreCard {
   secondInnings: InningsCard;
   constructor(totalOver, tossWinner, selection) {
     this.totalOver = totalOver;
+    this.tossWinner = tossWinner;
+    this.selection = selection;
     this.toss = `${tossWinner} won the toss and selected to ${selection} first`;
   }
 }

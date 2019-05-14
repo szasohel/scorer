@@ -1,4 +1,3 @@
-import { PlayerService } from './../services/player.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ScoreService } from '../services/score.service';
@@ -52,9 +51,11 @@ export class TossComponent implements OnInit {
       if (res === 'Batting') {
         this.partSelection = 'bat';
         if (this.tossWinner === 'Team Red') {
+
           this.battingSidePlayers = this.list.teamRed;
           this.bowlingSidePlayers = this.list.teamGreen;
         } else {
+
           this.battingSidePlayers = this.list.teamGreen;
           this.bowlingSidePlayers = this.list.teamRed;
         }

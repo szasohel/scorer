@@ -15,9 +15,9 @@ export class WicketsComponent implements OnInit {
   constructor(
     private scoreService: ScoreService,
     private inningsService: InningsService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onOut(out) {
     const listName = [];
@@ -30,6 +30,10 @@ export class WicketsComponent implements OnInit {
       outBatsman.push(el.out);
     });
     this.inningsService.alradyBattedSubject.next([listName, outBatsman]);
-    this.scoreService.batsmanChangeSubject.next(true);
+    if (this.scoreService.totalScore.wicket === (this.scoreService.battingSidePlayers.length - 1)) {
+      this.scoreService.changeInnings();
+    } else {
+      this.scoreService.batsmanChangeSubject.next(true);
+    }
   }
 }

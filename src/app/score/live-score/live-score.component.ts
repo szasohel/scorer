@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { BatsmanScore, BowlerScore, Total, Score } from 'src/app/model/score';
 import { ScoreService } from 'src/app/services/score.service';
 import { InningsService } from 'src/app/services/innings.service';
+import { ScoreCardService } from 'src/app/services/score-card.service';
 
 @Component({
   selector: 'app-live-score',
@@ -24,12 +25,19 @@ export class LiveScoreComponent implements OnInit {
   changeBatsman = false;
   strikeBatsman: FormControl;
   inningsChange = false;
+  innings = this.inningsServie.innings;
+  isShowWinner: boolean;
+  winner: string;
+  winningMargin: number;
+  winningMarginRun: number;
 
   constructor(
     private scoreService: ScoreService,
+    private scorecardService: ScoreCardService,
     private inningsServie: InningsService
   ) {
     this.scoreService.inningsChangeSubject.subscribe((res: boolean) => {
+      this.innings = this.inningsServie.innings;
       this.inningsChange = res;
     });
     this.scoreService.bowlerChangeSubject.subscribe((res: boolean) => {
@@ -53,7 +61,8 @@ export class LiveScoreComponent implements OnInit {
     this.bowler = this.scoreService.getBowler();
     this.extra = this.scoreService.getExtra();
     this.inningsServie.alradyBattedSubject.subscribe((list: any) => {
-      this.total.wicket = list[1].length - 1;
+      this.scoreService.totalScore.wicket = list[1].length - 1;
+      this.total = this.scoreService.totalScore;
       this.battingSidePlayers = this.scoreService.battingSidePlayers.filter(
         el => {
           return !list[0].includes(el);
@@ -66,6 +75,20 @@ export class LiveScoreComponent implements OnInit {
 
   onRunEmitter(score: Score) {
     this.scoreService.updateScore(score);
+    if (this.scoreService.targetRun <= 0) {
+      this.scorecardService.scorecard.secondInnings = this.inningsServie.innings;
+      if ((this.scorecardService.scorecard.tossWinner === 'Team Red' && this.scorecardService.scorecard.selection === 'bat')
+        || (this.scorecardService.scorecard.tossWinner === 'Team Green' && this.scorecardService.scorecard.selection === 'bowl')) {
+        this.winner = 'Team Green';
+        this.winningMargin = (this.scoreService.battingSidePlayers.length - 1) - this.total.wicket;
+
+      } else {
+        this.winner = 'Team Red';
+        this.winningMargin = (this.scoreService.battingSidePlayers.length - 1) - this.total.wicket;
+
+      }
+      this.isShowWinner = true;
+    }
   }
 
   onExtraEmitter(score: Score) {
@@ -74,6 +97,21 @@ export class LiveScoreComponent implements OnInit {
 
   onOutEmitter(score: Score) {
     this.scoreService.updateScore(score);
+    if ((this.scoreService.battingSidePlayers.length - 1) - this.total.wicket === 1) {
+      this.scorecardService.scorecard.secondInnings = this.inningsServie.innings;
+      if ((this.scorecardService.scorecard.tossWinner === 'Team Red' && this.scorecardService.scorecard.selection === 'bat')
+        || (this.scorecardService.scorecard.tossWinner === 'Team Green' && this.scorecardService.scorecard.selection === 'bowl')) {
+        this.winner = 'Team Red';
+        this.winningMarginRun = this.scorecardService.scorecard.firstInnings.total.run
+          - this.scorecardService.scorecard.secondInnings.total.run;
+      } else {
+        this.winner = 'Team Green';
+        this.winningMarginRun = this.scorecardService.scorecard.firstInnings.total.run
+          - this.scorecardService.scorecard.secondInnings.total.run;
+
+      }
+      this.isShowWinner = true;
+    }
   }
   onaddingbatsman() {
     this.inningsServie.setNewBatsman(

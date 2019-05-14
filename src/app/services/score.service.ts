@@ -30,6 +30,8 @@ export class ScoreService {
   bowlerChangeSubject = new Subject();
   batsmanChangeSubject = new Subject();
   inningsChangeSubject = new Subject();
+  targetRun;
+  targetball: number;
 
   constructor(private inningsService: InningsService,
     private scorecardService: ScoreCardService) {
@@ -54,7 +56,6 @@ export class ScoreService {
     });
   }
 
-  updateBatsmanScore(batsman: BatsmanScore, run: number) { }
   setBatsman1(batsman: BatsmanScore) {
     this.batsmen1 = batsman;
   }
@@ -123,6 +124,10 @@ export class ScoreService {
     }
     this.runRateCount();
     this.updateBowler(score);
+    if (this.inningsService.innings.inningsNumber === 2) {
+      this.targetRun = this.scorecardService.scorecard.firstInnings.total.run - this.totalScore.run;
+      this.targetball = (this.scorecardService.scorecard.totalOver * 6) - (this.totalScore.over * 6 + this.totalScore.ball);
+    }
   }
 
   updateBowler(score: Score) {
@@ -239,8 +244,6 @@ export class ScoreService {
       this.bowler.ball = 0;
       this.bowler.active = false;
       if (this.totalScore.over === this.scorecardService.scorecard.totalOver) {
-        this.bowlerChangeSubject.next(false);
-        this.inningsChangeSubject.next(true);
         this.changeInnings();
       } else {
         this.bowlerChangeSubject.next(true);
@@ -271,9 +274,15 @@ export class ScoreService {
   }
 
   changeInnings() {
-    this.totalScore = new Total();
-    const swapPlayers = this.battingSidePlayers;
-    this.battingSidePlayers = this.bowlingSidePlayers;
-    this.bowlingSidePlayers = swapPlayers;
+    if (this.inningsService.innings.inningsNumber === 1) {
+      this.batsmanChangeSubject.next(false);
+      this.bowlerChangeSubject.next(false);
+      this.inningsChangeSubject.next(true);
+      this.totalScore = new Total();
+      console.log(this.totalScore);
+      const swapPlayers = this.battingSidePlayers;
+      this.battingSidePlayers = this.bowlingSidePlayers;
+      this.bowlingSidePlayers = swapPlayers;
+    }
   }
 }

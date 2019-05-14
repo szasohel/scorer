@@ -1,11 +1,11 @@
 <!-- first innings -->
 <div *ngIf="innings.inningsNumber === 2">
-  <h6>1<sup>st</sup> Innings</h6>
-  <h6>
+  <h5>1<sup>st</sup> Innings</h5>
+  <h5>
     Total: {{ firstinnings.total.run }}/{{ firstinnings.total.wicket }} Over:
     {{ firstinnings.total.over }}.{{ firstinnings.total.ball }}
-  </h6>
-  <h6>Batting</h6>
+  </h5>
+  <h5>Batting</h5>
   <table mat-table [dataSource]="scorecardService.scorecard.firstInnings.batting" class="mat-elevation-z8"
     #firstbatsman>
     <ng-container matColumnDef="name">
@@ -52,7 +52,7 @@
     <tr mat-row *matRowDef="let row; columns: firstdisplayedColumns"></tr>
   </table>
 
-  <h6>Bowling</h6>
+  <h5>Bowling</h5>
   <table mat-table [dataSource]="scorecardService.scorecard.firstInnings.bowling" class="mat-elevation-z8" #firstbowler>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Bowler</th>
@@ -101,17 +101,17 @@
 
 <div>
   <!-- current innings -->
-  <h6 *ngIf="innings.inningsNumber === 1; else elseTemplate">
+  <h5 *ngIf="innings.inningsNumber === 1; else elseTemplate">
     1<sup>st</sup> Innings
-  </h6>
+  </h5>
   <ng-template #elseTemplate>
-    <h6>2<sup>nd</sup> Innings</h6>
+    <h5>2<sup>nd</sup> Innings</h5>
   </ng-template>
-  <h6>
+  <h5>
     Total: {{ innings.total.run }}/{{ innings.total.wicket }} Over:
     {{ innings.total.over }}.{{ innings.total.ball }}
-  </h6>
-  <h6>Batting</h6>
+  </h5>
+  <h5>Batting</h5>
   <table mat-table [dataSource]="dataSourceBatsman" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Batsman</th>
@@ -157,7 +157,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <h6>Bowling</h6>
+  <h5>Bowling</h5>
   <table mat-table [dataSource]="dataSourceBowler" class="mat-elevation-z8" #bowler>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Bowler</th>
