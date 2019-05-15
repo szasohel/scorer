@@ -5,6 +5,7 @@ import { BatsmanScore, BowlerScore, Total, Score } from 'src/app/model/score';
 import { ScoreService } from 'src/app/services/score.service';
 import { InningsService } from 'src/app/services/innings.service';
 import { ScoreCardService } from 'src/app/services/score-card.service';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-live-score',
@@ -34,7 +35,8 @@ export class LiveScoreComponent implements OnInit {
   constructor(
     private scoreService: ScoreService,
     private scorecardService: ScoreCardService,
-    private inningsServie: InningsService
+    private inningsServie: InningsService,
+    private playerService: PlayerService
   ) {
     this.scoreService.inningsChangeSubject.subscribe((res: boolean) => {
       this.innings = this.inningsServie.innings;
@@ -87,7 +89,9 @@ export class LiveScoreComponent implements OnInit {
         this.winningMargin = (this.scoreService.battingSidePlayers.length - 1) - this.total.wicket;
 
       }
+
       this.isShowWinner = true;
+      this.persistdata();
     }
   }
 
@@ -111,6 +115,7 @@ export class LiveScoreComponent implements OnInit {
 
       }
       this.isShowWinner = true;
+      this.persistdata();
     }
   }
   onaddingbatsman() {
@@ -118,5 +123,13 @@ export class LiveScoreComponent implements OnInit {
       new BatsmanScore(this.strikeBatsman.value, true)
     );
     this.changeBatsman = false;
+  }
+
+  persistdata() {
+    this.playerService.updateBatsmanList(this.scorecardService.scorecard.firstInnings.batting);
+    this.playerService.updateBowlerList(this.scorecardService.scorecard.firstInnings.bowling);
+    this.playerService.updateBatsmanList(this.scorecardService.scorecard.secondInnings.batting);
+    this.playerService.updateBowlerList(this.scorecardService.scorecard.secondInnings.bowling);
+    this.scorecardService.updateScoreCard();
   }
 }

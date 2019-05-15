@@ -59,6 +59,7 @@ export class InningsCard {
 }
 
 export class ScoreCard {
+  date = `${new Date().getMonth() + 1}/${new Date().getDate()}`;
   tossWinner: string;
   toss: string;
   selection: string;

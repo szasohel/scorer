@@ -20,6 +20,10 @@ import { AddBowlerComponent } from './score/add-bowler/add-bowler.component';
 import { LiveScoreComponent } from './score/live-score/live-score.component';
 import { ScorecardComponent } from './score/scorecard/scorecard.component';
 import { SecPlayerSelectionComponent } from './score/sec-player-selection/sec-player-selection.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -44,9 +48,12 @@ import { SecPlayerSelectionComponent } from './score/sec-player-selection/sec-pl
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
-    ReactiveFormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [AngularFireDatabase],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

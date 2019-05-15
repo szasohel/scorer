@@ -83,6 +83,7 @@ export class TossComponent implements OnInit {
 
   onStartScoring() {
     this.scorecardService.scorecard = new ScoreCard(+this.overs.value, this.tossWinner, this.partSelection);
+    console.log(this.scorecardService.scorecard);
     this.inningsService.setInnigsCard(new InningsCard(1));
     this.inningsService.setNewBatsman(
       new BatsmanScore(this.strikeBatsman.value, true)
