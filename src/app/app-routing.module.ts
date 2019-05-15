@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { TeamSelectionComponent } from './team-selection/team-selection.component';
 import { TossComponent } from './toss/toss.component';
 import { ScoreComponent } from './score/score.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', component: TeamSelectionComponent },
+  { path: '', component: HomeComponent },
+  { path: 'scorer', component: TeamSelectionComponent },
   { path: 'toss', component: TossComponent },
   { path: 'score', component: ScoreComponent }
 ];
@@ -14,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

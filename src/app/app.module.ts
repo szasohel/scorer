@@ -24,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { environment } from 'src/environments/environment';
+import { PlayerDetailsComponent } from './player-details/player-details.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { environment } from 'src/environments/environment';
     AddBowlerComponent,
     LiveScoreComponent,
     ScorecardComponent,
-    SecPlayerSelectionComponent
+    SecPlayerSelectionComponent,
+    PlayerDetailsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
