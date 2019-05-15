@@ -4,10 +4,12 @@ import { TeamSelectionComponent } from './team-selection/team-selection.componen
 import { TossComponent } from './toss/toss.component';
 import { ScoreComponent } from './score/score.component';
 import { HomeComponent } from './home/home.component';
+import { PlayerDetailsComponent } from './player-details/player-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'scorer', component: TeamSelectionComponent },
+  { path: 'players', component: PlayerDetailsComponent },
   { path: 'toss', component: TossComponent },
   { path: 'score', component: ScoreComponent }
 ];

@@ -2,9 +2,9 @@ import { Subject } from 'rxjs';
 import { BowlerScore, Score, Total } from './../model/score';
 import { Component, OnInit } from '@angular/core';
 import { BatsmanScore } from '../model/score';
-import { ScoreService } from '../services/score.service';
+import { ScoreService } from './services/score.service';
 import { FormControl } from '@angular/forms';
-import { InningsService } from '../services/innings.service';
+import { InningsService } from './services/innings.service';
 
 @Component({
   selector: 'app-score',

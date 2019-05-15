@@ -2,10 +2,10 @@ import { Subject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BatsmanScore, BowlerScore, Total, Score } from 'src/app/model/score';
-import { ScoreService } from 'src/app/services/score.service';
-import { InningsService } from 'src/app/services/innings.service';
-import { ScoreCardService } from 'src/app/services/score-card.service';
-import { PlayerService } from 'src/app/services/player.service';
+import { ScoreService } from 'src/app/score/services/score.service';
+import { InningsService } from 'src/app/score/services/innings.service';
+import { ScoreCardService } from 'src/app/score/services/score-card.service';
+import { PlayerService } from 'src/app/score/services/player.service';
 
 @Component({
   selector: 'app-live-score',

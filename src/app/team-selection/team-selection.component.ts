@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PlayerService } from '../services/player.service';
-import { TeamService } from '../services/team.service';
+import { PlayerService } from '../score/services/player.service';
+import { TeamService } from '../score/services/team.service';
 import { NgForm, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -24,7 +24,9 @@ export class TeamSelectionComponent implements OnInit {
     private teamService: TeamService,
     private router: Router
   ) {
-    this.playerLeft = this.playerService.getPlayersList();
+    this.playerService.getPlayers().subscribe(() => {
+      this.playerLeft = this.playerService.getPlayersList();
+    });
   }
 
   ngOnInit() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ScoreCard } from '../model/score';
+import { ScoreCard } from '../../model/score';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ScoreService } from 'src/app/services/score.service';
-import { InningsService } from 'src/app/services/innings.service';
+import { ScoreService } from 'src/app/score/services/score.service';
+import { InningsService } from 'src/app/score/services/innings.service';
 import { BatsmanScore, BowlerScore, Total, InningsCard } from 'src/app/model/score';
-import { ScoreCardService } from 'src/app/services/score-card.service';
+import { ScoreCardService } from 'src/app/score/services/score-card.service';
 
 @Component({
   selector: 'app-sec-player-selection',

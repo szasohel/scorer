@@ -1,4 +1,4 @@
-import { BatsmanScore, Score, Total, BowlerScore, InningsCard } from './../model/score';
+import { BatsmanScore, Score, Total, BowlerScore, InningsCard } from '../../model/score';
 import { Injectable, OnInit } from '@angular/core';
 import { InningsService } from './innings.service';
 import { Subject } from 'rxjs';

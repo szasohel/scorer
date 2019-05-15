@@ -1,5 +1,5 @@
 import { BatsmanScore } from './../../model/score';
-import { ScoreService } from './../../services/score.service';
+import { ScoreService } from '../services/score.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

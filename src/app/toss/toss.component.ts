@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ScoreService } from '../services/score.service';
+import { ScoreService } from '../score/services/score.service';
 import { BatsmanScore, BowlerScore, InningsCard, ScoreCard } from '../model/score';
 import { Router } from '@angular/router';
-import { InningsService } from '../services/innings.service';
-import { ScoreCardService } from '../services/score-card.service';
+import { InningsService } from '../score/services/innings.service';
+import { ScoreCardService } from '../score/services/score-card.service';
 
 @Component({
   selector: 'app-toss',
