@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ScoreService } from 'src/app/score/services/score.service';
+import { ScoreService } from 'src/app/services/score.service';
 import { FormControl } from '@angular/forms';
-import { InningsService } from 'src/app/score/services/innings.service';
+import { InningsService } from 'src/app/services/innings.service';
 import { BowlerScore } from 'src/app/model/score';
 
 @Component({

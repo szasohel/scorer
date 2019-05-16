@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Player } from '../../model/player';
-import { Subject } from 'rxjs';
+import { Player } from '../model/player';
+import { Subject, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { BatsmanScore, BowlerScore } from '../../model/score';
+import { BatsmanScore, BowlerScore } from '../model/score';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -507,6 +507,7 @@ export class PlayerService {
     return this.http.get('https://scorer-56f42.firebaseio.com/data/players.json').pipe(tap((res: any) => {
       this.players = res;
     }));
+    // return of(this.players);
   }
 
   getPlayersList() {
@@ -540,14 +541,14 @@ export class PlayerService {
       const pl = newScores.find((el) => {
         return el.name === player.name;
       });
-
+      console.log(pl);
       if (pl) {
-        player.match++;
         player.bowling.over += pl.over;
         player.bowling.run += pl.run;
         player.bowling.fours += pl.fours;
         player.bowling.dots += pl.dots;
         player.bowling.sixes += pl.sixes;
+        player.bowling.ball += pl.ball;
         player.bowling.economyRate = +this.calculateEcon(player.bowling.run, player.bowling.over, player.bowling.ball);
       }
     });

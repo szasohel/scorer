@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ScoreService } from '../score/services/score.service';
+import { FormControl, Validators } from '@angular/forms';
+import { ScoreService } from '../services/score.service';
 import { BatsmanScore, BowlerScore, InningsCard, ScoreCard } from '../model/score';
 import { Router } from '@angular/router';
-import { InningsService } from '../score/services/innings.service';
-import { ScoreCardService } from '../score/services/score-card.service';
+import { InningsService } from '../services/innings.service';
+import { ScoreCardService } from '../services/score-card.service';
 
 @Component({
   selector: 'app-toss',
@@ -37,11 +37,11 @@ export class TossComponent implements OnInit {
 
   ngOnInit() {
     this.list = JSON.parse(localStorage.getItem('teams'));
-    this.toss = new FormControl();
-    this.tossSelection = new FormControl();
-    this.strikeBatsman = new FormControl();
-    this.strikeBowler = new FormControl();
-    this.overs = new FormControl();
+    this.toss = new FormControl('', [Validators.required]);
+    this.tossSelection = new FormControl('', [Validators.required]);
+    this.strikeBatsman = new FormControl('', [Validators.required]);
+    this.strikeBowler = new FormControl('', [Validators.required]);
+    this.overs = new FormControl('', [Validators.required]);
     this.toss.valueChanges.subscribe(res => {
       this.tossWinner = res;
       this.showSelection = true;

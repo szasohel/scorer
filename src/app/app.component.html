@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<div fxLayout="column" fxLayoutAlign="start">
+  <mat-toolbar fxLayout="row" fxLayoutAlign="start center" class="toolbar">
+    <button mat-button fxFlex="20" class="home-icon" [routerLink]="['']" routerLinkActive="router-link-active">
+      BFCC
+    </button>
+    <div fxFlex="80" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button class="signin" (click)="onSignIn()" *ngIf="!showbutton">Sign In</button>
+      <button mat-button color="warn" (click)="onSignOut()" *ngIf="showbutton">Sign Out</button>
+    </div>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>

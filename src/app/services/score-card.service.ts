@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ScoreCard } from '../../model/score';
+import { ScoreCard } from '../model/score';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -9,7 +9,7 @@ export class ScoreCardService {
   scorecardList: ScoreCard[] = [];
   scorecard: ScoreCard;
   constructor(private http: HttpClient) {
-
+    this.getScorecardList();
   }
   getScorecardList() {
     this.http.get('https://scorer-56f42.firebaseio.com/data/scorecardlist.json').subscribe((res: any) => {

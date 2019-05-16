@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Score } from 'src/app/model/score';
-import { InningsService } from 'src/app/score/services/innings.service';
-import { ScoreService } from 'src/app/score/services/score.service';
+import { InningsService } from 'src/app/services/innings.service';
+import { ScoreService } from 'src/app/services/score.service';
 
 @Component({
   selector: 'app-wickets',

@@ -1,4 +1,4 @@
-import { BatsmanScore, Score, Total, BowlerScore, InningsCard } from '../../model/score';
+import { BatsmanScore, Score, Total, BowlerScore, InningsCard } from '../model/score';
 import { Injectable, OnInit } from '@angular/core';
 import { InningsService } from './innings.service';
 import { Subject } from 'rxjs';
@@ -279,7 +279,6 @@ export class ScoreService {
       this.bowlerChangeSubject.next(false);
       this.inningsChangeSubject.next(true);
       this.totalScore = new Total();
-      console.log(this.totalScore);
       const swapPlayers = this.battingSidePlayers;
       this.battingSidePlayers = this.bowlingSidePlayers;
       this.bowlingSidePlayers = swapPlayers;

@@ -6,10 +6,10 @@ import {
   ChangeDetectorRef,
   OnDestroy
 } from '@angular/core';
-import { InningsService } from 'src/app/score/services/innings.service';
+import { InningsService } from 'src/app/services/innings.service';
 import { MatTable } from '@angular/material';
-import { ScoreCardService } from 'src/app/score/services/score-card.service';
-import { ScoreService } from 'src/app/score/services/score.service';
+import { ScoreCardService } from 'src/app/services/score-card.service';
+import { ScoreService } from 'src/app/services/score.service';
 
 @Component({
   selector: 'app-scorecard',

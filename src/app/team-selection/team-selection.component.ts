@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PlayerService } from '../score/services/player.service';
-import { TeamService } from '../score/services/team.service';
+import { PlayerService } from '../services/player.service';
+import { TeamService } from '../services/team.service';
 import { NgForm, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 

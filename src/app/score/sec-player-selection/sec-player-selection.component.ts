@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ScoreService } from 'src/app/score/services/score.service';
-import { InningsService } from 'src/app/score/services/innings.service';
+import { FormControl, Validators } from '@angular/forms';
+import { ScoreService } from 'src/app/services/score.service';
+import { InningsService } from 'src/app/services/innings.service';
 import { BatsmanScore, BowlerScore, Total, InningsCard } from 'src/app/model/score';
-import { ScoreCardService } from 'src/app/score/services/score-card.service';
+import { ScoreCardService } from 'src/app/services/score-card.service';
+import { REQUIRED_VALIDATOR } from '@angular/forms/src/directives/validators';
 
 @Component({
   selector: 'app-sec-player-selection',
@@ -25,8 +26,6 @@ export class SecPlayerSelectionComponent implements OnInit {
   ngOnInit() {
     this.battingSidePlayers = this.scoreService.battingSidePlayers;
     this.bowlingSidePlayers = this.scoreService.bowlingSidePlayers;
-    console.log(this.battingSidePlayers);
-    console.log(this.bowlingSidePlayers);
     this.strikeBatsman = new FormControl();
     this.strikeBowler = new FormControl();
     this.nonStrikeBatsman = new FormControl();

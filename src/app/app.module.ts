@@ -26,6 +26,8 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { environment } from 'src/environments/environment';
 import { PlayerDetailsComponent } from './player-details/player-details.component';
 import { HomeComponent } from './home/home.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { HomeComponent } from './home/home.component';
     ScorecardComponent,
     SecPlayerSelectionComponent,
     PlayerDetailsComponent,
-    HomeComponent
+    HomeComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +58,11 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [AngularFireDatabase],
-  bootstrap: [AppComponent]
+  providers: [AngularFireDatabase, AngularFireAuth],
+  bootstrap: [AppComponent],
+  entryComponents: [SignInComponent]
 })
 export class AppModule { }
