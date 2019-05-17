@@ -1,5 +1,5 @@
-<mat-card class="batsmanCard" fxLayout="row" fxLayoutAlign="space-between center"
-  [ngClass]="{ active: batsman.strike }">
+<mat-card class="batsmanCard" fxLayout="row" fxLayoutAlign="space-between center" [ngClass]="{ active: batsman.strike }"
+  (click)="onClickBatsman(batsman)">
   <div fxLayout="column" fxLayoutAlign="center center">
     <span class="title">Name</span>
     {{ batsman.name }}

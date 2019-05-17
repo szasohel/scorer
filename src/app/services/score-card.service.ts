@@ -17,7 +17,7 @@ export class ScoreCardService {
     });
   }
   updateScoreCard() {
-    this.scorecardList.push(this.scorecard);
+    // this.scorecardList.push(this.scorecard);
     this.http.put('https://scorer-56f42.firebaseio.com/data/scorecardlist.json', this.scorecardList).subscribe();
   }
 }

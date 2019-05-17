@@ -9,10 +9,10 @@ import { AuthenticationGuardService } from './services/authentication-guard.serv
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'scorer', component: TeamSelectionComponent, canActivate: [AuthenticationGuardService] },
+  { path: 'scorer', component: TeamSelectionComponent },
   { path: 'players', component: PlayerDetailsComponent },
-  { path: 'toss', component: TossComponent, canActivate: [AuthenticationGuardService] },
-  { path: 'score', component: ScoreComponent, canActivate: [AuthenticationGuardService] }
+  { path: 'toss', component: TossComponent },
+  { path: 'score', component: ScoreComponent }
 ];
 
 @NgModule({

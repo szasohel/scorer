@@ -71,7 +71,6 @@ export class LiveScoreComponent implements OnInit {
           return !list[0].includes(el);
         }
       );
-      console.log(this.battingSidePlayers);
     });
     this.strikeBatsman = new FormControl();
   }
@@ -87,13 +86,24 @@ export class LiveScoreComponent implements OnInit {
   }
 
   onOutEmitter(score: Score) {
-    this.scoreService.updateScore(score);
-    this.findWinner();
-
+    if(score.outType === 'Run') {
+      console.log(score.outType);
+      const confirmation = confirm(`are you sure you've selected right batsman?`);
+      console.log(confirmation);
+      if(confirmation) {
+      console.log(confirmation);
+        this.scoreService.updateScore(score);
+        this.findWinner();
+      }
+    } else {
+      console.log(score.outType);
+      this.scoreService.updateScore(score);
+      this.findWinner();
+    }
   }
 
   findWinner() {
-    if ((this.scorecardService.scorecard.secondInnings && (this.scoreService.battingSidePlayers.length - 1) - this.total.wicket === 1)) {
+    if (this.inningsServie.innings.inningsNumber === 2 && this.scoreService.battingSidePlayers.length - this.total.wicket === 1) {
       this.scorecardService.scorecard.secondInnings = this.inningsServie.innings;
       if ((this.scorecardService.scorecard.tossWinner === 'Team Red' && this.scorecardService.scorecard.selection === 'bat')
         || (this.scorecardService.scorecard.tossWinner === 'Team Green' && this.scorecardService.scorecard.selection === 'bowl')) {
@@ -108,7 +118,7 @@ export class LiveScoreComponent implements OnInit {
       }
       this.persistdata();
       this.isShowWinner = true;
-    } else if (this.scoreService.targetRun <= 0) {
+    } else if (this.inningsServie.innings.inningsNumber === 2 && this.scoreService.targetRun <= 0) {
       this.scorecardService.scorecard.secondInnings = this.inningsServie.innings;
       if ((this.scorecardService.scorecard.tossWinner === 'Team Red' && this.scorecardService.scorecard.selection === 'bat')
         || (this.scorecardService.scorecard.tossWinner === 'Team Green' && this.scorecardService.scorecard.selection === 'bowl')) {
@@ -118,11 +128,10 @@ export class LiveScoreComponent implements OnInit {
       } else {
         this.winner = 'Team Red';
         this.winningMargin = (this.scoreService.battingSidePlayers.length - 1) - this.total.wicket;
-
       }
       this.persistdata();
       this.isShowWinner = true;
-    } else if (this.scoreService.targetball === 0 && this.scoreService.targetRun > 0) {
+    } else if (this.scoreService.targetball <= 0 && this.scoreService.targetRun > 0) {
       this.scorecardService.scorecard.secondInnings = this.inningsServie.innings;
       if ((this.scorecardService.scorecard.tossWinner === 'Team Red' && this.scorecardService.scorecard.selection === 'bat')
         || (this.scorecardService.scorecard.tossWinner === 'Team Green' && this.scorecardService.scorecard.selection === 'bowl')) {
@@ -133,12 +142,10 @@ export class LiveScoreComponent implements OnInit {
         this.winner = 'Team Green';
         this.winningMarginRun = this.scorecardService.scorecard.firstInnings.total.run
           - this.scorecardService.scorecard.secondInnings.total.run;
-
       }
       this.persistdata();
       this.isShowWinner = true;
     }
-
   }
   onaddingbatsman() {
     this.inningsServie.setNewBatsman(
@@ -153,5 +160,6 @@ export class LiveScoreComponent implements OnInit {
     this.playerService.updateBatsmanList(this.scorecardService.scorecard.secondInnings.batting);
     this.playerService.updateBowlerList(this.scorecardService.scorecard.secondInnings.bowling);
     this.scorecardService.updateScoreCard();
+    this.playerService.updatePlayerList();
   }
 }

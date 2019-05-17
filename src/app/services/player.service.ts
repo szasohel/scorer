@@ -523,7 +523,6 @@ export class PlayerService {
       const pl = newScores.find((el) => {
         return el.name === player.name;
       });
-      console.log(pl);
       if (pl) {
         player.match++;
         player.batting.ball += pl.ball;
@@ -534,6 +533,7 @@ export class PlayerService {
         player.batting.strikeRate = +this.calculateStrikeRate(player.batting.run, player.batting.ball);
       }
     });
+
   }
 
   updateBowlerList(newScores: BowlerScore[]) {
@@ -541,7 +541,6 @@ export class PlayerService {
       const pl = newScores.find((el) => {
         return el.name === player.name;
       });
-      console.log(pl);
       if (pl) {
         player.bowling.over += pl.over;
         player.bowling.run += pl.run;

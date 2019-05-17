@@ -144,7 +144,7 @@ export class ScoreService {
         this.bowler.run += 4;
       }
     }
-    if (score.type === 'out' && score.outType !== 'run') {
+    if (score.type === 'out' && score.outType !== 'Run') {
       this.bowler.wicket++;
     } else if (score.type === 'run') {
       this.bowler.run += score.run;

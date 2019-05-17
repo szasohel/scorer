@@ -10,7 +10,18 @@ import { Component, OnInit, Input } from '@angular/core';
 export class BatsmanComponent implements OnInit {
   @Input() batsman: BatsmanScore;
 
-  constructor() { }
+  constructor(private scoreService: ScoreService) { }
 
   ngOnInit() { }
+
+
+  onClickBatsman(batsman) {
+    if (batsman === this.scoreService.batsmen1) {
+      this.scoreService.batsmen1.strike = true;
+      this.scoreService.batsmen2.strike = false;
+    } else if (batsman === this.scoreService.batsmen2) {
+      this.scoreService.batsmen2.strike = true;
+      this.scoreService.batsmen1.strike = false;
+    }
+  }
 }
