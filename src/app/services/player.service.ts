@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Player } from '../model/player';
 import { Subject, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { BatsmanScore, BowlerScore } from '../model/score';
 import { HttpClient } from '@angular/common/http';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class PlayerService {
   selectedPlayerSubject = new Subject();
 
   players: Array<Player> = [];
+  players$: any;
   // players: Array<Player> = [
   //   {
   //     name: 'ARAFAT',
@@ -499,15 +501,14 @@ export class PlayerService {
   //   }
   // ];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private af: AngularFireDatabase) {
 
   }
 
   getPlayers() {
-    return this.http.get('https://scorer-56f42.firebaseio.com/data/players.json').pipe(tap((res: any) => {
+    return this.af.list('/data/players').valueChanges().pipe(tap((res: any) => {
       this.players = res;
     }));
-    // return of(this.players);
   }
 
   getPlayersList() {
