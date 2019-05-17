@@ -13,7 +13,6 @@ import { AddBowlerComponent } from './add-bowler/add-bowler.component';
 import { LiveScoreComponent } from './live-score/live-score.component';
 import { ScorecardComponent } from './scorecard/scorecard.component';
 import { SecPlayerSelectionComponent } from './sec-player-selection/sec-player-selection.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material.module';
 import { HttpClientModule } from '@angular/common/http';

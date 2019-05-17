@@ -3,11 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { ScoreComponent } from './score.component';
 import { TossComponent } from '../toss/toss.component';
 import { TeamSelectionComponent } from '../team-selection/team-selection.component';
+import { AuthenticationGuardService } from '../services/authentication-guard.service';
 
 const routes: Routes = [
-  { path: '', component: TeamSelectionComponent },
-  { path: 'toss', component: TossComponent },
-  { path: 'score', component: ScoreComponent }
+  { path: '', component: TeamSelectionComponent, canActivate: [AuthenticationGuardService] },
+  { path: 'toss', component: TossComponent, canActivate: [AuthenticationGuardService] },
+  { path: 'score', component: ScoreComponent, canActivate: [AuthenticationGuardService] }
 ];
 
 @NgModule({
