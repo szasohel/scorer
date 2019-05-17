@@ -6,9 +6,9 @@ import { TeamSelectionComponent } from '../team-selection/team-selection.compone
 import { AuthenticationGuardService } from '../services/authentication-guard.service';
 
 const routes: Routes = [
-  { path: '', component: TeamSelectionComponent, canActivate: [AuthenticationGuardService] },
-  { path: 'toss', component: TossComponent, canActivate: [AuthenticationGuardService] },
-  { path: 'score', component: ScoreComponent, canActivate: [AuthenticationGuardService] }
+  { path: '', component: TeamSelectionComponent },
+  { path: 'toss', component: TossComponent },
+  { path: 'score', component: ScoreComponent }
 ];
 
 @NgModule({

@@ -86,20 +86,9 @@ export class LiveScoreComponent implements OnInit {
   }
 
   onOutEmitter(score: Score) {
-    if(score.outType === 'Run') {
-      console.log(score.outType);
-      const confirmation = confirm(`are you sure you've selected right batsman?`);
-      console.log(confirmation);
-      if(confirmation) {
-      console.log(confirmation);
-        this.scoreService.updateScore(score);
-        this.findWinner();
-      }
-    } else {
-      console.log(score.outType);
-      this.scoreService.updateScore(score);
-      this.findWinner();
-    }
+    console.log('out');
+    this.scoreService.updateScore(score);
+    this.findWinner();
   }
 
   findWinner() {

@@ -82,6 +82,7 @@ export class ScoreService {
   }
 
   updateScore(score: Score) {
+    console.log(this.inningsService.innings);
     this.inningsService.innings.total = this.totalScore;
     if (score.type === 'extra') {
       if (score.run === 'WD' || score.run === 'NB') {
