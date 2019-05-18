@@ -12,12 +12,13 @@ import { TossComponent } from './toss/toss.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
-import { environment } from 'src/environments/environment';
 import { PlayerDetailsComponent } from './player-details/player-details.component';
 import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { ScoreModule } from './score/score.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ScoreModule } from './score/score.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    ScoreModule
+    ScoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AngularFireDatabase, AngularFireAuth],
   bootstrap: [AppComponent],

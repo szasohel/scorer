@@ -73,4 +73,16 @@ export class ScoreCard {
     this.selection = selection;
     this.toss = `${tossWinner} won the toss and selected to ${selection} first`;
   }
+
+}
+
+export class Extra {
+  total = 0;
+  WD = 0;
+  NB = 0;
+  Bye = 0;
+  Bye1 = 0;
+  Bye2 = 0;
+  Bye3 = 0;
+  Bye4 = 0;
 }

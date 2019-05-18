@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BatsmanScore, BowlerScore, Total, Score } from 'src/app/model/score';
+import { BatsmanScore, BowlerScore, Total, Score, Extra } from 'src/app/model/score';
 import { ScoreService } from 'src/app/services/score.service';
 import { InningsService } from 'src/app/services/innings.service';
 import { ScoreCardService } from 'src/app/services/score-card.service';
@@ -16,7 +16,7 @@ export class LiveScoreComponent implements OnInit {
   batsman1: BatsmanScore;
   batsman2: BatsmanScore;
   bowler: BowlerScore;
-  extra: any;
+  extra = new Extra();
   total = new Total();
   strikeBowler: any;
   bowlingSidePlayers;
@@ -40,7 +40,8 @@ export class LiveScoreComponent implements OnInit {
   ) {
     this.scoreService.inningsChangeSubject.subscribe((res: boolean) => {
       this.innings = this.inningsServie.innings;
-      this.total = new Total;
+      this.total = new Total();
+      this.extra = new Extra();
       this.inningsChange = res;
     });
     this.scoreService.bowlerChangeSubject.subscribe((res: boolean) => {
@@ -62,7 +63,7 @@ export class LiveScoreComponent implements OnInit {
     this.batsman1 = this.scoreService.getBatsman1();
     this.batsman2 = this.scoreService.getBatsman2();
     this.bowler = this.scoreService.getBowler();
-    this.extra = this.scoreService.getExtra();
+
     this.inningsServie.alradyBattedSubject.subscribe((list: any) => {
       this.scoreService.totalScore.wicket = list[1].length - 1;
       this.total = this.scoreService.totalScore;
@@ -82,14 +83,17 @@ export class LiveScoreComponent implements OnInit {
 
   onExtraEmitter(score: Score) {
     this.scoreService.updateScore(score);
+    this.extra = this.scoreService.extra;
+    console.log(this.extra);
     this.findWinner();
   }
 
   onOutEmitter(score: Score) {
-    console.log('out');
     this.scoreService.updateScore(score);
     this.findWinner();
   }
+
+
 
   findWinner() {
     if (this.inningsServie.innings.inningsNumber === 2 && this.scoreService.battingSidePlayers.length - this.total.wicket === 1) {

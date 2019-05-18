@@ -1,7 +1,7 @@
-import { BatsmanScore, Score, Total, BowlerScore, InningsCard } from '../model/score';
+import { BatsmanScore, Score, Total, BowlerScore, InningsCard, Extra } from '../model/score';
 import { Injectable, OnInit } from '@angular/core';
 import { InningsService } from './innings.service';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { ScoreCardService } from './score-card.service';
 
 @Injectable({
@@ -14,16 +14,17 @@ export class ScoreService {
   bowlingSidePlayers;
   battingSidePlayers;
   totalScore = new Total();
-  extra = {
-    total: 0,
-    WD: 0,
-    NB: 0,
-    Bye: 0,
-    Bye1: 0,
-    Bye2: 0,
-    Bye3: 0,
-    Bye4: 0
-  };
+  extra = new Extra();
+  // extra = {
+  //   total: 0,
+  //   WD: 0,
+  //   NB: 0,
+  //   Bye: 0,
+  //   Bye1: 0,
+  //   Bye2: 0,
+  //   Bye3: 0,
+  //   Bye4: 0
+  // };
   activeBatsmanSubject = new Subject();
   activeBowlerSubject = new Subject();
   activePlayers: Array<any>;
@@ -82,7 +83,6 @@ export class ScoreService {
   }
 
   updateScore(score: Score) {
-    console.log(this.inningsService.innings);
     this.inningsService.innings.total = this.totalScore;
     if (score.type === 'extra') {
       if (score.run === 'WD' || score.run === 'NB') {
@@ -117,7 +117,7 @@ export class ScoreService {
         this.totalCount(score.run);
       }
       this.ballAndOverCount();
-      if (this.batsmen1.strike === true) {
+      if (this.batsmen1.strike === true && score.outType !== 'Run') {
         this.updateBatsman1(score);
       } else {
         this.updateBatsman2(score);
@@ -129,6 +129,8 @@ export class ScoreService {
       this.targetRun = this.scorecardService.scorecard.firstInnings.total.run - this.totalScore.run;
       this.targetball = (this.scorecardService.scorecard.totalOver * 6) - (this.totalScore.over * 6 + this.totalScore.ball);
     }
+    console.log(this.extra);
+
   }
 
   updateBowler(score: Score) {
@@ -280,6 +282,7 @@ export class ScoreService {
       this.bowlerChangeSubject.next(false);
       this.inningsChangeSubject.next(true);
       this.totalScore = new Total();
+      this.extra = new Extra();
       const swapPlayers = this.battingSidePlayers;
       this.battingSidePlayers = this.bowlingSidePlayers;
       this.bowlingSidePlayers = swapPlayers;
