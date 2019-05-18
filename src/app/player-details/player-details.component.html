@@ -2,69 +2,77 @@
   <mat-expansion-panel *ngFor="let player of players">
     <mat-expansion-panel-header>
       <mat-panel-title class="player-title">
-        {{player.name}}
+        {{ player.name }}
       </mat-panel-title>
     </mat-expansion-panel-header>
     <h5>Batting</h5>
-    <div fxLayout="row" fxLayoutAlign="space-between start" class="player-title">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between start"
+      class="player-title"
+    >
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>Matches</p>
-        <p>{{player.match}}</p>
+        <p>{{ player.match }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>Run</p>
-        <p>{{player.batting.run}}</p>
+        <p>{{ player.batting.run }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>Ball</p>
-        <p>{{player.batting.ball}}</p>
+        <p>{{ player.batting.ball }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>0s</p>
-        <p>{{player.batting.dots}}</p>
+        <p>{{ player.batting.dots }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>4s</p>
-        <p>{{player.batting.fours}}</p>
+        <p>{{ player.batting.fours }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>6s</p>
-        <p>{{player.batting.sixes}}</p>
+        <p>{{ player.batting.sixes }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>Strike Rate</p>
-        <p>{{player.batting.strikeRate}}</p>
+        <p>{{ player.batting.strikeRate }}</p>
       </div>
     </div>
     <h5>Bowling</h5>
-    <div fxLayout="row" fxLayoutAlign="space-between start" class="player-title">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between start"
+      class="player-title"
+    >
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>Matches</p>
-        <p>{{player.match}}</p>
+        <p>{{ player.match }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>Wicket</p>
-        <p>{{player.bowling.wicket}}</p>
+        <p>{{ player.bowling.wicket }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>Run</p>
-        <p>{{player.bowling.run}}</p>
+        <p>{{ player.bowling.run }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>0s</p>
-        <p>{{player.bowling.dots}}</p>
+        <p>{{ player.bowling.dots }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>4s</p>
-        <p>{{player.bowling.fours}}</p>
+        <p>{{ player.bowling.fours }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>6s</p>
-        <p>{{player.bowling.sixes}}</p>
+        <p>{{ player.bowling.sixes }}</p>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center">
         <p>Economy</p>
-        <p>{{player.bowling.economyRate}}</p>
+        <p>{{ player.bowling.economyRate }}</p>
       </div>
     </div>
   </mat-expansion-panel>

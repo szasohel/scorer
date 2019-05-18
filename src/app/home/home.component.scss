@@ -1,10 +1,13 @@
 .home {
-  height: 90vh;
+  height: 93vh;
 }
 
 .bfcc-logo {
   height: 200px;
   width: 200px;
+  border-radius: 50%;
+  margin-top: 50px;
+  z-index: 100;
 }
 
 button {
@@ -12,5 +15,15 @@ button {
   margin: 15px;
   color: white;
   font-weight: bold;
-  background-color: rgba($color: red, $alpha: .7);
+  background-color: rgba($color: green, $alpha: 0.8);
+}
+
+.home-img {
+  background: no-repeat center;
+  height: 94vh;
+  width: 100vw;
+  background-size: cover;
+  opacity: 0.5;
+  position: absolute;
+  margin-top: -10px;
 }

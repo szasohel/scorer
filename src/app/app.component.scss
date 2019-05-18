@@ -1,15 +1,18 @@
 .signin {
   color: green;
+  font-weight: bold;
 }
 
 .home-icon {
-  color: red;
+  color: green;
   font-weight: bold;
+  font-size: 20px;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white0,
+    1px 1px 0 white;
 }
 
 .toolbar {
   height: 40px;
+  background: rgba($color: rgb(248, 73, 61), $alpha: 0.5);
   margin-bottom: 10px;
-  background: linear-gradient(to right, rgba(57, 130, 53, 1) 0%, rgba(138, 182, 107, 1) 67%, rgba(201, 222, 150, 1) 100%);
-  background: linear-gradient(to right, rgba(57, 130, 53, 1) 0%, rgba(138, 182, 107, 1) 67%, rgba(201, 222, 150, 1) 100%);
 }

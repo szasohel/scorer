@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { ScoreService } from '../services/score.service';
-import { BatsmanScore, BowlerScore, InningsCard, ScoreCard } from '../model/score';
+import { ScoreService } from '../../services/score.service';
+import {
+  BatsmanScore,
+  BowlerScore,
+  InningsCard,
+  ScoreCard
+} from '../../model/score';
 import { Router } from '@angular/router';
-import { InningsService } from '../services/innings.service';
-import { ScoreCardService } from '../services/score-card.service';
+import { InningsService } from '../../services/innings.service';
+import { ScoreCardService } from '../../services/score-card.service';
 
 @Component({
   selector: 'app-toss',
@@ -33,7 +38,7 @@ export class TossComponent implements OnInit {
     private scorecardService: ScoreCardService,
     private router: Router,
     private inningsService: InningsService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.list = JSON.parse(localStorage.getItem('teams'));
@@ -51,11 +56,9 @@ export class TossComponent implements OnInit {
       if (res === 'Batting') {
         this.partSelection = 'bat';
         if (this.tossWinner === 'Team Red') {
-
           this.battingSidePlayers = this.list.teamRed;
           this.bowlingSidePlayers = this.list.teamGreen;
         } else {
-
           this.battingSidePlayers = this.list.teamGreen;
           this.bowlingSidePlayers = this.list.teamRed;
         }
@@ -73,8 +76,8 @@ export class TossComponent implements OnInit {
       this.scoreService.battingSidePlayers = this.battingSidePlayers;
     });
 
-    this.strikeBatsman.valueChanges.subscribe((res) => {
-      this.nonStrikeSelection = this.battingSidePlayers.filter((el) => {
+    this.strikeBatsman.valueChanges.subscribe(res => {
+      this.nonStrikeSelection = this.battingSidePlayers.filter(el => {
         return el !== res;
       });
     });
@@ -82,7 +85,11 @@ export class TossComponent implements OnInit {
   }
 
   onStartScoring() {
-    this.scorecardService.scorecard = new ScoreCard(+this.overs.value, this.tossWinner, this.partSelection);
+    this.scorecardService.scorecard = new ScoreCard(
+      +this.overs.value,
+      this.tossWinner,
+      this.partSelection
+    );
     console.log(this.scorecardService.scorecard);
     this.inningsService.setInnigsCard(new InningsCard(1));
     this.inningsService.setNewBatsman(
@@ -95,6 +102,6 @@ export class TossComponent implements OnInit {
 
     this.inningsService.setNewBowler(new BowlerScore(this.strikeBowler.value));
 
-    this.router.navigate(['/score']);
+    this.router.navigate(['/scorer/score']);
   }
 }

@@ -17,10 +17,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TeamSelectionComponent } from './team-selection/team-selection.component';
+import { TossComponent } from './toss/toss.component';
 
 @NgModule({
   declarations: [
     ScoreComponent,
+    TossComponent,
     BatsmanComponent,
     ExtraComponent,
     BowlerComponent,
@@ -31,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LiveScoreComponent,
     ScorecardComponent,
     SecPlayerSelectionComponent,
+    TeamSelectionComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FlexLayoutModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ]
 })
-export class ScoreModule { }
+export class ScoreModule {}

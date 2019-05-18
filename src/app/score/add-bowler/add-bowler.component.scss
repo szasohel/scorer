@@ -1,6 +1,5 @@
 .scoring {
-  position: fixed;
-  bottom: 30px;
+  margin-top: 20px;
 }
 
 .tossSelection {
@@ -12,5 +11,5 @@
 }
 
 mat-card {
-  background-color: rgba($color: grey, $alpha: .2);
+  background-color: rgba($color: grey, $alpha: 0.2);
 }

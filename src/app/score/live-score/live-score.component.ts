@@ -1,7 +1,13 @@
 import { Subject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BatsmanScore, BowlerScore, Total, Score, Extra } from 'src/app/model/score';
+import {
+  BatsmanScore,
+  BowlerScore,
+  Total,
+  Score,
+  Extra
+} from 'src/app/model/score';
 import { ScoreService } from 'src/app/services/score.service';
 import { InningsService } from 'src/app/services/innings.service';
 import { ScoreCardService } from 'src/app/services/score-card.service';
@@ -93,48 +99,71 @@ export class LiveScoreComponent implements OnInit {
     this.findWinner();
   }
 
-
-
   findWinner() {
-    if (this.inningsServie.innings.inningsNumber === 2 && this.scoreService.battingSidePlayers.length - this.total.wicket === 1) {
+    if (
+      this.inningsServie.innings.inningsNumber === 2 &&
+      this.scoreService.battingSidePlayers.length - this.total.wicket === 1
+    ) {
       this.scorecardService.scorecard.secondInnings = this.inningsServie.innings;
-      if ((this.scorecardService.scorecard.tossWinner === 'Team Red' && this.scorecardService.scorecard.selection === 'bat')
-        || (this.scorecardService.scorecard.tossWinner === 'Team Green' && this.scorecardService.scorecard.selection === 'bowl')) {
+      if (
+        (this.scorecardService.scorecard.tossWinner === 'Team Red' &&
+          this.scorecardService.scorecard.selection === 'bat') ||
+        (this.scorecardService.scorecard.tossWinner === 'Team Green' &&
+          this.scorecardService.scorecard.selection === 'bowl')
+      ) {
         this.winner = 'Team Red';
-        this.winningMarginRun = this.scorecardService.scorecard.firstInnings.total.run
-          - this.scorecardService.scorecard.secondInnings.total.run;
+        this.winningMarginRun =
+          this.scorecardService.scorecard.firstInnings.total.run -
+          this.scorecardService.scorecard.secondInnings.total.run;
       } else {
         this.winner = 'Team Green';
-        this.winningMarginRun = this.scorecardService.scorecard.firstInnings.total.run
-          - this.scorecardService.scorecard.secondInnings.total.run;
-
+        this.winningMarginRun =
+          this.scorecardService.scorecard.firstInnings.total.run -
+          this.scorecardService.scorecard.secondInnings.total.run;
       }
       this.persistdata();
       this.isShowWinner = true;
-    } else if (this.inningsServie.innings.inningsNumber === 2 && this.scoreService.targetRun <= 0) {
+    } else if (
+      this.inningsServie.innings.inningsNumber === 2 &&
+      this.scoreService.targetRun <= 0
+    ) {
       this.scorecardService.scorecard.secondInnings = this.inningsServie.innings;
-      if ((this.scorecardService.scorecard.tossWinner === 'Team Red' && this.scorecardService.scorecard.selection === 'bat')
-        || (this.scorecardService.scorecard.tossWinner === 'Team Green' && this.scorecardService.scorecard.selection === 'bowl')) {
+      if (
+        (this.scorecardService.scorecard.tossWinner === 'Team Red' &&
+          this.scorecardService.scorecard.selection === 'bat') ||
+        (this.scorecardService.scorecard.tossWinner === 'Team Green' &&
+          this.scorecardService.scorecard.selection === 'bowl')
+      ) {
         this.winner = 'Team Green';
-        this.winningMargin = (this.scoreService.battingSidePlayers.length - 1) - this.total.wicket;
-
+        this.winningMargin =
+          this.scoreService.battingSidePlayers.length - 1 - this.total.wicket;
       } else {
         this.winner = 'Team Red';
-        this.winningMargin = (this.scoreService.battingSidePlayers.length - 1) - this.total.wicket;
+        this.winningMargin =
+          this.scoreService.battingSidePlayers.length - 1 - this.total.wicket;
       }
       this.persistdata();
       this.isShowWinner = true;
-    } else if (this.scoreService.targetball <= 0 && this.scoreService.targetRun > 0) {
+    } else if (
+      this.scoreService.targetball <= 0 &&
+      this.scoreService.targetRun > 0
+    ) {
       this.scorecardService.scorecard.secondInnings = this.inningsServie.innings;
-      if ((this.scorecardService.scorecard.tossWinner === 'Team Red' && this.scorecardService.scorecard.selection === 'bat')
-        || (this.scorecardService.scorecard.tossWinner === 'Team Green' && this.scorecardService.scorecard.selection === 'bowl')) {
+      if (
+        (this.scorecardService.scorecard.tossWinner === 'Team Red' &&
+          this.scorecardService.scorecard.selection === 'bat') ||
+        (this.scorecardService.scorecard.tossWinner === 'Team Green' &&
+          this.scorecardService.scorecard.selection === 'bowl')
+      ) {
         this.winner = 'Team Red';
-        this.winningMarginRun = this.scorecardService.scorecard.firstInnings.total.run
-          - this.scorecardService.scorecard.secondInnings.total.run;
+        this.winningMarginRun =
+          this.scorecardService.scorecard.firstInnings.total.run -
+          this.scorecardService.scorecard.secondInnings.total.run;
       } else {
         this.winner = 'Team Green';
-        this.winningMarginRun = this.scorecardService.scorecard.firstInnings.total.run
-          - this.scorecardService.scorecard.secondInnings.total.run;
+        this.winningMarginRun =
+          this.scorecardService.scorecard.firstInnings.total.run -
+          this.scorecardService.scorecard.secondInnings.total.run;
       }
       this.persistdata();
       this.isShowWinner = true;
@@ -148,10 +177,18 @@ export class LiveScoreComponent implements OnInit {
   }
 
   persistdata() {
-    this.playerService.updateBatsmanList(this.scorecardService.scorecard.firstInnings.batting);
-    this.playerService.updateBowlerList(this.scorecardService.scorecard.firstInnings.bowling);
-    this.playerService.updateBatsmanList(this.scorecardService.scorecard.secondInnings.batting);
-    this.playerService.updateBowlerList(this.scorecardService.scorecard.secondInnings.bowling);
+    this.playerService.updateBatsmanList(
+      this.scorecardService.scorecard.firstInnings.batting
+    );
+    this.playerService.updateBowlerList(
+      this.scorecardService.scorecard.firstInnings.bowling
+    );
+    this.playerService.updateBatsmanList(
+      this.scorecardService.scorecard.secondInnings.batting
+    );
+    this.playerService.updateBowlerList(
+      this.scorecardService.scorecard.secondInnings.bowling
+    );
     this.scorecardService.updateScoreCard();
     this.playerService.updatePlayerList();
   }

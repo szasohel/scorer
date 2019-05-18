@@ -7,7 +7,7 @@ body {
   padding: 0px;
   box-sizing: border-box;
   font-size: 12px;
-
+  overscroll-behavior: none;
   // @media screen and (max-width: 600px) {
   //   padding: 20px 5px 20px 5px;
   // }

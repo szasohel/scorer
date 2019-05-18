@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PlayerService } from '../services/player.service';
-import { TeamService } from '../services/team.service';
+import { PlayerService } from '../../services/player.service';
+import { TeamService } from '../../services/team.service';
 import { NgForm, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -77,6 +77,6 @@ export class TeamSelectionComponent implements OnInit {
         teamGreen: this.teamGreenSelectedPlayer
       })
     );
-    this.router.navigate(['/toss']);
+    this.router.navigate(['/scorer/toss']);
   }
 }
