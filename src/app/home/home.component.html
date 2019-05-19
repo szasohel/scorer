@@ -4,7 +4,7 @@
 
   <div fxLayout="column" fxLayoutAlign="start center" fxFlex="60">
     <mat-error *ngIf="error" style="font-size:14px;">{{ error }}</mat-error>
-    <button mat-raised-button>Scorecards</button>
+    <button mat-raised-button [routerLink]="['/scorecard']">Scorecards</button>
     <button mat-raised-button [routerLink]="['/players']">
       Player Profile
     </button>

@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { ScoreCard } from '../model/score';
 import { HttpClient } from '@angular/common/http';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScoreCardService {
   scorecardList: ScoreCard[] = [];
-  scorecard: ScoreCard;
-  constructor(private http: HttpClient) {
-    this.getScorecardList();
+  scorecard: any;
+  scoreCard$: AngularFireList<any[]>;
+  constructor(private http: HttpClient, private db: AngularFireDatabase) {
+    this.scoreCard$ = this.db.list('/data/scorecardlist');
   }
-  getScorecardList() {
-    this.http.get('https://scorer-56f42.firebaseio.com/data/scorecardlist.json').subscribe((res: any) => {
-      this.scorecardList = res;
-    });
+  addScoreCard(): void {
+    console.log('I am called');
+    this.scoreCard$.push(this.scorecard);
   }
-  updateScoreCard() {
-    // this.scorecardList.push(this.scorecard);
-    this.http.put('https://scorer-56f42.firebaseio.com/data/scorecardlist.json', this.scorecardList).subscribe();
+
+  retrieveScoreCard(date) {
+    return this.db.list('/data/scorecardlist', ref =>
+      ref.orderByChild('date').equalTo(date)
+    );
   }
 }

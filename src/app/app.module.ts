@@ -20,13 +20,16 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ScorecardListComponent } from './scorecard-list/scorecard-list.component';
+import { ScorecardComponent } from './score/scorecard/scorecard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerDetailsComponent,
     HomeComponent,
-    SignInComponent
+    SignInComponent,
+    ScorecardListComponent
   ],
   imports: [
     BrowserModule,

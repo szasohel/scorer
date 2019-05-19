@@ -1,3 +1,4 @@
+import { ScorecardComponent } from './score/scorecard/scorecard.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
 
@@ -25,7 +26,8 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTableModule
+  MatTableModule,
+  MatNativeDateModule
 } from '@angular/material';
 
 const MODULES = [
@@ -53,7 +55,8 @@ const MODULES = [
   MatBadgeModule,
   MatTooltipModule,
   MatProgressBarModule,
-  MatTableModule
+  MatTableModule,
+  MatNativeDateModule
 ];
 
 @NgModule({

@@ -1,0 +1,66 @@
+mat-list-item {
+  font-size: 12px !important;
+  margin: 5px;
+  border: 1px solid lightblue;
+  border-radius: 10px;
+  height: 30px;
+  cursor: pointer;
+}
+
+::ng-host {
+  width: 100%;
+}
+table {
+  margin-top: 10px;
+  width: 350px;
+}
+
+td.mat-cell:first-of-type {
+  padding-left: 15px;
+}
+
+th.mat-header-cell:first-of-type {
+  padding-left: 15px;
+}
+
+td.mat-cell:last-of-type {
+  padding-right: 15px;
+}
+
+th.mat-header-cell:last-of-type {
+  padding-right: 15px;
+}
+
+.out {
+  width: 150px;
+  text-align: center;
+}
+
+tr {
+  height: 30px !important;
+}
+
+th {
+  font-weight: bold;
+}
+
+td {
+  font-size: 11px;
+  margin: 8px;
+}
+
+.mat-column-name {
+  font-weight: bold;
+}
+
+.center-text {
+  text-align: center;
+}
+
+th.mat-header-cell {
+  padding: 2px;
+}
+
+h6 {
+  margin: 10px 0 10px 0;
+}

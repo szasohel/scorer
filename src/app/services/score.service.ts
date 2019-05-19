@@ -1,4 +1,11 @@
-import { BatsmanScore, Score, Total, BowlerScore, InningsCard, Extra } from '../model/score';
+import {
+  BatsmanScore,
+  Score,
+  Total,
+  BowlerScore,
+  InningsCard,
+  Extra
+} from '../model/score';
 import { Injectable, OnInit } from '@angular/core';
 import { InningsService } from './innings.service';
 import { Subject, BehaviorSubject } from 'rxjs';
@@ -15,16 +22,7 @@ export class ScoreService {
   battingSidePlayers;
   totalScore = new Total();
   extra = new Extra();
-  // extra = {
-  //   total: 0,
-  //   WD: 0,
-  //   NB: 0,
-  //   Bye: 0,
-  //   Bye1: 0,
-  //   Bye2: 0,
-  //   Bye3: 0,
-  //   Bye4: 0
-  // };
+
   activeBatsmanSubject = new Subject();
   activeBowlerSubject = new Subject();
   activePlayers: Array<any>;
@@ -34,8 +32,10 @@ export class ScoreService {
   targetRun;
   targetball: number;
 
-  constructor(private inningsService: InningsService,
-    private scorecardService: ScoreCardService) {
+  constructor(
+    private inningsService: InningsService,
+    private scorecardService: ScoreCardService
+  ) {
     this.inningsService.activeBatsmenSubject.subscribe(
       (activeBatsmen: Array<BatsmanScore>) => {
         this.batsmen1 = activeBatsmen.find((batsmen: BatsmanScore) => {
@@ -84,6 +84,7 @@ export class ScoreService {
 
   updateScore(score: Score) {
     this.inningsService.innings.total = this.totalScore;
+    this.inningsService.innings.extra = this.extra;
     if (score.type === 'extra') {
       if (score.run === 'WD' || score.run === 'NB') {
         this.extra[score.run] += 1;
@@ -126,11 +127,13 @@ export class ScoreService {
     this.runRateCount();
     this.updateBowler(score);
     if (this.inningsService.innings.inningsNumber === 2) {
-      this.targetRun = this.scorecardService.scorecard.firstInnings.total.run - this.totalScore.run;
-      this.targetball = (this.scorecardService.scorecard.totalOver * 6) - (this.totalScore.over * 6 + this.totalScore.ball);
+      this.targetRun =
+        this.scorecardService.scorecard.firstInnings.total.run -
+        this.totalScore.run;
+      this.targetball =
+        this.scorecardService.scorecard.totalOver * 6 -
+        (this.totalScore.over * 6 + this.totalScore.ball);
     }
-    console.log(this.extra);
-
   }
 
   updateBowler(score: Score) {
@@ -202,11 +205,16 @@ export class ScoreService {
       }
     }
     this.updateBall();
-    this.batsmen2.strikeRate = +this.calculateStrikeRate(this.batsmen2);
+    this.batsmen2.strikeRate = this.calculateStrikeRate(this.batsmen2);
   }
 
   calculateStrikeRate(batsman: BatsmanScore) {
-    return ((batsman.run / batsman.ball) * 100).toFixed(2);
+    const sr = +((batsman.run / batsman.ball) * 100).toFixed(2);
+    if (!isFinite(sr)) {
+      return 0;
+    } else {
+      return sr;
+    }
   }
 
   changeStrike() {
@@ -270,10 +278,16 @@ export class ScoreService {
   }
 
   calculateEcon() {
-    this.bowler.economyRate = +(
+    const economyRate = +(
       this.totalScore.run /
       ((this.totalScore.over * 6 + this.totalScore.ball) / 6)
     ).toFixed(2);
+
+    if (isNaN(economyRate)) {
+      this.bowler.economyRate = 0;
+    } else {
+      this.bowler.economyRate = economyRate;
+    }
   }
 
   changeInnings() {

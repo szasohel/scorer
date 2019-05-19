@@ -57,6 +57,68 @@
     <tr mat-row *matRowDef="let row; columns: firstdisplayedColumns"></tr>
   </table>
 
+  <h5>Extra</h5>
+  <table
+    mat-table
+    [dataSource]="firstdataSourceExtra"
+    class="mat-elevation-z8"
+    #firstbatsman
+  >
+    <ng-container matColumnDef="Total">
+      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="WD">
+      <th mat-header-cell *matHeaderCellDef class="center-text">WD</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.WD }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="NB">
+      <th mat-header-cell *matHeaderCellDef class="center-text">NB</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.NB }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Bye">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Bye</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.Bye }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Bye1">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Bye1</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.Bye1 }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Bye2">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Bye2</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.Bye2 }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Bye3">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Bye3</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.Bye3 }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Bye4">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Bye4</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.Bye4 }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="extraColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: extraColumns"></tr>
+  </table>
+
   <h5>Bowling</h5>
   <table
     mat-table
@@ -166,6 +228,69 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <h5>Extra</h5>
+  <table
+    *ngIf="dataSourceExtra"
+    mat-table
+    [dataSource]="dataSourceExtra"
+    class="mat-elevation-z8"
+    #firstbatsman
+  >
+    <ng-container matColumnDef="Total">
+      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="WD">
+      <th mat-header-cell *matHeaderCellDef class="center-text">WD</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.WD }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="NB">
+      <th mat-header-cell *matHeaderCellDef class="center-text">NB</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.NB }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Bye">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Bye</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.Bye }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Bye1">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Bye1</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.Bye1 }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Bye2">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Bye2</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.Bye2 }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Bye3">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Bye3</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.Bye3 }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Bye4">
+      <th mat-header-cell *matHeaderCellDef class="center-text">Bye4</th>
+      <td mat-cell *matCellDef="let element" class="center-text">
+        {{ element.Bye4 }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="extraColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: extraColumns"></tr>
   </table>
 
   <h5>Bowling</h5>

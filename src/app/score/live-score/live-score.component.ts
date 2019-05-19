@@ -189,7 +189,7 @@ export class LiveScoreComponent implements OnInit {
     this.playerService.updateBowlerList(
       this.scorecardService.scorecard.secondInnings.bowling
     );
-    this.scorecardService.updateScoreCard();
+    this.scorecardService.addScoreCard();
     this.playerService.updatePlayerList();
   }
 }

@@ -53,13 +53,15 @@ export class InningsCard {
   total = new Total();
   batting: Array<BatsmanScore> = [];
   bowling: Array<BowlerScore> = [];
+  extra = new Extra();
   constructor(inningsNumer) {
     this.inningsNumber = inningsNumer;
   }
 }
 
 export class ScoreCard {
-  date = `${new Date().getMonth() + 1}/${new Date().getDate()}`;
+  date = `${new Date().getMonth() +
+    1}/${new Date().getDate()}/${new Date().getFullYear()}`;
   tossWinner: string;
   toss: string;
   selection: string;

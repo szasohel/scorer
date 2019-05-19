@@ -9,7 +9,6 @@ import {
 import { InningsService } from 'src/app/services/innings.service';
 import { MatTable } from '@angular/material';
 import { ScoreCardService } from 'src/app/services/score-card.service';
-import { ScoreService } from 'src/app/services/score.service';
 
 @Component({
   selector: 'app-scorecard',
@@ -23,15 +22,40 @@ export class ScorecardComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['name', 'out', 'run', 'ball', 'fours', 'sixes'];
   displayedColumnsBowler: string[] = ['name', 'over', 'run', 'fours', 'sixes'];
   dataSourceBatsman = this.inningsService.innings.batting;
+  dataSourceExtra;
   dataSourceBowler = this.inningsService.innings.bowling;
 
   @ViewChild('firstbatsman') firstbatsmanTable: MatTable<any>;
   @ViewChild('firstbowler') firstbowlerTable: MatTable<any>;
 
-  firstdisplayedColumns: string[] = ['name', 'out', 'run', 'ball', 'fours', 'sixes'];
-  firstdisplayedColumnsBowler: string[] = ['name', 'over', 'run', 'fours', 'sixes'];
+  firstdisplayedColumns: string[] = [
+    'name',
+    'out',
+    'run',
+    'ball',
+    'fours',
+    'sixes'
+  ];
+  firstdisplayedColumnsBowler: string[] = [
+    'name',
+    'over',
+    'run',
+    'fours',
+    'sixes'
+  ];
+  extraColumns: string[] = [
+    'Total',
+    'WD',
+    'NB',
+    'Bye',
+    'Bye1',
+    'Bye2',
+    'Bye3',
+    'Bye4'
+  ];
   firstdataSourceBatsman;
   firstdataSourceBowler;
+  firstdataSourceExtra;
 
   innings: InningsCard = this.inningsService.innings;
   firstinnings: InningsCard;
@@ -40,7 +64,7 @@ export class ScorecardComponent implements OnInit, OnDestroy {
     private inningsService: InningsService,
     private scorecardService: ScoreCardService,
     private changeDetectorRefs: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.inningsService.inningsCardSubject.subscribe((res: InningsCard) => {
@@ -49,6 +73,10 @@ export class ScorecardComponent implements OnInit, OnDestroy {
         this.firstinnings = this.scorecardService.scorecard.firstInnings;
         this.firstdataSourceBatsman = this.scorecardService.scorecard.firstInnings.batting;
         this.firstdataSourceBowler = this.scorecardService.scorecard.firstInnings.bowling;
+        this.firstdataSourceExtra = [
+          this.scorecardService.scorecard.firstInnings.extra
+        ];
+
         this.batsmanTable.renderRows();
         this.bowlerTable.renderRows();
       }
@@ -56,7 +84,8 @@ export class ScorecardComponent implements OnInit, OnDestroy {
       this.innings = res;
       this.dataSourceBatsman = [...res.batting];
       this.dataSourceBowler = [...res.bowling];
-      console.log(this.dataSourceBatsman, this.dataSourceBowler);
+      this.dataSourceExtra = [...[res.extra]];
+      console.log(res.extra);
       this.batsmanTable.renderRows();
       this.bowlerTable.renderRows();
     });
