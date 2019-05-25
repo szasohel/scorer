@@ -1,3 +1,4 @@
+import { LiveMatchComponent } from './live-match/live-match.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -8,7 +9,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'scorer', loadChildren: './score/score.module#ScoreModule' },
   { path: 'players', component: PlayerDetailsComponent },
-  { path: 'scorecard', component: ScorecardListComponent }
+  { path: 'scorecard', component: ScorecardListComponent },
+  { path: 'live', component: LiveMatchComponent }
 ];
 
 @NgModule({

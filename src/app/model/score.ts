@@ -54,6 +54,8 @@ export class InningsCard {
   batting: Array<BatsmanScore> = [];
   bowling: Array<BowlerScore> = [];
   extra = new Extra();
+  targetRun ? = 0;
+  targetBall ? = 0;
   constructor(inningsNumer) {
     this.inningsNumber = inningsNumer;
   }

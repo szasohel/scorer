@@ -49,12 +49,15 @@ export class LiveScoreComponent implements OnInit {
       this.total = new Total();
       this.extra = new Extra();
       this.inningsChange = res;
+      this.scoreService.showLive();
     });
     this.scoreService.bowlerChangeSubject.subscribe((res: boolean) => {
       this.changeBowler = res;
+      this.scoreService.showLive();
     });
     this.scoreService.batsmanChangeSubject.subscribe((res: boolean) => {
       this.changeBatsman = res;
+      this.scoreService.showLive();
     });
     this.scoreService.activeBatsmanSubject.subscribe((res: any) => {
       this.batsman1 = res.batsman1;
@@ -191,5 +194,6 @@ export class LiveScoreComponent implements OnInit {
     );
     this.scorecardService.addScoreCard();
     this.playerService.updatePlayerList();
+    this.scoreService.endLive(this.winner);
   }
 }

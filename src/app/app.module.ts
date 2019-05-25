@@ -22,6 +22,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ScorecardListComponent } from './scorecard-list/scorecard-list.component';
 import { ScorecardComponent } from './score/scorecard/scorecard.component';
+import { LiveMatchComponent } from './live-match/live-match.component';
+import { ScoreModule } from './score/score.module';
 
 @NgModule({
   declarations: [
@@ -29,11 +31,13 @@ import { ScorecardComponent } from './score/scorecard/scorecard.component';
     PlayerDetailsComponent,
     HomeComponent,
     SignInComponent,
-    ScorecardListComponent
+    ScorecardListComponent,
+    LiveMatchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ScoreModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,

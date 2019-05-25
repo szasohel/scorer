@@ -43,6 +43,7 @@ import { TossComponent } from './toss/toss.component';
     MaterialModule,
     HttpClientModule,
     ReactiveFormsModule
-  ]
+  ],
+  exports: [BatsmanComponent, BowlerComponent, ExtraComponent]
 })
 export class ScoreModule {}

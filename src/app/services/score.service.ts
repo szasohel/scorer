@@ -1,3 +1,4 @@
+import { AngularFireDatabase } from 'angularfire2/database';
 import {
   BatsmanScore,
   Score,
@@ -10,6 +11,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { InningsService } from './innings.service';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { ScoreCardService } from './score-card.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +35,10 @@ export class ScoreService {
   targetball: number;
 
   constructor(
+    private http: HttpClient,
     private inningsService: InningsService,
-    private scorecardService: ScoreCardService
+    private scorecardService: ScoreCardService,
+    private db: AngularFireDatabase
   ) {
     this.inningsService.activeBatsmenSubject.subscribe(
       (activeBatsmen: Array<BatsmanScore>) => {
@@ -93,36 +97,36 @@ export class ScoreService {
         this.extra[score.run] += 1;
         this.totalCount(1);
         this.updateBall();
-        this.ballAndOverCount();
         this.changeStrike();
+        this.ballAndOverCount();
       } else if (score.run === 'Bye2') {
         this.extra[score.run] += 2;
         this.totalCount(2);
-        this.ballAndOverCount();
         this.updateBall();
+        this.ballAndOverCount();
       } else if (score.run === 'Bye3') {
         this.extra[score.run] += 3;
         this.totalCount(3);
         this.updateBall();
-        this.ballAndOverCount();
         this.changeStrike();
+        this.ballAndOverCount();
       } else if (score.run === 'Bye4') {
         this.extra[score.run] += 4;
         this.totalCount(4);
-        this.ballAndOverCount();
         this.updateBall();
+        this.ballAndOverCount();
       }
       this.updateExtraTotal();
     } else if (score.type === 'run' || score.type === 'out') {
       if (score.type === 'run') {
         this.totalCount(score.run);
       }
-      this.ballAndOverCount();
       if (this.batsmen1.strike === true && score.outType !== 'Run') {
         this.updateBatsman1(score);
       } else {
         this.updateBatsman2(score);
       }
+      this.ballAndOverCount();
     }
     this.runRateCount();
     this.updateBowler(score);
@@ -133,6 +137,8 @@ export class ScoreService {
       this.targetball =
         this.scorecardService.scorecard.totalOver * 6 -
         (this.totalScore.over * 6 + this.totalScore.ball);
+      this.inningsService.innings.targetBall = this.targetball;
+      this.inningsService.innings.targetRun = this.targetRun;
     }
   }
 
@@ -301,5 +307,15 @@ export class ScoreService {
       this.battingSidePlayers = this.bowlingSidePlayers;
       this.bowlingSidePlayers = swapPlayers;
     }
+  }
+
+  showLive() {
+    this.db.object('/data/live/').set(this.inningsService.innings);
+  }
+
+  endLive(winner) {
+    const date = `${new Date().getMonth() +
+      1}/${new Date().getDate()}/${new Date().getFullYear()}`;
+    this.db.object('/data/live/').set({ winner: winner, date: date });
   }
 }
