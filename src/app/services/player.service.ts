@@ -1,10 +1,10 @@
+import { Player } from './../model/player';
 import { Injectable } from '@angular/core';
-import { Player } from '../model/player';
 import { Subject, of } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
 import { BatsmanScore, BowlerScore } from '../model/score';
 import { HttpClient } from '@angular/common/http';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +13,21 @@ export class PlayerService {
   selectedPlayerSubject = new Subject();
 
   players: Array<Player> = [];
-  players$: any;
+  players$: AngularFireList<any[]>;
 
   constructor(private http: HttpClient, private af: AngularFireDatabase) {}
 
   getPlayers() {
-    return this.af
-      .list('/data/players')
-      .valueChanges()
-      .pipe(
-        tap((res: any) => {
-          this.players = res;
-        })
-      );
+    this.players$ = this.af.list('/data/players');
+    return this.players$.valueChanges().pipe(
+      tap((res: any) => {
+        this.players = res;
+      })
+    );
+  }
+
+  addPlayer(player) {
+    this.players$.push(player);
   }
 
   getPlayersList() {

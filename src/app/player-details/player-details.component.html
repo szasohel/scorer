@@ -1,10 +1,34 @@
+<div fxLayout="column" fxLayoutAlign="center center" *ngIf="showbutton">
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="Enter a name"
+        [formControl]="name"
+      />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!name.value"
+      (click)="onAddName()"
+    >
+      Add Player
+    </button>
+  </div>
+  <mat-error>{{ error }}</mat-error>
+  <h2>Players Profile</h2>
+</div>
+
 <mat-accordion>
   <mat-expansion-panel *ngFor="let player of players">
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header (click)="onHeaderClicked(player.name)">
       <mat-panel-title class="player-title">
         {{ player.name }}
       </mat-panel-title>
     </mat-expansion-panel-header>
+    <img *ngIf="view === player.name" src="{{ player.pic }}" alt="" />
     <h5>Batting</h5>
     <div
       fxLayout="row"
