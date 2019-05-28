@@ -3,16 +3,11 @@
     <p>Winner of the match on {{ date }} is {{ winner }}.</p>
     <p>
       Live score ended. Please
-      <a routerLink="/scorecard">click here</a>
+      <a [routerLink]="['/scorecard']" [queryParams]="{date: date}">click here</a>
       to see the final result.
     </p>
   </h3>
-  <div
-    class="live-score"
-    fxLayout="column"
-    fxLayoutAlign="center center"
-    *ngIf="totalScore"
-  >
+  <div class="live-score" fxLayout="column" fxLayoutAlign="center center" *ngIf="totalScore">
     <h4 *ngIf="inningsNumber === 2 && targetRun">
       Need {{ targetRun }} run off {{ targetball }} ball
     </h4>

@@ -3,6 +3,7 @@ import { ScoreCardService } from 'src/app/services/score-card.service';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-scorecard-list',
@@ -55,10 +56,17 @@ export class ScorecardListComponent implements OnInit {
   firstdataSourceBowler;
   firstdataSourceExtra;
 
-  constructor(private scoreCardService: ScoreCardService) {}
+  constructor(private scoreCardService: ScoreCardService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.date = new FormControl();
+    this.route.queryParams.subscribe((res) => {
+      if (res) {
+        this.date = new FormControl(res.date);
+        this.onSearch();
+      } else {
+        this.date = new FormControl();
+      }
+    });
   }
 
   onSearch() {
