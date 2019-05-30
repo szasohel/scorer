@@ -1,10 +1,13 @@
 <div fxLayout="column" fxLayoutAlign="start">
   <mat-toolbar fxLayout="row" fxLayoutAlign="start center" class="toolbar">
-    <button mat-button fxFlex="20" class="home-icon" [routerLink]="['']" routerLinkActive="router-link-active">
+    <button mat-button fxFlex="100" class="home-icon" [routerLink]="['']" routerLinkActive="router-link-active"
+      fxFlexOffset="5">
       BFCC
     </button>
-    <div fxFlex="80" fxLayout="row" fxLayoutAlign="end center">
-      <button mat-button class="signin" (click)="onSignIn()" *ngIf="!showbutton">Sign In</button>
+    <div fxFlex="5" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button class="signin" (click)="onSignIn()" *ngIf="!showbutton">
+        <mat-icon>account_circle</mat-icon>
+      </button>
       <button mat-button color="warn" (click)="onSignOut()" *ngIf="showbutton">Sign Out</button>
     </div>
   </mat-toolbar>

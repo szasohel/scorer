@@ -1,16 +1,19 @@
-<div class="home" fxLayout="column" fxLayoutAlign="space-between center">
-  <img class="home-img" src="../../assets/bcg.jpg" alt="" />
+<div class="home" fxLayout="column" fxLayoutAlign="start center">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <button mat-stroked-button [routerLink]="['/live']">Live Match</button>
+    <button mat-stroked-button [routerLink]="['/scorecard']">Scorecards</button>
+    <button mat-stroked-button [routerLink]="['/players']">
+      Player Profile
+    </button>
+    <button mat-stroked-button [routerLink]="['/scorer']" *ngIf="showbutton">
+      Start Scoring
+    </button>
+  </div>
+
   <img src="../assets/logo.png" class="bfcc-logo" alt="bfcc logo" fxFlex="30" />
 
   <div fxLayout="column" fxLayoutAlign="start center" fxFlex="60">
     <mat-error *ngIf="error" style="font-size:14px;">{{ error }}</mat-error>
-    <button mat-raised-button [routerLink]="['/live']">Live Match</button>
-    <button mat-raised-button [routerLink]="['/scorecard']">Scorecards</button>
-    <button mat-raised-button [routerLink]="['/players']">
-      Player Profile
-    </button>
-    <button mat-raised-button [routerLink]="['/scorer']" *ngIf="showbutton">
-      Start Scoring
-    </button>
+
   </div>
 </div>

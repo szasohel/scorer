@@ -56,11 +56,11 @@ const MODULES = [
   MatTooltipModule,
   MatProgressBarModule,
   MatTableModule,
-  MatNativeDateModule
+  MatNativeDateModule,
 ];
 
 @NgModule({
   imports: MODULES,
   exports: MODULES
 })
-export class MaterialModule {}
+export class MaterialModule { }
