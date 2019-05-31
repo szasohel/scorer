@@ -15,10 +15,26 @@
   margin-top: 10px;
 }
 
-mat-card {
-  background-color: rgba($color: grey, $alpha: 0.2);
-}
+// mat-card {
+//   background-color: rgba($color: grey, $alpha: 0.2);
+// }
 
 .tossSelection {
   width: 250px;
+}
+
+.total2 {
+  border-radius: 50px;
+  margin-top: -10px;
+  width: 200px;
+  height: 40px;
+  background-color: #04064d;
+  color: white;
+}
+
+.total {
+  border-radius: 50px;
+  z-index: 5;
+  background-color: #ff1e50;
+  color: white;
 }

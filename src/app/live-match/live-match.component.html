@@ -11,11 +11,13 @@
     <h4 *ngIf="inningsNumber === 2 && targetRun">
       Need {{ targetRun }} run off {{ targetball }} ball
     </h4>
-    <mat-card>
+    <mat-card class="total">
       <p>
         Total: {{ totalScore.run }}/{{ totalScore.wicket }} Overs:
         {{ totalScore.over }}.{{ totalScore.ball }}
       </p>
+    </mat-card>
+    <mat-card class="total2" fxLayout="column" fxLayoutAlign="center center">
       <p>Current Run Rate: {{ totalScore.runRate }}</p>
     </mat-card>
     <p class="title">Batsmen</p>
