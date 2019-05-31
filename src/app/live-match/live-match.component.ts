@@ -32,8 +32,8 @@ export class LiveMatchComponent implements OnInit, OnDestroy {
             this.date = res[0];
           } else if (res.length > 2) {
             this.winner = '';
-            this.batsman1 = res[0][0];
-            this.batsman2 = res[0][1];
+            this.batsman1 = this.findActiveBatsman(res[0])[0];
+            this.batsman2 = this.findActiveBatsman(res[0])[1];
             this.bowler = this.findBowler(res[1]);
             this.extra = res[2];
             this.inningsNumber = res[3];
@@ -46,7 +46,7 @@ export class LiveMatchComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -54,7 +54,16 @@ export class LiveMatchComponent implements OnInit, OnDestroy {
   findBowler(list) {
     if (list.length) {
       return list.find(el => {
-        return (el.active = true);
+        return (el.active === true);
+      });
+    }
+  }
+
+  findActiveBatsman(list) {
+    console.log(list);
+    if (list.length) {
+      return list.filter(el => {
+        return (el.active === true);
       });
     }
   }

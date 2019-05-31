@@ -62,9 +62,11 @@ export class LiveScoreComponent implements OnInit {
     this.scoreService.activeBatsmanSubject.subscribe((res: any) => {
       this.batsman1 = res.batsman1;
       this.batsman2 = res.batsman2;
+      this.scoreService.showLive();
     });
     this.scoreService.activeBowlerSubject.subscribe((res: any) => {
       this.bowler = res;
+      this.scoreService.showLive();
     });
   }
 
