@@ -12,6 +12,7 @@ table {
   width: 350px;
 }
 
+
 td.mat-cell:first-of-type {
   padding-left: 15px;
 }
@@ -39,6 +40,8 @@ tr {
 
 th {
   font-weight: bold;
+  color: white;
+  background-color: #ff1e50;
 }
 
 td {

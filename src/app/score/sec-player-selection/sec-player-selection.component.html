@@ -9,6 +9,16 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+    </div>
+  </mat-card>
+  <mat-card *ngIf="strikeBatsman.value" class="tossDetailCard" fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
+      <p>Strike Batsman: {{ strikeBatsman.value }}</p>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="strikeBatsman.value" fxLayout="column" class="tossWinnerCard" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
       <mat-form-field class="tossSelection">
         <mat-label>Select Non-Strike Batsman</mat-label>
         <mat-select [formControl]="nonStrikeBatsman">
@@ -17,16 +27,15 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <p *ngIf="strikeBatsman.value">
-        Strike Batsman: {{ strikeBatsman.value }}
-      </p>
-      <p *ngIf="nonStrikeBatsman.value">
-        Non-Strike Batsman: {{ nonStrikeBatsman.value }}
-      </p>
+    </div>
+  </mat-card>
+  <mat-card *ngIf="nonStrikeBatsman.value" class="tossDetailCard" fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
+      <p>Non-Strike Batsman: {{ nonStrikeBatsman.value }}</p>
     </div>
   </mat-card>
 
-  <mat-card *ngIf="nonStrikeBatsman.value" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card *ngIf="nonStrikeBatsman.value" class="tossWinnerCard" fxLayout="column" fxLayoutAlign="center center">
     <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
       <mat-form-field class="tossSelection">
         <mat-label>Select Strike Bowler</mat-label>
@@ -36,9 +45,13 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <p *ngIf="strikeBowler.value">
-        Strike Bowler: {{ strikeBowler.value }}
-      </p>
+    </div>
+  </mat-card>
+  <mat-card *ngIf="strikeBowler.value" style="margin-bottom: 50px;" class="tossDetailCard" fxLayout="column"
+    fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
+      <p>
+        Strike Bowler: {{ strikeBowler.value }}</p>
     </div>
   </mat-card>
   <button *ngIf="strikeBowler.value" class="scoring" mat-raised-button color="primary" (click)="onStartScoring()">

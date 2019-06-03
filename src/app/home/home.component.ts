@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   error: string;
   subscription: Subscription;
   announcement = '';
+  pic: any;
 
 
   constructor(private authService: AuthServiceService, private db: AngularFireDatabase) { }
@@ -24,7 +25,8 @@ export class HomeComponent implements OnInit {
       .valueChanges().pipe(
         tap((res: any) => {
           console.log(res);
-          this.announcement = res[0];
+          this.announcement = res[0]
+          this.pic = res[1];
         })
       ).subscribe();
     this.authService.isAuthenticated$.subscribe((isAuthed) => {

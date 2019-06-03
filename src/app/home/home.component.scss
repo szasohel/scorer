@@ -6,7 +6,6 @@
   height: 200px;
   width: 200px;
   border-radius: 50%;
-  margin-top: 30px;
   z-index: 100;
 }
 
@@ -26,10 +25,16 @@ button {
 
 .slider {
   width: 100%;
-  margin-top: 20px;
-  height: 50px;
-  background-color: #04064d;
+  margin-bottom: 20px;
+  height: 40px;
+  background-color: rgba($color: #04064d, $alpha: .5);
   font-size: 16px;
   color: white;
   font-weight: bold;
+}
+
+.bfcc-hero {
+  width: 100vw;
+  height: 200px;
+  margin-top: 20px;
 }

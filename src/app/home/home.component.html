@@ -10,15 +10,19 @@
     </button>
   </div>
 
-  <img src="../assets/logo.png" class="bfcc-logo" alt="bfcc logo" fxFlex="30" />
-
-  <div fxLayout="column" fxLayoutAlign="center center" fxFlex="4">
-    <mat-error *ngIf="error" style="font-size:14px;">{{error}}</mat-error>
-  </div>
-
+  <img src="{{pic}}" class="bfcc-hero" alt="bfcc logo" fxFlex="30" />
   <ng-container *ngIf="announcement">
     <div class="slider" fxLayoutAlign="center center">
       <marquee>{{announcement}}</marquee>
     </div>
   </ng-container>
+
+  <div fxLayout="column" fxLayoutAlign="center center" fxFlex="4">
+    <mat-error *ngIf="error" style="font-size:14px;">{{error}}</mat-error>
+  </div>
+
+
+  <img src="../assets/logo.png" class="bfcc-logo" alt="bfcc logo" fxFlex="30" />
+
+
 </div>

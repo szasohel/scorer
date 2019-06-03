@@ -1,4 +1,3 @@
-<!-- first innings -->
 <div *ngIf="innings.inningsNumber === 2">
   <h5>1<sup>st</sup> Innings</h5>
   <h5>
@@ -6,12 +5,8 @@
     {{ firstinnings.total.over }}.{{ firstinnings.total.ball }}
   </h5>
   <h5>Batting</h5>
-  <table
-    mat-table
-    [dataSource]="scorecardService.scorecard.firstInnings.batting"
-    class="mat-elevation-z8"
-    #firstbatsman
-  >
+  <table mat-table [dataSource]="scorecardService.scorecard.firstInnings.batting" class="mat-elevation-z8"
+    #firstbatsman>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Batsman</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
@@ -20,8 +15,7 @@
     <ng-container matColumnDef="out">
       <th mat-header-cell *matHeaderCellDef class="out"></th>
       <td mat-cell *matCellDef="let element" class="out">
-        {{ element.out }}<span *ngIf="element.out"> Out - B. </span
-        >{{ element.bowler }}
+        {{ element.out }}<span *ngIf="element.out"> Out - B. </span>{{ element.bowler }}
       </td>
     </ng-container>
 
@@ -58,12 +52,7 @@
   </table>
 
   <h5>Extra</h5>
-  <table
-    mat-table
-    [dataSource]="firstdataSourceExtra"
-    class="mat-elevation-z8"
-    #firstbatsman
-  >
+  <table mat-table [dataSource]="firstdataSourceExtra" class="mat-elevation-z8" #firstbatsman>
     <ng-container matColumnDef="Total">
       <th mat-header-cell *matHeaderCellDef>Total</th>
       <td mat-cell *matCellDef="let element">{{ element.total }}</td>
@@ -120,12 +109,7 @@
   </table>
 
   <h5>Bowling</h5>
-  <table
-    mat-table
-    [dataSource]="scorecardService.scorecard.firstInnings.bowling"
-    class="mat-elevation-z8"
-    #firstbowler
-  >
+  <table mat-table [dataSource]="scorecardService.scorecard.firstInnings.bowling" class="mat-elevation-z8" #firstbowler>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Bowler</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
@@ -172,7 +156,6 @@
 </div>
 
 <div>
-  <!-- current innings -->
   <h5 *ngIf="innings.inningsNumber === 1; else elseTemplate">
     1<sup>st</sup> Innings
   </h5>
@@ -193,8 +176,7 @@
     <ng-container matColumnDef="out">
       <th mat-header-cell *matHeaderCellDef class="out"></th>
       <td mat-cell *matCellDef="let element" class="out">
-        {{ element.out }}<span *ngIf="element.out"> Out - B. </span
-        >{{ element.bowler }}
+        {{ element.out }}<span *ngIf="element.out"> Out - B. </span>{{ element.bowler }}
       </td>
     </ng-container>
 
@@ -231,13 +213,7 @@
   </table>
 
   <h5>Extra</h5>
-  <table
-    *ngIf="dataSourceExtra"
-    mat-table
-    [dataSource]="dataSourceExtra"
-    class="mat-elevation-z8"
-    #firstbatsman
-  >
+  <table *ngIf="dataSourceExtra" mat-table [dataSource]="dataSourceExtra" class="mat-elevation-z8" #firstbatsman>
     <ng-container matColumnDef="Total">
       <th mat-header-cell *matHeaderCellDef>Total</th>
       <td mat-cell *matCellDef="let element">{{ element.total }}</td>
@@ -294,12 +270,7 @@
   </table>
 
   <h5>Bowling</h5>
-  <table
-    mat-table
-    [dataSource]="dataSourceBowler"
-    class="mat-elevation-z8"
-    #bowler
-  >
+  <table mat-table [dataSource]="dataSourceBowler" class="mat-elevation-z8" #bowler>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Bowler</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>

@@ -64,7 +64,7 @@ export class ScorecardComponent implements OnInit, OnDestroy {
     private inningsService: InningsService,
     private scorecardService: ScoreCardService,
     private changeDetectorRefs: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.inningsService.inningsCardSubject.subscribe((res: InningsCard) => {
