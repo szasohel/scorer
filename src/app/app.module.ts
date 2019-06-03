@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TossComponent } from './score/toss/toss.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import {
@@ -21,9 +20,10 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ScorecardListComponent } from './scorecard-list/scorecard-list.component';
-import { ScorecardComponent } from './score/scorecard/scorecard.component';
 import { LiveMatchComponent } from './live-match/live-match.component';
 import { ScoreModule } from './score/score.module';
+import { AdminComponent } from './home/admin/admin.component';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import { ScoreModule } from './score/score.module';
     HomeComponent,
     SignInComponent,
     ScorecardListComponent,
-    LiveMatchComponent
+    LiveMatchComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -54,4 +55,4 @@ import { ScoreModule } from './score/score.module';
   bootstrap: [AppComponent],
   entryComponents: [SignInComponent]
 })
-export class AppModule {}
+export class AppModule { }

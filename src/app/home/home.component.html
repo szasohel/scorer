@@ -1,4 +1,4 @@
-<div class="home" fxLayout="column" fxLayoutAlign="start center">
+<div class="home" fxLayout="column" fxLayoutAlign="start center" *ngIf="!showAdmin">
   <div fxLayout="row" fxLayoutAlign="start center" fxFlex="5">
     <button mat-stroked-button [routerLink]="['/live']">Live Match</button>
     <button mat-stroked-button [routerLink]="['/scorecard']">Scorecards</button>
@@ -24,5 +24,9 @@
 
   <img src="../assets/logo.png" class="bfcc-logo" alt="bfcc logo" fxFlex="30" />
 
-
+  <div>
+    <button mat-stroked-button (click)="showAdmin=true" class="invisible-button">Admin</button>
+  </div>
 </div>
+
+<app-admin *ngIf="showAdmin" (goBack)='goBack($event)'></app-admin>

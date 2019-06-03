@@ -15,18 +15,19 @@ export class HomeComponent implements OnInit {
   subscription: Subscription;
   announcement = '';
   pic: any;
+  showAdmin = false;
 
 
   constructor(private authService: AuthServiceService, private db: AngularFireDatabase) { }
 
   ngOnInit() {
     this.subscription = this.db
-      .list('/data/announcement')
+      .object('/data/announcement')
       .valueChanges().pipe(
         tap((res: any) => {
           console.log(res);
-          this.announcement = res[0]
-          this.pic = res[1];
+          this.announcement = res.C;
+          this.pic = res.pic;
         })
       ).subscribe();
     this.authService.isAuthenticated$.subscribe((isAuthed) => {
@@ -36,6 +37,10 @@ export class HomeComponent implements OnInit {
         this.error = '';
       }, 2000);
     });
+  }
+
+  goBack(data) {
+    this.showAdmin = data;
   }
 
 }

@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutAlign="space-between center">
+  <mat-card fxLayout="column" class="tossWinnerCard" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
+      <mat-form-field class="tossSelection">
+        <input matInput type="text" placeholder="Enter Announcement" [formControl]="announcement">
+      </mat-form-field>
+    </div>
+  </mat-card>
+  <mat-card fxLayout="column" class="tossWinnerCard" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
+      <mat-form-field class="tossSelection">
+        <input matInput type="text" placeholder="Enter Hero Image Url" [formControl]="heroImage">
+      </mat-form-field>
+    </div>
+  </mat-card>
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <button *ngIf="announcement.value || heroImage.value" class="scoring" mat-stroked-button color="primary"
+      (click)="onSave()" style="margin-right: 20px;">
+      Save
+    </button>
+    <button class="scoring" mat-stroked-button color="primary" (click)="onCancel()">
+      Cancel
+    </button>
+  </div>
+</div>
