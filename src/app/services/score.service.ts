@@ -121,12 +121,12 @@ export class ScoreService {
       if (score.type === 'run') {
         this.totalCount(score.run);
       }
+      this.ballAndOverCount();
       if (this.batsmen1.strike === true && score.outType !== 'Run') {
         this.updateBatsman1(score);
       } else {
         this.updateBatsman2(score);
       }
-      this.ballAndOverCount();
     }
     this.runRateCount();
     this.updateBowler(score);
