@@ -25,7 +25,7 @@
   <img src="../assets/logo.png" class="bfcc-logo" alt="bfcc logo" fxFlex="30" />
 
   <div>
-    <button mat-stroked-button (click)="showAdmin=true" class="invisible-button">Admin</button>
+    <button mat-stroked-button (click)="showAdmin=true" class="invisible-button" *ngIf="showbutton">Admin</button>
   </div>
 </div>
 

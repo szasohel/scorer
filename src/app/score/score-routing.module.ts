@@ -6,13 +6,13 @@ import { TeamSelectionComponent } from './team-selection/team-selection.componen
 import { AuthenticationGuardService } from '../services/authentication-guard.service';
 
 const routes: Routes = [
-  { path: '', component: TeamSelectionComponent },
-  { path: 'toss', component: TossComponent },
-  { path: 'score', component: ScoreComponent }
+  { path: '', component: TeamSelectionComponent, canActivate: [AuthenticationGuardService] },
+  { path: 'toss', component: TossComponent, canActivate: [AuthenticationGuardService] },
+  { path: 'score', component: ScoreComponent, canActivate: [AuthenticationGuardService] }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ScoreRoutingModule {}
+export class ScoreRoutingModule { }
