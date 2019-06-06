@@ -179,6 +179,7 @@ export class LiveScoreComponent implements OnInit {
       new BatsmanScore(this.strikeBatsman.value, true)
     );
     this.changeBatsman = false;
+    this.strikeBatsman.reset();
   }
 
   persistdata() {

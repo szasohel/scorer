@@ -49,5 +49,8 @@ export class SecPlayerSelectionComponent implements OnInit {
 
     this.inningsService.setNewBowler(new BowlerScore(this.strikeBowler.value));
     this.scoreService.inningsChangeSubject.next(false);
+    this.strikeBatsman.reset();
+    this.strikeBowler.reset();
+    this.nonStrikeBatsman.reset();
   }
 }

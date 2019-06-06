@@ -37,5 +37,6 @@ export class AddBowlerComponent implements OnInit {
     } else {
       this.inningsServie.setNewBowler(new BowlerScore(this.strikeBowler.value));
     }
+    this.strikeBowler.reset();
   }
 }

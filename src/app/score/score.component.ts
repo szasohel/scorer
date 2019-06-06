@@ -1,17 +1,18 @@
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { BowlerScore, Score, Total } from './../model/score';
 import { Component, OnInit } from '@angular/core';
 import { BatsmanScore } from '../model/score';
 import { ScoreService } from '../services/score.service';
 import { FormControl } from '@angular/forms';
 import { InningsService } from '../services/innings.service';
+import { NavigationGuardService } from '../services/navigation-guard.service.';
 
 @Component({
   selector: 'app-score',
   templateUrl: './score.component.html',
   styleUrls: ['./score.component.scss']
 })
-export class ScoreComponent implements OnInit {
+export class ScoreComponent implements OnInit, NavigationGuardService {
   batsman1: BatsmanScore;
   batsman2: BatsmanScore;
   bowler: BowlerScore;
@@ -42,6 +43,11 @@ export class ScoreComponent implements OnInit {
     this.scoreService.activeBowlerSubject.subscribe((res: any) => {
       this.bowler = res;
     });
+  }
+
+  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    console.log('canDeactivate has fired in the component!');
+    return false;
   }
 
   ngOnInit() {
