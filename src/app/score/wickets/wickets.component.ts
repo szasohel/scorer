@@ -12,6 +12,7 @@ export class WicketsComponent implements OnInit {
   outs = ['Bold', 'Caught', 'Stump', 'Run', 'LBW'];
   score = new Score();
   @Output() outEmitter = new EventEmitter();
+  confirmOut: boolean;
   constructor(
     private scoreService: ScoreService,
     private inningsService: InningsService
@@ -20,6 +21,17 @@ export class WicketsComponent implements OnInit {
   ngOnInit() { }
 
   onOut(out) {
+    if (out === 'Run') {
+      this.confirmOut = confirm('Did you select the right batsmen?');
+      if (this.confirmOut) {
+        this.outUpdate(out);
+      }
+    } else {
+      this.outUpdate(out);
+    }
+  }
+
+  outUpdate(out) {
     const listName = [];
     const outBatsman = [];
     this.score.type = 'out';

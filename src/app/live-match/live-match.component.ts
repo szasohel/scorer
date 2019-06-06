@@ -26,7 +26,6 @@ export class LiveMatchComponent implements OnInit, OnDestroy {
       .valueChanges()
       .pipe(
         tap((res: any) => {
-          console.log(res);
           if (res.length === 2) {
             this.winner = res[1];
             this.date = res[0];
@@ -60,7 +59,6 @@ export class LiveMatchComponent implements OnInit, OnDestroy {
   }
 
   findActiveBatsman(list) {
-    console.log(list);
     if (list.length) {
       return list.filter(el => {
         return (el.active === true);

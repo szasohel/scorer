@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   BatsmanScore,
@@ -19,6 +19,7 @@ import { PlayerService } from 'src/app/services/player.service';
   styleUrls: ['./live-score.component.scss']
 })
 export class LiveScoreComponent implements OnInit {
+  @Output() endGame = new EventEmitter();
   batsman1: BatsmanScore;
   batsman2: BatsmanScore;
   bowler: BowlerScore;
@@ -95,7 +96,6 @@ export class LiveScoreComponent implements OnInit {
   onExtraEmitter(score: Score) {
     this.scoreService.updateScore(score);
     this.extra = this.scoreService.extra;
-    console.log(this.extra);
     this.findWinner();
   }
 
@@ -198,5 +198,6 @@ export class LiveScoreComponent implements OnInit {
     this.scorecardService.addScoreCard();
     this.playerService.updatePlayerList();
     this.scoreService.endLive(this.winner);
+    this.endGame.emit();
   }
 }

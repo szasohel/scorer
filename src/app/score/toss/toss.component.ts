@@ -38,7 +38,7 @@ export class TossComponent implements OnInit {
     private scorecardService: ScoreCardService,
     private router: Router,
     private inningsService: InningsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.list = JSON.parse(localStorage.getItem('teams'));
@@ -90,7 +90,6 @@ export class TossComponent implements OnInit {
       this.tossWinner,
       this.partSelection
     );
-    console.log(this.scorecardService.scorecard);
     this.inningsService.setInnigsCard(new InningsCard(1));
     this.inningsService.setNewBatsman(
       new BatsmanScore(this.strikeBatsman.value, true)

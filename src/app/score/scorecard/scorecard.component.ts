@@ -85,7 +85,6 @@ export class ScorecardComponent implements OnInit, OnDestroy {
       this.dataSourceBatsman = [...res.batting];
       this.dataSourceBowler = [...res.bowling];
       this.dataSourceExtra = [...[res.extra]];
-      console.log(res.extra);
       this.batsmanTable.renderRows();
       this.bowlerTable.renderRows();
     });

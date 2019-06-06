@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
       .object('/data/announcement')
       .valueChanges().pipe(
         tap((res: any) => {
-          console.log(res);
           this.announcement = res.C;
           this.pic = res.pic;
         })

@@ -25,6 +25,7 @@ export class ScoreComponent implements OnInit, NavigationGuardService {
   changeBowler = false;
   changeBatsman = false;
   strikeBatsman: FormControl;
+  endGame = false;
 
   constructor(
     private scoreService: ScoreService,
@@ -46,8 +47,7 @@ export class ScoreComponent implements OnInit, NavigationGuardService {
   }
 
   canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
-    console.log('canDeactivate has fired in the component!');
-    return false;
+    return this.endGame;
   }
 
   ngOnInit() {
@@ -63,7 +63,6 @@ export class ScoreComponent implements OnInit, NavigationGuardService {
           return !list[0].includes(el);
         }
       );
-      console.log(this.battingSidePlayers);
     });
     this.strikeBatsman = new FormControl();
   }
@@ -84,5 +83,8 @@ export class ScoreComponent implements OnInit, NavigationGuardService {
       new BatsmanScore(this.strikeBatsman.value, true)
     );
     this.changeBatsman = false;
+  }
+  onEndGame() {
+    this.endGame = true;
   }
 }

@@ -23,7 +23,6 @@ export class AuthServiceService {
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(value => {
-        console.log('Nice, it worked!');
         this.isAuthenticatedSubject.next(true);
 
       })

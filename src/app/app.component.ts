@@ -11,29 +11,27 @@ import { AuthServiceService } from './services/auth-service.service';
 })
 export class AppComponent implements OnInit {
   showbutton: boolean;
+  confirmLogout: boolean;
   constructor(
     private dialog: MatDialog,
     private authService: AuthServiceService,
     private score: ScoreCardService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.authService.isAuthenticated$.subscribe(isAuthed => {
       this.dialog.closeAll();
       this.showbutton = isAuthed;
     });
-    // this.score
-    //   .retrieveScoreCard()
-    //   .valueChanges()
-    //   .subscribe(res => {
-    //     console.log(res);
-    //   });
   }
   onSignIn() {
     this.dialog.open(SignInComponent);
   }
 
   onSignOut() {
-    this.authService.logout();
+    this.confirmLogout = confirm('Are you sure you want to logout?');
+    if (this.confirmLogout) {
+      this.authService.logout();
+    }
   }
 }

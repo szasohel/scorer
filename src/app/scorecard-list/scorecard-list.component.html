@@ -5,6 +5,7 @@
   <button mat-raised-button color="primary" [disabled]="!date.value" (click)="onSearch()">
     Search
   </button>
+  <mat-error *ngIf="scoreCard.length <= 0" class="error">No Results Found</mat-error>
   <mat-list *ngIf="scoreCard.length">
     <mat-list-item *ngFor="let card of scoreCard" (click)="onSelectCard(card)">
       <button mat-stroked-button>{{ card.date }}</button>

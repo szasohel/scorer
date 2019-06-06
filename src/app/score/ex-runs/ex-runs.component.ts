@@ -20,7 +20,6 @@ export class ExRunsComponent implements OnInit {
 
   addRun(extra) {
     this.score.run = extra;
-    console.log(this.score);
     this.extraEmitter.emit(this.score);
   }
 

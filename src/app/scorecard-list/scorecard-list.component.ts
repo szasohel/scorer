@@ -76,7 +76,6 @@ export class ScorecardListComponent implements OnInit {
       .subscribe(res => {
         this.scoreCard = res;
       });
-    console.log(this.scoreCard);
   }
 
   onSelectCard(card) {
@@ -87,6 +86,5 @@ export class ScorecardListComponent implements OnInit {
     this.firstdataSourceBowler = card.firstInnings.bowling;
     this.firstdataSourceExtra = [card.firstInnings.extra];
     this.card = card;
-    console.log(this.card);
   }
 }
