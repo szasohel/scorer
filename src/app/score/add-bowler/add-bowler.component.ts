@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ScoreService } from 'src/app/services/score.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InningsService } from 'src/app/services/innings.service';
 import { BowlerScore } from 'src/app/model/score';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-add-bowler',
@@ -11,32 +11,53 @@ import { BowlerScore } from 'src/app/model/score';
 })
 export class AddBowlerComponent implements OnInit {
   bowlingSidePlayers: any;
-  strikeBowler: FormControl;
+  bowlerList: any;
+  showCard: boolean;
+  bowlerForm: FormGroup;
+  bowlerscore: BowlerScore;
 
   constructor(
-    private scoreService: ScoreService,
-    private inningsServie: InningsService
-  ) { }
+    private playerService: PlayerService,
+    public inningsService: InningsService
+  ) {}
 
   ngOnInit() {
-    this.bowlingSidePlayers = this.scoreService.bowlingSidePlayers.filter((el) => {
-      return el !== this.scoreService.bowler.name;
+    this.playerService.getPlayers().subscribe(() => {
+      this.bowlingSidePlayers = this.playerService.getPlayersList();
     });
-    this.strikeBowler = new FormControl();
+    this.bowlerForm = new FormGroup({
+      strikeBowler: new FormControl(null, [Validators.required]),
+      overs: new FormControl(null, [Validators.required]),
+      runs: new FormControl(null, [Validators.required]),
+      wickets: new FormControl(null, [Validators.required]),
+      dots: new FormControl(null, [Validators.required]),
+      fours: new FormControl(null, [Validators.required]),
+      balls: new FormControl(null, [Validators.required]),
+      sixes: new FormControl(null, [Validators.required])
+    });
   }
-  onStartScoring() {
-    this.scoreService.bowlerChangeSubject.next(false);
-    const isBowler = this.inningsServie
-      .getBowlerList()
-      .find((bowler: BowlerScore) => {
-        return bowler.name === this.strikeBowler.value;
-      });
-    if (isBowler) {
-      isBowler.active = true;
-      this.inningsServie.setNewBowler(isBowler);
-    } else {
-      this.inningsServie.setNewBowler(new BowlerScore(this.strikeBowler.value));
-    }
-    this.strikeBowler.reset();
+  onAddAnother() {
+    this.bowlerscore = new BowlerScore();
+    this.bowlerscore = {
+      name: this.bowlerForm.get('strikeBowler').value,
+      run: this.bowlerForm.get('runs').value,
+      over: this.bowlerForm.get('overs').value,
+      wicket: this.bowlerForm.get('wickets').value,
+      fours: this.bowlerForm.get('fours').value,
+      sixes: this.bowlerForm.get('sixes').value,
+      ball: this.bowlerForm.get('balls').value,
+      dots: this.bowlerForm.get('dots').value,
+      economyRate: this.calculateEcon(
+        this.bowlerForm.get('runs').value,
+        this.bowlerForm.get('overs').value,
+        this.bowlerForm.get('balls').value
+      )
+    };
+    this.inningsService.addBowler(this.bowlerscore);
+    this.bowlerForm.reset();
+  }
+
+  calculateEcon(run, over, ball) {
+    return +(run / ((over * 6 + ball) / 6)).toFixed(2);
   }
 }

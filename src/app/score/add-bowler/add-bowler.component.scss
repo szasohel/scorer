@@ -1,9 +1,10 @@
 .scoring {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .tossSelection {
-  width: 250px;
+  width: 50px;
+  margin-right: 10px;
 }
 
 .add-bowler {
@@ -11,6 +12,14 @@
 }
 
 mat-card {
-  background-color: rgba($color: #04064d, $alpha: .5);
+  background-color: rgba($color: #04064d, $alpha: 0.5);
   border-radius: 50px;
+  max-width: 332px;
+}
+
+ol {
+  max-width: 332px;
+}
+li {
+  margin: 10px;
 }

@@ -1,18 +1,35 @@
 <div fxLayout="column" fxLayoutAlign="start center">
   <mat-form-field>
-    <input matInput type="text" placeholder="Enter a date (ex 5/19/2019)" [formControl]="date" />
+    <input
+      matInput
+      type="text"
+      placeholder="Enter a date (ex 5/19/2019)"
+      [formControl]="date"
+    />
   </mat-form-field>
-  <button mat-raised-button color="primary" [disabled]="!date.value" (click)="onSearch()">
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!date.value"
+    (click)="onSearch()"
+  >
     Search
   </button>
-  <mat-error *ngIf="scoreCard.length <= 0" class="error">No Results Found</mat-error>
+  <mat-error *ngIf="scoreCard.length <= 0" class="error"
+    >No Results Found</mat-error
+  >
   <mat-list *ngIf="scoreCard.length">
     <mat-list-item *ngFor="let card of scoreCard" (click)="onSelectCard(card)">
       <button mat-stroked-button>{{ card.date }}</button>
     </mat-list-item>
   </mat-list>
 </div>
-<div *ngIf="dataSourceBowler" fxLayout="column" fxLayoutAlign="start center" style="padding-bottom: 20px;">
+<div
+  *ngIf="showCard"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  style="padding-bottom: 20px;"
+>
   <!-- first innings -->
   <div>
     <h5>1<sup>st</sup> Innings</h5>
@@ -25,7 +42,12 @@
       }}
     </h5>
     <h5>Batting</h5>
-    <table mat-table [dataSource]="firstdataSourceBatsman" class="mat-elevation-z8" #firstbatsman>
+    <table
+      mat-table
+      [dataSource]="firstdataSourceBatsman"
+      class="mat-elevation-z8"
+      #firstbatsman
+    >
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Batsman</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
@@ -34,7 +56,8 @@
       <ng-container matColumnDef="out">
         <th mat-header-cell *matHeaderCellDef class="out"></th>
         <td mat-cell *matCellDef="let element" class="out">
-          {{ element.out }}<span *ngIf="element.out"> Out - B. </span>{{ element.bowler }}
+          {{ element.out }}<span *ngIf="element.out"> Out - B. </span
+          >{{ element.bowler }}
         </td>
       </ng-container>
 
@@ -71,7 +94,12 @@
     </table>
 
     <h5>Extra</h5>
-    <table mat-table [dataSource]="firstdataSourceExtra" class="mat-elevation-z8" #firstbatsman>
+    <table
+      mat-table
+      [dataSource]="firstdataSourceExtra"
+      class="mat-elevation-z8"
+      #firstbatsman
+    >
       <ng-container matColumnDef="Total">
         <th mat-header-cell *matHeaderCellDef>Total</th>
         <td mat-cell *matCellDef="let element">{{ element.total }}</td>
@@ -128,7 +156,12 @@
     </table>
 
     <h5>Bowling</h5>
-    <table mat-table [dataSource]="firstdataSourceBowler" class="mat-elevation-z8" #firstbowler>
+    <table
+      mat-table
+      [dataSource]="firstdataSourceBowler"
+      class="mat-elevation-z8"
+      #firstbowler
+    >
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Bowler</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
@@ -170,7 +203,10 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="firstdisplayedColumnsBowler"></tr>
-      <tr mat-row *matRowDef="let row; columns: firstdisplayedColumnsBowler"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: firstdisplayedColumnsBowler"
+      ></tr>
     </table>
   </div>
 
@@ -196,7 +232,8 @@
       <ng-container matColumnDef="out">
         <th mat-header-cell *matHeaderCellDef class="out"></th>
         <td mat-cell *matCellDef="let element" class="out">
-          {{ element.out }}<span *ngIf="element.out"> Out - B. </span>{{ element.bowler }}
+          {{ element.out }}<span *ngIf="element.out"> Out - B. </span
+          >{{ element.bowler }}
         </td>
       </ng-container>
 
@@ -233,7 +270,12 @@
     </table>
 
     <h5>Extra</h5>
-    <table mat-table [dataSource]="dataSourceExtra" class="mat-elevation-z8" #firstbatsman>
+    <table
+      mat-table
+      [dataSource]="dataSourceExtra"
+      class="mat-elevation-z8"
+      #firstbatsman
+    >
       <ng-container matColumnDef="Total">
         <th mat-header-cell *matHeaderCellDef>Total</th>
         <td mat-cell *matCellDef="let element">{{ element.total }}</td>
@@ -290,7 +332,12 @@
     </table>
 
     <h5>Bowling</h5>
-    <table mat-table [dataSource]="dataSourceBowler" class="mat-elevation-z8" #bowler>
+    <table
+      mat-table
+      [dataSource]="dataSourceBowler"
+      class="mat-elevation-z8"
+      #bowler
+    >
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Bowler</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>

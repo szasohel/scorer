@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ScoreCard } from '../model/score';
+import { ScoreCard, InningsCard } from '../model/score';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
@@ -14,7 +14,6 @@ export class ScoreCardService {
     this.scoreCard$ = this.db.list('/data/scorecardlist');
   }
   addScoreCard(): void {
-    console.log('I am called');
     this.scoreCard$.push(this.scorecard);
   }
 
@@ -22,5 +21,16 @@ export class ScoreCardService {
     return this.db.list('/data/scorecardlist', ref =>
       ref.orderByChild('date').equalTo(date)
     );
+  }
+
+  addinnings(inn: InningsCard) {
+    if (inn.inningsNumber === 1) {
+      this.scorecard = new ScoreCard();
+      this.scorecard.firstInnings = inn;
+    } else if (inn.inningsNumber === 2) {
+      this.scorecard.secondInnings = inn;
+    } else {
+      throw console.error('there is an error');
+    }
   }
 }

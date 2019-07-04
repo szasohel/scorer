@@ -1,60 +1,95 @@
-<div class="live-score" fxLayout="column" fxLayoutAlign="center center"
-  *ngIf="!changeBowler && !changeBatsman && !inningsChange && !isShowWinner">
-  <h4 *ngIf="innings.inningsNumber === 2 && scoreService.targetRun">
-    Need {{ scoreService.targetRun }} run off {{ scoreService.targetball }} ball
-  </h4>
-  <mat-card class="total">
-    <p>
-      Total: {{ scoreService.totalScore.run }}/{{
-        scoreService.totalScore.wicket
+<div class="live-score" fxLayout="column" fxLayoutAlign="center center">
+  <div *ngIf="inningsService.innings">
+    <h5>1<sup>st</sup> Innings</h5>
+    <h5>
+      Total: {{ inningsService.innings.total.run }}/{{
+        inningsService.innings.total.wicket
       }}
-      Overs: {{ scoreService.totalScore.over }}.{{
-        scoreService.totalScore.ball
+      Over: {{ inningsService.innings.total.over }}.{{
+        inningsService.innings.total.ball
       }}
-    </p>
-  </mat-card>
-  <mat-card class="total2" fxLayout="column" fxLayoutAlign="center center">
-    <p>Current Run Rate: {{ scoreService.totalScore.runRate }}</p>
-  </mat-card>
-  <p class="title">Batsmen</p>
-  <app-batsman [batsman]="batsman1"></app-batsman>
-  <app-batsman [batsman]="batsman2"></app-batsman>
-  <p class="title">Extra</p>
-  <app-extra [extra]="extra"></app-extra>
-  <p class="title">Bowler</p>
-  <app-bowler [bowler]="bowler"></app-bowler>
-  <app-runs (runEmitter)="onRunEmitter($event)"></app-runs>
-  <app-ex-runs (extraEmitter)="onExtraEmitter($event)"></app-ex-runs>
-  <app-wickets (outEmitter)="onOutEmitter($event)"></app-wickets>
-</div>
-<app-sec-player-selection *ngIf="inningsChange"></app-sec-player-selection>
-<app-add-bowler *ngIf="changeBowler"></app-add-bowler>
-<mat-card class="add-batsman" fxLayout="column" fxLayoutAlign="center center" *ngIf="changeBatsman">
-  <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center" fxFlex="30">
-    <mat-form-field class="tossSelection">
-      <mat-label>Select Strike Batsman</mat-label>
-      <mat-select [formControl]="strikeBatsman">
-        <mat-option *ngFor="let strikeBatsman of battingSidePlayers" [value]="strikeBatsman">
-          {{ strikeBatsman }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    </h5>
   </div>
-  <button *ngIf="strikeBatsman.value" class="scoring" mat-raised-button color="primary" (click)="onaddingbatsman()">
-    Start Scoring
+  <mat-card
+    class="add-bowler"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    *ngIf="!inningsService.innings"
+  >
+    <form [formGroup]="inForm">
+      <div fxLayout="column" fxLayoutAlign="center center" fxFlexAlign="center">
+        <mat-form-field class="mainSelection">
+          <mat-label>Select Innings</mat-label>
+          <mat-select formControlName="innings">
+            <mat-option *ngFor="let in of [1, 2]" [value]="in">
+              {{ in }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="center start" fxFlexAlign="center">
+          <mat-form-field class="tossSelection">
+            <input
+              matInput
+              type="number"
+              placeholder="Runs"
+              formControlName="runs"
+            />
+          </mat-form-field>
+          <mat-form-field class="tossSelection">
+            <input
+              matInput
+              type="number"
+              placeholder="Wickets"
+              formControlName="wickets"
+            />
+          </mat-form-field>
+          <mat-form-field class="tossSelection">
+            <input
+              matInput
+              type="number"
+              placeholder="Overs"
+              formControlName="overs"
+            />
+          </mat-form-field>
+          <mat-form-field class="tossSelection">
+            <input
+              matInput
+              type="number"
+              placeholder="ball"
+              formControlName="ball"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <button
+      class="scoring"
+      mat-raised-button
+      color="primary"
+      (click)="onStartScoring()"
+      [disabled]="!inForm.valid"
+    >
+      Add Innings
+    </button>
+  </mat-card>
+  <app-add-batsman></app-add-batsman>
+  <app-add-bowler></app-add-bowler>
+  <button
+    class="scoring"
+    mat-raised-button
+    *ngIf="!second && inningsService.innings"
+    color="primary"
+    (click)="onDoneAdding()"
+  >
+    Done Adding
   </button>
-</mat-card>
-<div *ngIf="isShowWinner" class="winner" fxLayout="column" fxLayoutAlign="center center">
-  <p *ngIf="winningMargin; else elseTemplate">
-    {{ winner }} won the match by {{ winningMargin }} wickets
-  </p>
-
-  <ng-template #elseTemplate>
-    <p>{{ winner }} won the match by {{ winningMarginRun }} runs</p>
-  </ng-template>
-
-  <div class="pyro">
-    <div class="before"></div>
-    <div class="after"></div>
-  </div>
+  <button
+    class="scoring"
+    *ngIf="second"
+    mat-raised-button
+    color="primary"
+    (click)="onFinish()"
+  >
+    Finish
+  </button>
 </div>

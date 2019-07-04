@@ -55,11 +55,15 @@ export class ScorecardListComponent implements OnInit {
   firstdataSourceBatsman;
   firstdataSourceBowler;
   firstdataSourceExtra;
+  showCard: boolean;
 
-  constructor(private scoreCardService: ScoreCardService, private route: ActivatedRoute) { }
+  constructor(
+    private scoreCardService: ScoreCardService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe((res) => {
+    this.route.queryParams.subscribe(res => {
       if (res) {
         this.date = new FormControl(res.date);
         this.onSearch();
@@ -79,6 +83,7 @@ export class ScorecardListComponent implements OnInit {
   }
 
   onSelectCard(card) {
+    this.showCard = true;
     this.dataSourceBatsman = card.secondInnings.batting;
     this.dataSourceBowler = card.secondInnings.bowling;
     this.dataSourceExtra = [card.secondInnings.extra];
@@ -86,5 +91,6 @@ export class ScorecardListComponent implements OnInit {
     this.firstdataSourceBowler = card.firstInnings.bowling;
     this.firstdataSourceExtra = [card.firstInnings.extra];
     this.card = card;
+    console.log(this.dataSourceBatsman);
   }
 }

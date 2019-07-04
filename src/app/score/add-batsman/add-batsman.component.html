@@ -1,7 +1,7 @@
 <ng-container *ngIf="inningsService.innings">
-  <ol fxLayout="row wrap" fxLayoutAlign="space start">
-    <li *ngFor="let bowler of inningsService.innings.bowling">
-      {{ bowler.name }}
+  <ol fxLayout="row wrap" fxLayoutAlign="start start">
+    <li *ngFor="let batsman of inningsService.innings.batting">
+      {{ batsman.name }}
     </li>
   </ol>
 </ng-container>
@@ -11,16 +11,13 @@
   fxLayoutAlign="center center"
   *ngIf="inningsService.innings"
 >
-  <form [formGroup]="bowlerForm">
+  <form [formGroup]="batsmanForm">
     <div fxLayout="column" fxLayoutAlign="center center" fxFlexAlign="center">
       <mat-form-field class="mainSelection">
-        <mat-label>Select Bowler</mat-label>
-        <mat-select formControlName="strikeBowler">
-          <mat-option
-            *ngFor="let strikeBowler of bowlingSidePlayers"
-            [value]="strikeBowler"
-          >
-            {{ strikeBowler }}
+        <mat-label>Select Batsman</mat-label>
+        <mat-select formControlName="batsman">
+          <mat-option *ngFor="let batsman of players" [value]="batsman">
+            {{ batsman }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -33,23 +30,7 @@
           <input
             matInput
             type="number"
-            placeholder="Overs"
-            formControlName="overs"
-          />
-        </mat-form-field>
-        <mat-form-field class="tossSelection">
-          <input
-            matInput
-            type="number"
-            placeholder="Balls"
-            formControlName="balls"
-          />
-        </mat-form-field>
-        <mat-form-field class="tossSelection">
-          <input
-            matInput
-            type="number"
-            placeholder="Runs"
+            placeholder="Run"
             formControlName="runs"
           />
         </mat-form-field>
@@ -57,8 +38,8 @@
           <input
             matInput
             type="number"
-            placeholder="Wickets"
-            formControlName="wickets"
+            placeholder="Balls"
+            formControlName="ball"
           />
         </mat-form-field>
         <mat-form-field class="tossSelection">
@@ -90,10 +71,10 @@
         class="scoring"
         mat-raised-button
         color="primary"
-        (click)="onAddAnother()"
-        [disabled]="!bowlerForm.valid"
+        (click)="onStartScoring()"
+        [disabled]="!batsmanForm.valid"
       >
-        Add Bowler
+        Add Batsman
       </button>
     </div>
   </form>

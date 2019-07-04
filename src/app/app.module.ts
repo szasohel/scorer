@@ -20,7 +20,6 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ScorecardListComponent } from './scorecard-list/scorecard-list.component';
-import { LiveMatchComponent } from './live-match/live-match.component';
 import { ScoreModule } from './score/score.module';
 import { AdminComponent } from './home/admin/admin.component';
 
@@ -32,7 +31,6 @@ import { AdminComponent } from './home/admin/admin.component';
     HomeComponent,
     SignInComponent,
     ScorecardListComponent,
-    LiveMatchComponent,
     AdminComponent
   ],
   imports: [
