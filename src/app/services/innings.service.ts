@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 })
 export class InningsService {
   innings: InningsCard;
-  constructor() { }
+  constructor() {}
 
   getInnigsCard() {
     return this.innings;
@@ -21,4 +21,19 @@ export class InningsService {
     return this.innings.bowling;
   }
 
+  addBowler(bowler) {
+    this.innings.bowling.push(bowler);
+  }
+
+  addBatsman(batsman) {
+    this.innings.batting.push(batsman);
+  }
+
+  addInningsTotal(inNum, runs, overs, wickets, ball) {
+    this.innings = new InningsCard(inNum);
+    this.innings.total.ball = ball;
+    this.innings.total.run = runs;
+    this.innings.total.over = overs;
+    this.innings.total.wicket = wickets;
+  }
 }

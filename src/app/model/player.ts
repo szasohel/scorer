@@ -3,8 +3,8 @@ export class Player {
   name: string;
   match = 0;
   id: number;
-  batting = new BatsmanScore(null, null);
-  bowling = new BowlerScore(null);
+  batting = new BatsmanScore();
+  bowling = new BowlerScore();
   pic: string;
   constructor(name, id) {
     this.name = name;

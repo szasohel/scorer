@@ -1,5 +1,6 @@
+import { BatsmanScore } from './../../model/score';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BowlerScore } from 'src/app/model/score';
 import { ScoreService } from 'src/app/services/score.service';
 import { PlayerService } from 'src/app/services/player.service';
@@ -11,55 +12,60 @@ import { InningsService } from 'src/app/services/innings.service';
   styleUrls: ['./add-batsman.component.scss']
 })
 export class AddBatsmanComponent implements OnInit {
-  bowlingSidePlayers: any;
-  strikeBowler: FormControl;
+  players: any;
+  batsman: FormControl;
   overs: FormControl;
   runs: FormControl;
   wickets: FormControl;
   dots: FormControl;
   fours: FormControl;
   sixes: FormControl;
-  bowlerscore: BowlerScore;
+  batsmanScore: BatsmanScore;
   ball: FormControl;
+  batsmanForm: FormGroup;
 
   constructor(
-    private scoreService: ScoreService,
     private playerService: PlayerService,
-    private inningsServie: InningsService
-  ) { }
+    public inningsService: InningsService
+  ) {}
 
   ngOnInit() {
     this.playerService.getPlayers().subscribe(() => {
-      this.bowlingSidePlayers = this.playerService.getPlayersList();
+      this.players = this.playerService.getPlayersList();
     });
-    console.log(this.playerService.getPlayersList());
-    this.strikeBowler = new FormControl();
-    this.overs = new FormControl();
-    this.runs = new FormControl();
-    this.wickets = new FormControl();
-    this.dots = new FormControl();
-    this.fours = new FormControl();
-    this.sixes = new FormControl();
-    this.ball = new FormControl();
+    this.batsmanForm = new FormGroup({
+      batsman: new FormControl(null, [Validators.required]),
+      runs: new FormControl(null, [Validators.required]),
+      dots: new FormControl(null, [Validators.required]),
+      fours: new FormControl(null, [Validators.required]),
+      sixes: new FormControl(null, [Validators.required]),
+      ball: new FormControl(null, [Validators.required])
+    });
   }
   onStartScoring() {
-    this.bowlerscore = new BowlerScore(this.strikeBowler.value);
-    this.bowlerscore = {
-      run: this.runs.value,
-      over: this.overs.value,
-      wicket: this.wickets.value,
-      fours: this.fours.value,
-      sixes: this.sixes.value,
-      ball: this.ball.value,
-      dots: this.dots.value,
-      economyRate: this.calculateEcon(this.runs.value, this.overs.value, this.ball.value)
+    this.batsmanScore = new BatsmanScore();
+    this.batsmanScore = {
+      name: this.batsmanForm.get('batsman').value,
+      run: this.batsmanForm.get('runs').value,
+      fours: this.batsmanForm.get('fours').value,
+      sixes: this.batsmanForm.get('sixes').value,
+      ball: this.batsmanForm.get('ball').value,
+      dots: this.batsmanForm.get('dots').value,
+      strikeRate: this.calculateStrike(
+        this.batsmanForm.get('runs').value,
+        this.batsmanForm.get('ball').value
+      )
     };
+    this.inningsService.addBatsman(this.batsmanScore);
+    this.batsmanForm.reset();
   }
 
-  calculateEcon(run, over, ball) {
-    return +(
-      run /
-      ((over * 6 + ball) / 6)
-    ).toFixed(2);
+  calculateStrike(run, ball) {
+    const sr = +((run / ball) * 100).toFixed(2);
+    if (!isFinite(sr)) {
+      return 0;
+    } else {
+      return sr;
+    }
   }
 }

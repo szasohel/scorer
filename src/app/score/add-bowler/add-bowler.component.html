@@ -1,37 +1,100 @@
-<mat-card class="add-bowler" fxLayout="column" fxLayoutAlign="center center">
-  <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center">
-    <mat-form-field class="tossSelection">
-      <mat-label>Select Bowler</mat-label>
-      <mat-select [formControl]="strikeBowler">
-        <mat-option *ngFor="let strikeBowler of bowlingSidePlayers" [value]="strikeBowler">
-          {{ strikeBowler }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div fxLayout="row" fxLayoutAlign="center start" fxFlexAlign="center">
-      <mat-form-field class="tossSelection">
-        <input matInput type="number" placeholder="Overs" [formControl]="overs">
+<ng-container *ngIf="inningsService.innings">
+  <ol fxLayout="row wrap" fxLayoutAlign="space start">
+    <li *ngFor="let bowler of inningsService.innings.bowling">
+      {{ bowler.name }}
+    </li>
+  </ol>
+</ng-container>
+<mat-card
+  class="add-bowler"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  *ngIf="inningsService.innings"
+>
+  <form [formGroup]="bowlerForm">
+    <div fxLayout="column" fxLayoutAlign="center center" fxFlexAlign="center">
+      <mat-form-field class="mainSelection">
+        <mat-label>Select Bowler</mat-label>
+        <mat-select formControlName="strikeBowler">
+          <mat-option
+            *ngFor="let strikeBowler of bowlingSidePlayers"
+            [value]="strikeBowler"
+          >
+            {{ strikeBowler }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-      <mat-form-field class="tossSelection">
-        <input matInput type="number" placeholder="Runs" [formControl]="runs">
-      </mat-form-field>
-      <mat-form-field class="tossSelection">
-        <input matInput type="number" placeholder="Wickets" [formControl]="wickets">
-      </mat-form-field>
+      <div
+        fxLayout="row wrap"
+        fxLayoutAlign="center start"
+        fxFlexAlign="center"
+      >
+        <mat-form-field class="tossSelection">
+          <input
+            matInput
+            type="number"
+            placeholder="Overs"
+            formControlName="overs"
+          />
+        </mat-form-field>
+        <mat-form-field class="tossSelection">
+          <input
+            matInput
+            type="number"
+            placeholder="Balls"
+            formControlName="balls"
+          />
+        </mat-form-field>
+        <mat-form-field class="tossSelection">
+          <input
+            matInput
+            type="number"
+            placeholder="Runs"
+            formControlName="runs"
+          />
+        </mat-form-field>
+        <mat-form-field class="tossSelection">
+          <input
+            matInput
+            type="number"
+            placeholder="Wickets"
+            formControlName="wickets"
+          />
+        </mat-form-field>
+        <mat-form-field class="tossSelection">
+          <input
+            matInput
+            type="number"
+            placeholder="Dots"
+            formControlName="dots"
+          />
+        </mat-form-field>
+        <mat-form-field class="tossSelection">
+          <input
+            matInput
+            type="number"
+            placeholder="4s"
+            formControlName="fours"
+          />
+        </mat-form-field>
+        <mat-form-field class="tossSelection">
+          <input
+            matInput
+            type="number"
+            placeholder="6s"
+            formControlName="sixes"
+          />
+        </mat-form-field>
+      </div>
+      <button
+        class="scoring"
+        mat-raised-button
+        color="primary"
+        (click)="onAddAnother()"
+        [disabled]="!bowlerForm.valid"
+      >
+        Add Bowler
+      </button>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center start" fxFlexAlign="center">
-      <mat-form-field class="tossSelection">
-        <input matInput type="number" placeholder="Dots" [formControl]="dots">
-      </mat-form-field>
-      <mat-form-field class="tossSelection">
-        <input matInput type="number" placeholder="4s" [formControl]="fours">
-      </mat-form-field>
-      <mat-form-field class="tossSelection">
-        <input matInput type="number" placeholder="6s" [formControl]="sixes">
-      </mat-form-field>
-    </div>
-  </div>
-  <button class="scoring" mat-raised-button color="primary" (click)="onStartScoring()">
-    Add Bowler
-  </button>
+  </form>
 </mat-card>

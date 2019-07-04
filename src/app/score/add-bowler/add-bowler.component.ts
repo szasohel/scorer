@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ScoreService } from 'src/app/services/score.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InningsService } from 'src/app/services/innings.service';
 import { BowlerScore } from 'src/app/model/score';
 import { PlayerService } from 'src/app/services/player.service';
@@ -12,54 +11,53 @@ import { PlayerService } from 'src/app/services/player.service';
 })
 export class AddBowlerComponent implements OnInit {
   bowlingSidePlayers: any;
-  strikeBowler: FormControl;
-  overs: FormControl;
-  runs: FormControl;
-  wickets: FormControl;
-  dots: FormControl;
-  fours: FormControl;
-  sixes: FormControl;
+  bowlerList: any;
+  showCard: boolean;
+  bowlerForm: FormGroup;
   bowlerscore: BowlerScore;
-  ball: FormControl;
 
   constructor(
-    private scoreService: ScoreService,
     private playerService: PlayerService,
-    private inningsServie: InningsService
-  ) { }
+    public inningsService: InningsService
+  ) {}
 
   ngOnInit() {
     this.playerService.getPlayers().subscribe(() => {
       this.bowlingSidePlayers = this.playerService.getPlayersList();
     });
-    console.log(this.playerService.getPlayersList());
-    this.strikeBowler = new FormControl();
-    this.overs = new FormControl();
-    this.runs = new FormControl();
-    this.wickets = new FormControl();
-    this.dots = new FormControl();
-    this.fours = new FormControl();
-    this.sixes = new FormControl();
-    this.ball = new FormControl();
+    this.bowlerForm = new FormGroup({
+      strikeBowler: new FormControl(null, [Validators.required]),
+      overs: new FormControl(null, [Validators.required]),
+      runs: new FormControl(null, [Validators.required]),
+      wickets: new FormControl(null, [Validators.required]),
+      dots: new FormControl(null, [Validators.required]),
+      fours: new FormControl(null, [Validators.required]),
+      balls: new FormControl(null, [Validators.required]),
+      sixes: new FormControl(null, [Validators.required])
+    });
   }
-  onStartScoring() {
-    this.bowlerscore = new BowlerScore(this.strikeBowler.value);
+  onAddAnother() {
+    this.bowlerscore = new BowlerScore();
     this.bowlerscore = {
-      run: this.runs.value,
-      over: this.overs.value,
-      wicket: this.wickets.value,
-      fours: this.fours.value,
-      sixes: this.sixes.value,
-      ball: this.ball.value,
-      dots: this.dots.value,
-      economyRate: this.calculateEcon(this.runs.value, this.overs.value, this.ball.value)
+      name: this.bowlerForm.get('strikeBowler').value,
+      run: this.bowlerForm.get('runs').value,
+      over: this.bowlerForm.get('overs').value,
+      wicket: this.bowlerForm.get('wickets').value,
+      fours: this.bowlerForm.get('fours').value,
+      sixes: this.bowlerForm.get('sixes').value,
+      ball: this.bowlerForm.get('balls').value,
+      dots: this.bowlerForm.get('dots').value,
+      economyRate: this.calculateEcon(
+        this.bowlerForm.get('runs').value,
+        this.bowlerForm.get('overs').value,
+        this.bowlerForm.get('balls').value
+      )
     };
+    this.inningsService.addBowler(this.bowlerscore);
+    this.bowlerForm.reset();
   }
 
   calculateEcon(run, over, ball) {
-    return +(
-      run /
-      ((over * 6 + ball) / 6)
-    ).toFixed(2);
+    return +(run / ((over * 6 + ball) / 6)).toFixed(2);
   }
 }
