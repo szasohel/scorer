@@ -14,7 +14,6 @@ export class ScoreCardService {
     this.scoreCard$ = this.db.list('/data/scorecardlist');
   }
   addScoreCard(): void {
-    console.log('I am called');
     this.scoreCard$.push(this.scorecard);
   }
 

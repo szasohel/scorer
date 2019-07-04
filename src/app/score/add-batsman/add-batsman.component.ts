@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ScoreService } from 'src/app/services/score.service';
 import { FormControl } from '@angular/forms';
-import { InningsService } from 'src/app/services/innings.service';
 import { BowlerScore } from 'src/app/model/score';
+import { ScoreService } from 'src/app/services/score.service';
 import { PlayerService } from 'src/app/services/player.service';
+import { InningsService } from 'src/app/services/innings.service';
 
 @Component({
-  selector: 'app-add-bowler',
-  templateUrl: './add-bowler.component.html',
-  styleUrls: ['./add-bowler.component.scss']
+  selector: 'app-add-batsman',
+  templateUrl: './add-batsman.component.html',
+  styleUrls: ['./add-batsman.component.scss']
 })
-export class AddBowlerComponent implements OnInit {
+export class AddBatsmanComponent implements OnInit {
   bowlingSidePlayers: any;
   strikeBowler: FormControl;
   overs: FormControl;

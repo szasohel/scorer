@@ -1,5 +1,3 @@
-import { ScorecardComponent } from './score/scorecard/scorecard.component';
-import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
 
 import {

@@ -1,24 +1,37 @@
 <mat-card class="add-bowler" fxLayout="column" fxLayoutAlign="center center">
   <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center">
     <mat-form-field class="tossSelection">
-      <mat-label>Select Strike Bowler</mat-label>
+      <mat-label>Select Bowler</mat-label>
       <mat-select [formControl]="strikeBowler">
-        <mat-option
-          *ngFor="let strikeBowler of bowlingSidePlayers"
-          [value]="strikeBowler"
-        >
+        <mat-option *ngFor="let strikeBowler of bowlingSidePlayers" [value]="strikeBowler">
           {{ strikeBowler }}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="center start" fxFlexAlign="center">
+      <mat-form-field class="tossSelection">
+        <input matInput type="number" placeholder="Overs" [formControl]="overs">
+      </mat-form-field>
+      <mat-form-field class="tossSelection">
+        <input matInput type="number" placeholder="Runs" [formControl]="runs">
+      </mat-form-field>
+      <mat-form-field class="tossSelection">
+        <input matInput type="number" placeholder="Wickets" [formControl]="wickets">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center start" fxFlexAlign="center">
+      <mat-form-field class="tossSelection">
+        <input matInput type="number" placeholder="Dots" [formControl]="dots">
+      </mat-form-field>
+      <mat-form-field class="tossSelection">
+        <input matInput type="number" placeholder="4s" [formControl]="fours">
+      </mat-form-field>
+      <mat-form-field class="tossSelection">
+        <input matInput type="number" placeholder="6s" [formControl]="sixes">
+      </mat-form-field>
+    </div>
   </div>
-  <button
-    *ngIf="strikeBowler.value"
-    class="scoring"
-    mat-raised-button
-    color="primary"
-    (click)="onStartScoring()"
-  >
-    Start Scoring
+  <button class="scoring" mat-raised-button color="primary" (click)="onStartScoring()">
+    Add Bowler
   </button>
 </mat-card>

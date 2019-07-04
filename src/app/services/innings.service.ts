@@ -7,10 +7,6 @@ import { Subject } from 'rxjs';
 })
 export class InningsService {
   innings: InningsCard;
-  activeBatsmenSubject = new Subject();
-  activeBowlerSubject = new Subject();
-  alradyBattedSubject = new Subject();
-  inningsCardSubject = new Subject();
   constructor() { }
 
   getInnigsCard() {
@@ -21,36 +17,8 @@ export class InningsService {
     this.innings = innings;
   }
 
-  getActiveBatsmen() {
-    return this.innings.batting.filter((batsman: BatsmanScore) => {
-      return batsman.active === true;
-    });
-  }
-
-  getActiveBowler() {
-    return this.innings.bowling.find((bowler: BowlerScore) => {
-      return bowler.active === true;
-    });
-  }
-
   getBowlerList() {
     return this.innings.bowling;
   }
 
-  setNewBatsman(actBatsman: BatsmanScore) {
-    this.innings.batting.push(actBatsman);
-    this.inningsCardSubject.next(this.innings);
-    this.activeBatsmenSubject.next(this.getActiveBatsmen());
-  }
-
-  setNewBowler(actBowler: BowlerScore) {
-    const isBowler = this.innings.bowling.find((bowler: BowlerScore) => {
-      return bowler.name === actBowler.name;
-    });
-    if (!isBowler) {
-      this.innings.bowling.push(actBowler);
-    }
-    this.activeBowlerSubject.next(this.getActiveBowler());
-    this.inningsCardSubject.next(this.innings);
-  }
 }

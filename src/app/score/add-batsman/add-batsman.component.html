@@ -1,11 +1,10 @@
-<div class="live-score" fxLayout="column" fxLayoutAlign="center center">
-  <mat-card class="add-bowler" fxLayout="column" fxLayoutAlign="center center">
+<mat-card class="add-bowler" fxLayout="column" fxLayoutAlign="center center">
     <div fxLayout="column" fxLayoutAlign="center start" fxFlexAlign="center">
       <mat-form-field class="tossSelection">
-        <mat-label>Select Innings</mat-label>
-        <mat-select [formControl]="innings">
-          <mat-option *ngFor="let in of [1,2]" [value]="in">
-            {{ in }}
+        <mat-label>Select Bowler</mat-label>
+        <mat-select [formControl]="strikeBowler">
+          <mat-option *ngFor="let strikeBowler of bowlingSidePlayers" [value]="strikeBowler">
+            {{ strikeBowler }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -20,11 +19,20 @@
           <input matInput type="number" placeholder="Wickets" [formControl]="wickets">
         </mat-form-field>
       </div>
+      <div fxLayout="row" fxLayoutAlign="center start" fxFlexAlign="center">
+        <mat-form-field class="tossSelection">
+          <input matInput type="number" placeholder="Dots" [formControl]="dots">
+        </mat-form-field>
+        <mat-form-field class="tossSelection">
+          <input matInput type="number" placeholder="4s" [formControl]="fours">
+        </mat-form-field>
+        <mat-form-field class="tossSelection">
+          <input matInput type="number" placeholder="6s" [formControl]="sixes">
+        </mat-form-field>
+      </div>
     </div>
     <button class="scoring" mat-raised-button color="primary" (click)="onStartScoring()">
-      Add Innings
+      Add Bowler
     </button>
   </mat-card>
-  <app-add-bowler></app-add-bowler>
-  <app-add-batsman></app-add-batsman>
-</div>
+  

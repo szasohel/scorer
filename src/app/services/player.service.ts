@@ -15,7 +15,8 @@ export class PlayerService {
   players: Array<Player> = [];
   players$: AngularFireList<any[]>;
 
-  constructor(private http: HttpClient, private af: AngularFireDatabase) {}
+  constructor(private http: HttpClient, private af: AngularFireDatabase) {
+  }
 
   getPlayers() {
     this.players$ = this.af.list('/data/players');
