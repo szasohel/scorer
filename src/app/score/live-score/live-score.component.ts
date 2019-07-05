@@ -19,7 +19,7 @@ export class LiveScoreComponent implements OnInit {
     private scoreService: ScoreCardService,
     private playerService: PlayerService,
     public inningsService: InningsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.inForm = new FormGroup({
@@ -47,6 +47,7 @@ export class LiveScoreComponent implements OnInit {
     this.scoreService.addinnings(this.inningsService.innings);
     if (this.scoreService.scorecard.secondInnings) {
       this.second = true;
+      this.onFinish();
     }
     this.inningsService.innings = null;
     console.log(this.scoreService.scorecard);

@@ -10,12 +10,7 @@
       }}
     </h5>
   </div>
-  <mat-card
-    class="add-bowler"
-    fxLayout="column"
-    fxLayoutAlign="center center"
-    *ngIf="!inningsService.innings"
-  >
+  <mat-card class="add-bowler" fxLayout="column" fxLayoutAlign="center center" *ngIf="!inningsService.innings">
     <form [formGroup]="inForm">
       <div fxLayout="column" fxLayoutAlign="center center" fxFlexAlign="center">
         <mat-form-field class="mainSelection">
@@ -28,68 +23,28 @@
         </mat-form-field>
         <div fxLayout="row" fxLayoutAlign="center start" fxFlexAlign="center">
           <mat-form-field class="tossSelection">
-            <input
-              matInput
-              type="number"
-              placeholder="Runs"
-              formControlName="runs"
-            />
+            <input matInput type="number" placeholder="Runs" formControlName="runs" />
           </mat-form-field>
           <mat-form-field class="tossSelection">
-            <input
-              matInput
-              type="number"
-              placeholder="Wickets"
-              formControlName="wickets"
-            />
+            <input matInput type="number" placeholder="Wickets" formControlName="wickets" />
           </mat-form-field>
           <mat-form-field class="tossSelection">
-            <input
-              matInput
-              type="number"
-              placeholder="Overs"
-              formControlName="overs"
-            />
+            <input matInput type="number" placeholder="Overs" formControlName="overs" />
           </mat-form-field>
           <mat-form-field class="tossSelection">
-            <input
-              matInput
-              type="number"
-              placeholder="ball"
-              formControlName="ball"
-            />
+            <input matInput type="number" placeholder="ball" formControlName="ball" />
           </mat-form-field>
         </div>
       </div>
     </form>
-    <button
-      class="scoring"
-      mat-raised-button
-      color="primary"
-      (click)="onStartScoring()"
-      [disabled]="!inForm.valid"
-    >
+    <button class="scoring" mat-raised-button color="primary" (click)="onStartScoring()" [disabled]="!inForm.valid">
       Add Innings
     </button>
   </mat-card>
   <app-add-batsman></app-add-batsman>
   <app-add-bowler></app-add-bowler>
-  <button
-    class="scoring"
-    mat-raised-button
-    *ngIf="!second && inningsService.innings"
-    color="primary"
-    (click)="onDoneAdding()"
-  >
+  <button class="scoring" mat-raised-button *ngIf="!second && inningsService.innings" color="primary"
+    (click)="onDoneAdding()">
     Done Adding
-  </button>
-  <button
-    class="scoring"
-    *ngIf="second"
-    mat-raised-button
-    color="primary"
-    (click)="onFinish()"
-  >
-    Finish
   </button>
 </div>
